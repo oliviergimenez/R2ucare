@@ -3,6 +3,7 @@
 export(ind_test_22)
 export(ind_test_rc)
 export(marray)
+export(multimarray)
 export(pool2K)
 export(test2cl)
 export(test2ct)
