@@ -73,5 +73,15 @@ test2cl_males
 * Pradel, R., Gimenez O. and J.-D. Lebreton (2005). [Principles and interest of GOF tests for multistate capture-recapture models](https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2005ABC.pdf). Animal Biodiversity and Conservation 28: 189–204.
 * Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). [A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model](https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2003Biometrics.pdf). Biometrics 59: 43-53.
 
-
-
+## Yet to be done
+* check the behavior of the R chisq/Fisher.test functions when cells are deleted and the contingency table is no longer a square or a rectangle
+* add signed test
+* add functions to manipulate data
+* write vignette 
+* add function to perform overall test (sum of all components)
+* allow reading in files with Headed format
+* add multistate gof
+* add gof for mixture of recapture and recoveries (Rachel)
+* add test for heterogeneity (Anita)
+* plan a sequence of root tests
+* add a series of datasets for end-users to manipulate package
