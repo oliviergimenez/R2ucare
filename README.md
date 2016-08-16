@@ -37,25 +37,33 @@ dip.mal.hist = dip.hist[mask,]
 dip.mal.freq = dip.freq[mask]
 
 # load R2ucare package
-load(R2ucare)
+library(R2ucare)
 
 # perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females
-3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
-3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
+test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
+test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
 X = dip.fem.hist
 freq = dip.fem.freq
 m = marray(X,freq)$m[,,]
-2ct_females = test2ct(m)
-2cl_females = test2cl(m)
+test2ct_females = test2ct(m)
+test2cl_females = test2cl(m)
+test3sr_females
+test3sm_females
+test2ct_females
+test2cl_females
 
 # perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for males
-3sr_males = test3sr(dip.mal.hist, dip.mal.freq)
-3sm_males = test3sm(dip.mal.hist, dip.mal.freq)
+test3sr_males = test3sr(dip.mal.hist, dip.mal.freq)
+test3sm_males = test3sm(dip.mal.hist, dip.mal.freq)
 X = dip.mal.hist
 freq = dip.mal.freq
 m = marray(X,freq)$m[,,]
-2ct_males = test2ct(m)
-2cl_males = test2cl(m)
+test2ct_males = test2ct(m)
+test2cl_males = test2cl(m)
+test3sr_males
+test3sm_males
+test2ct_males
+test2cl_males
 ```
 
 ## References 
