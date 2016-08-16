@@ -1,0 +1,12 @@
+Package: R2ucare
+Title: Goodness-of-fit tests for capture-recapture models
+Version: 0.0.0.9000
+Authors@R: person("Olivier", "Gimenez", email = "olivier.gimenez@cefe.cnrs.fr", role = c("aut", "cre"))
+Description: Performs goodness-of-fit tests for capture-recapture models. Also contains several functions to process these data.
+Depends: R (>= 3.3.0)
+License: MIT license
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1.9000
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
