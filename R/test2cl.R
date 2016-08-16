@@ -11,7 +11,8 @@
 #' @examples
 #' # read in Dipper dataset
 #' library(RMark)
-#' dipper = convert.inp('ed.inp',group.df=data.frame(sex=c('Male','Female')))
+#' dipper = system.file("extdata", "ed.inp", package = "R2ucare")
+#' dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 #' 
 #' # add spaces between columns
 #' dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
