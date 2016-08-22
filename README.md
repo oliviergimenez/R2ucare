@@ -149,7 +149,7 @@ However, several useful functions need a proper R equivalent. I have coded a few
     + add more functions to manipulate data as in U-CARE (clean data, suppress first encounter, ungroup, ...)
     + write vignette 
     + add signed tests
-    + allow reading in files with Headed format
+    + allow reading in files with Headed format (see [here](https://github.com/hadley/haven), [here](http://blog.analytixware.com/2015/02/reading-sas-into-r.html) and [here](http://rconvert.com/sas-vs-r-code-compare/5-ways-to-convert-sas-data-to-r/))
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
     + add verbose with the option to print tables
