@@ -9,11 +9,13 @@ Please email all comments/questions to olivier.gimenez [AT] cefe.cnrs.fr
 Citation: to come
 
 ## What it does
-Ths package contains R functions to perform goodness-of-fit tests for capture-recapture models. We will enrich it soon with various functions to manipulate capture-recapture data and visualize the tests. 
+
+Ths package contains R functions to perform goodness-of-fit tests for capture-recapture models. We will enrich it soon with various functions to manipulate capture-recapture data and visualize the tests. Any other function you would like to see available in R2ucare, just email us.
 
 Despite what its name might suggest, **you do not need** to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009). 
-
 For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). [Chapter 5 of the Gentle Introduction to MARK](http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf) also provides a good start for understanding goodness-of-fit test. 
+
+**Warning**: to date, no goodness-of-fit test exists for models with individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, remove these covariates from your dataset before using it with R2ucare. For groups, just treat the group separately as in the Dipper example below. 
 
 ## To install the package
 
@@ -117,7 +119,7 @@ testMltec(X,freq)
 1. Stuff to write
     + add AS and JMV fitting to complete multisite gof test
     + add function to perform overall test (sum of all components)
-    + add functions to manipulate data as in U-CARE
+    + add functions to manipulate data as in U-CARE (in R, many of the functions that are proposed in U-CARE tp manipulate the data can be mimicked with R built-in functions. For example, recoding states or reversing time. However, several functions are still useful and need their own R function like, e.g.: read Headed format, write Headed/mark format, clean data, suppress first encounter, pool / unpool, m-array). 
     + write vignette 
     + add signed tests
     + allow reading in files with Headed format
