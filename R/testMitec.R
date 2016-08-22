@@ -1,0 +1,155 @@
+#' TestM.ITEC
+#'
+#' This function performs TestM.ITEC
+#' @param X is a matrix of encounter histories with K occasions
+#' @param freq is a vector of the number of individuals with the corresponding encounter history
+#' @return This function returns a data.frame with occasion, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
+#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
+#' @keywords package
+#' @export
+#' @examples
+#' # read in Geese dataset
+#' library(RMark)
+#' geese = system.file("extdata", "geese.inp", package = "R2ucare")
+#' geese = convert.inp(geese)
+#'
+# add spaces between columns
+#' geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
+#' geese.freq = geese$freq
+#'
+#' # encounter histories and number of individuals with corresponding histories
+#' X = geese.hist
+#' freq = geese.freq
+#'
+#' # load R2ucare package
+#' library(R2ucare)
+#'
+#' # perform TestM.ITEC
+#' testMitec(X,freq)
+
+testMitec <- function(X,freq){
+
+# test of multinomial mixture / MMLM method Yantis et al.
+# adaptation of program Pascal mix
+
+#derocc=1-min(filtre);
+#filtre=find(filtre);
+
+# various quantities to define
+k = ncol(X)
+his = X
+a = max(his)
+
+# initialization
+table_multi_mitec = data.frame(occasion = rep(NA,k-3),stat = rep(NA,k-3), df = rep(NA,k-3), p_val = rep(NA,k-3), test_perf = rep(FALSE,k-3))
+
+marray = multimarray(X,freq)
+
+
+debutligne = 1
+finligne = seq(a,a*k,by=a)
+debutcolonne = seq(1,a*(k-1),by=a)
+fincolonne = a * (k-1)
+
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+
+#for (i in 2:(k-2)+derocc){ # boucle sur les occasions
+for (i in 2:(k-2)){ # boucle sur les occasions
+
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]
+
+        for (j in 1:(i-2)){
+            if ((i-2)<1) break
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]
+            mixandbases = mixandbases[-((a+1):(2*a)),]
+        }
+        for (j in 1:((ncol(mixandbases)-a)/a-1)){
+            if (((ncol(mixandbases)-a)/a-1)<1) break
+            mixandbases[,(a+1):(2*a)] = mixandbases[,(a+1):(2*a)] + mixandbases[,(2*a+1):(3*a)]
+            mixandbases = mixandbases[,-((2*a+1):(3*a))]
+        }
+        nk = nrow(mixandbases)
+        tabtemp = mixandbases[(nk-a+1):nk,]
+        #tabtemp = tabtemp[filtre,] # les bases filtrees
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)
+        nj = nrow(tabtemp)
+        nk = nrow(mixandbases)
+
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){
+            table_multi_mitec[i-1,1] = i
+            table_multi_mitec[i-1,2] = 0
+            table_multi_mitec[i-1,3] = 0
+            table_multi_mitec[i-1,4] = 0
+            table_multi_mitec[i-1,5] = 'None'
+            break
+        }
+
+        # pooling
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+
+        # DEBUT DU CALCUL DU TEST DE MELANGE (traduit de Yantis et al)
+
+        indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange
+        data = cbind(mixandbases,indic_mixbasis)
+
+        #if verbosity>=3
+        #    strtable=[ strtable {strcat('occasion :',num2str(i))} ];
+        #    taille=size(data,2);
+        #    strtable=[ strtable {'--------------- Seen again - Seen again later '} ];
+        #    for kk=1:size(data,1)
+        #        if data(kk,taille)==0
+        #            strtable=[ strtable {strcat('When last released | ',num2str(data(kk,1:taille-1))) }];
+        #        else
+        #            strtable=[ strtable {strcat('Currently released | ',num2str(data(kk,1:taille-1))) }];
+        #        end
+        #    end
+        #end
+
+        nk = nrow(data)
+        r = ncol(data)
+        ni = r - 1
+        data = t(data)
+        nature = data[r,] # il s'agit de indic_mixanbasis'
+        data = data[-r,] # on la supprime !!!
+        tri = which(nature!=0) # coordonnees des bases
+        nj = length(tri) # nombre de bases
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges
+        M = data[,tri] # on renumerote bases et melanges
+        totk = apply(M,2,sum) # effectif des colonnes
+        CoorMelVide = which(totk[(nj+1):nk]==0)
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]
+        nk = ncol(M)
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes
+        # Si aucune base n'est vide & si melanges
+        if (nj!=nk){
+        	# NEW definition des bases
+        	Np = t(M[,1:nj])
+        	# definition des melanges
+        	Mp = t(M[,(nj+1):nk])
+        	# calcul des coefficients du melanges
+        	res = coef_mixtures(Mp,Np)
+        	Q = res$P
+        	P = res$PI
+        	A = res$GAM
+        	Q = rbind(P,Q)
+        	# calcul des valeurs attendues
+        	theoriques = matrix(rep(rep(1,ni)*totk,length(totk)),byrow=T,nrow=length(totk)) * t(Q)
+        	# calcul du nombre de degre de liberte
+        	df = (nk-nj)*(ni-nj)
+        	# test LR
+        	tempchi2 = gof_test(1,c(M),c(theoriques))
+        	table_multi_mitec[i-1,1] = i
+        	table_multi_mitec[i-1,2] = tempchi2
+        	table_multi_mitec[i-1,3] = df
+        	table_multi_mitec[i-1,4] = 1-pchisq(tempchi2,df)
+        	table_multi_mitec[i-1,5] = 'Chi-square'
+        	} else {
+        	table_multi_mitec[i-1,1] = i
+        	table_multi_mitec[i-1,2] = 0
+        	table_multi_mitec[i-1,3] = 0
+        	table_multi_mitec[i-1,4] = 0
+        	table_multi_mitec[i-1,5] = 'None'
+        	}
+}
+table_multi_mitec
+}

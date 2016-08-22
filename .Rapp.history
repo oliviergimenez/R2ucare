@@ -1,0 +1,1023 @@
+gof_test(1,c(M),c(theoriques))
+lambda
+observes=c(M)
+theoriques=c(theoriques)
+cache1 = (observes==0)#
+cache2 = (theoriques==0)#
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+observes
+theoriques
+observes-thoeriques
+observes-theoriques
+sum(observes-theoriques
+)
+observes/theoriques
+observes*(((observes/theoriques)^lambda)-1
+)
+theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)
+df = (nk-nj)*(ni-nj)
+source('gof_test.R')
+tempchi2 = gof_test(1,c(M),c(theoriques))
+tempchi2
+testMltec(X,freq)
+source('gof_test.R')
+testMltec(X,freq)
+X
+freq
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+i
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+mixandbases
+indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange#
+        data = cbind(mixandbases,indic_mixbasis)#
+    #if verbosity>=3#
+    #    strtable=[ strtable {strcat('occasion :',num2str(i),', last column : 1 for basis and 0 for mixture ')}];#
+    #    taille=size(data,2);#
+    #    strtable=[ strtable {'--------------- Seen again at t+2 - Seen later '}];#
+    #    for kk=1:size(data,1)#
+    #        if data(kk,taille)==0#
+    #            strtable=[ strtable {strcat('When last released | ',num2str(data(kk,1:taille-1)))}];#
+    #        else    #
+    #            strtable=[ strtable {strcat('Currently released | ',num2str(data(kk,1:taille-1)))}];#
+    #        end#
+    #    end   #
+    #end#
+        nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases#
+        nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges#
+        M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes#
+        CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes
+totk
+M
+CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes
+totk
+M
+# programme principal#
+# test de mélanges de multinomiales suivant la methode MMLM de Yantis et al.#
+# adaptation du programme Pascal mix#
+# ========== QUE FAIT LE PROGRAMME ==================================#
+# 1 - on lit les histoires de capture et on crée le m-array#
+# 3 - on extrait les bases et mélanges à la bonne occaz#
+        # - une ligne par multinomiale#
+        # - la derniere colonne indique s'il s'agit d'un #
+        #   melange (0) ou d'une base (1)#
+# 4 - on fait le gof#
+# 5 - on revient en 3 juska df = 0#
+#derocc=1-min(filtre); #
+#filtre=find(filtre);#
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+datat
+i
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]
+mixandbases
+# données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+mixandbases
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]
+mixandbases
+nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)
+mixandbases
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melang
+tabtemp = mixandbases[(nk-a+1):nk,] # les bases
+tabtemp
+mixandbases[1:(nk-a),]
+mixandbases = cbind(mixandbases[1:(nk-a),],tabtemp)
+mixandbases
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)
+mixandbases
+nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }
+mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+mixandbases
+indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange
+indic_mixbasis
+data = cbind(mixandbases,indic_mixbasis)
+data
+nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases
+tri
+nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges
+tri
+M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes
+totk
+CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes
+totk
+Np = t(M[,1:nj]) #
+        	# definition des melanges#
+        	Mp = t(M[,(nj+1):nk])#
+        	# calcul des coefficients du melanges#
+        	res = coef_mixtures(Mp,Np)#
+        	Q = res$P#
+        	P = res$PI#
+        	A = res$GAM
+Q
+P
+A
+Q = rbind(P,Q)
+Q
+theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)
+theoriques
+df = (nk-nj)*(ni-nj)#
+        	# test LR#
+        	tempchi2 = gof_test(1,c(M),c(theoriques))
+tempchi2
+observes=c(M)
+theoriques=c(theoriques)
+cache1 = (observes == 0)#
+cache2 = (theoriques == 0)
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+observes
+theoriques
+sum(observes-theoriques)
+2 / (lambda*(lambda+1))*sum(observes*(((observes/theoriques)^lambda)-1))
+2 / (lambda*(lambda+1))
+sum(observes*(((observes/theoriques)^lambda)-1))
+(observes/theoriques)
+theoriques
+observes
+3.203913e-03 < 0.01
+3.203913e-03 < 0.1
+cache1 = (observes < 0.1)#
+cache2 = (theoriques < 0.1)#
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+(observes/theoriques)
+stat = 2 / (lambda*(lambda+1))*sum(observes*(((observes/theoriques)^lambda)-1))
+stat
+i=2
+i=3
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.1)#
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+stat = 2 / (lambda*(lambda+1))*sum(observes*(((observes/theoriques)^lambda)-1))
+stat
+source('gof_test.R')
+source('testMltec.R')
+testMltec(X,freq)
+X
+freq
+testMltec(X,freq)
+source('testMltec.R')
+testMltec(X,freq)
+#derocc=1-min(filtre); #
+#filtre=find(filtre);#
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+i
+# on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+mixandbases
+# on discerne les bases des mélanges avec des 1 et des 0 dans une#
+        # colonne supplémentaire#
+        indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange#
+        data = cbind(mixandbases,indic_mixbasis)#
+    #if verbosity>=3#
+    #    strtable=[ strtable {strcat('occasion :',num2str(i),', last column : 1 for basis and 0 for mixture ')}];#
+    #    taille=size(data,2);#
+    #    strtable=[ strtable {'--------------- Seen again at t+2 - Seen later '}];#
+    #    for kk=1:size(data,1)#
+    #        if data(kk,taille)==0#
+    #            strtable=[ strtable {strcat('When last released | ',num2str(data(kk,1:taille-1)))}];#
+    #        else    #
+    #            strtable=[ strtable {strcat('Currently released | ',num2str(data(kk,1:taille-1)))}];#
+    #        end#
+    #    end   #
+    #end#
+        nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases#
+        nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges#
+        M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes#
+        CoorMelVide = which(totk[(nj+1):nk]==0)
+nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes#
+        # Si aucune base n'est vide & si melanges#
+        if (nj!=nk){#
+        	# NEW definition des bases#
+        	Np = t(M[,1:nj]) #
+        	# definition des melanges#
+        	Mp = t(M[,(nj+1):nk])#
+        	# calcul des coefficients du melanges#
+        	res = coef_mixtures(Mp,Np)#
+        	Q = res$P#
+        	P = res$PI#
+        	A = res$GAM#
+        	Q = rbind(P,Q)#
+        	# calcul des valeurs attendues        #
+        	theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)#
+        	# calcul du nombre de degre de liberte #
+        	df = (nk-nj)*(ni-nj)
+nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes#
+        # Si aucune base n'est vide & si melanges
+# programme principal#
+# test de mélanges de multinomiales suivant la methode MMLM de Yantis et al.#
+# adaptation du programme Pascal mix#
+# ========== QUE FAIT LE PROGRAMME ==================================#
+# 1 - on lit les histoires de capture et on crée le m-array#
+# 3 - on extrait les bases et mélanges à la bonne occaz#
+        # - une ligne par multinomiale#
+        # - la derniere colonne indique s'il s'agit d'un #
+        #   melange (0) ou d'une base (1)#
+# 4 - on fait le gof#
+# 5 - on revient en 3 juska df = 0#
+#derocc=1-min(filtre); #
+#filtre=find(filtre);#
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+i
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)#
+        # DEBUT DU CALCUL DU TEST DE MELANGE (traduit de Yantis et al)#
+        # on discerne les bases des mélanges avec des 1 et des 0 dans une#
+        # colonne supplémentaire#
+        indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange#
+        data = cbind(mixandbases,indic_mixbasis)#
+    #if verbosity>=3#
+    #    strtable=[ strtable {strcat('occasion :',num2str(i),', last column : 1 for basis and 0 for mixture ')}];#
+    #    taille=size(data,2);#
+    #    strtable=[ strtable {'--------------- Seen again at t+2 - Seen later '}];#
+    #    for kk=1:size(data,1)#
+    #        if data(kk,taille)==0#
+    #            strtable=[ strtable {strcat('When last released | ',num2str(data(kk,1:taille-1)))}];#
+    #        else    #
+    #            strtable=[ strtable {strcat('Currently released | ',num2str(data(kk,1:taille-1)))}];#
+    #        end#
+    #    end   #
+    #end#
+        nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases#
+        nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges#
+        M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes#
+        CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes#
+        # Si aucune base n'est vide & si melanges
+Np = t(M[,1:nj]) #
+        	# definition des melanges#
+        	Mp = t(M[,(nj+1):nk])#
+        	# calcul des coefficients du melanges#
+        	res = coef_mixtures(Mp,Np)#
+        	Q = res$P#
+        	P = res$PI#
+        	A = res$GAM#
+        	Q = rbind(P,Q)#
+        	# calcul des valeurs attendues        #
+        	theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)#
+        	# calcul du nombre de degre de liberte
+theoriques
+observes
+P
+A
+#derocc=1-min(filtre); #
+#filtre=find(filtre);#
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+i
+datat
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]
+mixandbases
+nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)
+mixandbases
+# on discerne les bases des mélanges avec des 1 et des 0 dans une#
+        # colonne supplémentaire#
+        indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange#
+        data = cbind(mixandbases,indic_mixbasis)
+data
+nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases
+tri
+nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges#
+        M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes
+totk
+CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes
+totk
+M
+# NEW definition des bases#
+        	Np = t(M[,1:nj]) #
+        	# definition des melanges#
+        	Mp = t(M[,(nj+1):nk])#
+        	# calcul des coefficients du melanges#
+        	res = coef_mixtures(Mp,Np)
+Q = res$P#
+        	P = res$PI#
+        	A = res$GAM
+Q
+P
+A
+Q = rbind(P,Q)#
+        	# calcul des valeurs attendues        #
+        	theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)#
+        	# calcul du nombre de degre de liberte #
+        	df = (nk-nj)*(ni-nj)#
+        	# test LR
+theoriques
+totk
+matrix(rep(totk,ni),byrow=T,nrow=ni)
+matrix(rep(totk,ni),byrow=T,nrow=ni) * Q
+matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)
+t(Q)
+round(t(Q),2)
+round(matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q))
+tempchi2 = gof_test(1,c(M),c(theoriques))
+tempchi2
+c(M)
+observes=c(M)
+theoriques=c(matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q))
+theoriques
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.1)#
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+sum(observes-theoriques)
+theoriques
+round(theoriques,2)
+round(observes,2)
+cbind(round(observes,2),round(theoriques,2))
+sum(observes*(((observes/theoriques)^lambda)-1))
+observes/theoriques
+theoriques[6]
+source('gof_test.R')
+testMltec(X,freq)
+theoriques[6]<0.01
+theoriques[6]<0.05
+theoriques
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.01)#
+if (sum(cache1)>0){#
+observes=observes[cache1==0]#
+theoriques=theoriques[cache1==0]#
+} else { #
+	if (sum(cache2)>0){#
+		observes=observes[cache2==0]#
+		theoriques=theoriques[cache2==0]#
+		}#
+	}
+theoriques
+cbind(round(observes,2),round(theoriques,2))
+sum(observes*(((observes/theoriques)^lambda)-1))
+source('gof_test.R')
+source('testMltec.R')
+testMltec(X,freq)
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+observes
+theoriques
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.01)
+cache1
+cache2
+sum(cache1)
+sum(cache2)
+theoriques[3]=0.003
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.01)
+cache1
+cache2
+sum(cache1)>0
+sum(cache2)>0
+!cache2
+observes = observes[!cache2]#
+		theoriques = theoriques[!cache2]
+observes
+theoriques
+um(observes*(((observes/theoriques)^lambda)-1))
+sum(observes*(((observes/theoriques)^lambda)-1))
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+X
+freq
+i
+# programme principal#
+# test de mélanges de multinomiales suivant la methode MMLM de Yantis et al.#
+# adaptation du programme Pascal mix#
+# ========== QUE FAIT LE PROGRAMME ==================================#
+# 1 - on lit les histoires de capture et on crée le m-array#
+# 3 - on extrait les bases et mélanges à la bonne occaz#
+        # - une ligne par multinomiale#
+        # - la derniere colonne indique s'il s'agit d'un #
+        #   melange (0) ou d'une base (1)#
+# 4 - on fait le gof#
+# 5 - on revient en 3 juska df = 0#
+#derocc=1-min(filtre); #
+#filtre=find(filtre);#
+# various quantities to define#
+k = ncol(X)#
+his = X#
+a = max(his)#
+#
+# initialization#
+table_multi_litec = data.frame(occasion = rep(NA,k-4),stat = rep(NA,k-4), df = rep(NA,k-4), p_val = rep(NA,k-4), test_perf = rep(FALSE,k-4))#
+#
+marray = multimarray(X,freq)#
+# ============= coordonnées des tables M dans le m-array#
+debutligne = 1#
+finligne = seq(a,a*k,by=a)#
+debutcolonne = seq(1,a*(k-1),by=a)#
+fincolonne = a * (k-1)#
+#
+datat = marray[,2:(ncol(marray)-1)] # extrait du m-array avec les revus, sans les relaches ni les jamais revus
+# extraction des composantes du test i.e. tables (bases + mélanges)#
+        mixandbases = datat[debutligne:finligne[i],debutcolonne[i]:fincolonne]#
+        # ============================================================#
+        # on réduit les mélanges à s (# d'états), en fonction du#
+        # l'état de dernière observation#
+        # ============================================================#
+        for (j in 1:(i-2)){#
+            if ((i-2)<1) break#
+            mixandbases[1:a,] = mixandbases[1:a,] + mixandbases[(a+1):(2*a),]#
+            mixandbases = mixandbases[-((a+1):(2*a)),]#
+        }#
+    mixandbases = mixandbases[,-(1:a)]#
+        # données manquantes (une base n'a pas de données), on pré-remplit#
+        # le tableau des résultats#
+        nk = nrow(mixandbases) # nb de melanges + nb de bases#
+        tabtemp = mixandbases[(nk-a+1):nk,] # les bases#
+        #tabtemp = tabtemp[filtre,] # les bases filtrees#
+        mixandbases = rbind(mixandbases[1:(nk-a),],tabtemp)#
+        nj = nrow(tabtemp)#
+        nk = nrow(mixandbases)#
+#
+        if (any(apply(tabtemp,1,sum)==0) | (nj==0)){#
+            table_multi_litec[i-1,1] = i#
+            table_multi_litec[i-1,2] = 0#
+            table_multi_litec[i-1,3] = 0#
+            table_multi_litec[i-1,4] = 0#
+            table_multi_litec[i-1,5] = 'None'#
+            break#
+        }#
+#
+        # pooling#
+        mixandbases = pooling_mixtures(nk,nj,a,mixandbases)#
+        # DEBUT DU CALCUL DU TEST DE MELANGE (traduit de Yantis et al)#
+        # on discerne les bases des mélanges avec des 1 et des 0 dans une#
+        # colonne supplémentaire#
+        indic_mixbasis = c(matrix(0,nrow=nrow(mixandbases)-nj,ncol=1),rep(1,nj)) # indique 1 ou 0 suivant que base ou melange#
+        data = cbind(mixandbases,indic_mixbasis)#
+    #if verbosity>=3#
+    #    strtable=[ strtable {strcat('occasion :',num2str(i),', last column : 1 for basis and 0 for mixture ')}];#
+    #    taille=size(data,2);#
+    #    strtable=[ strtable {'--------------- Seen again at t+2 - Seen later '}];#
+    #    for kk=1:size(data,1)#
+    #        if data(kk,taille)==0#
+    #            strtable=[ strtable {strcat('When last released | ',num2str(data(kk,1:taille-1)))}];#
+    #        else    #
+    #            strtable=[ strtable {strcat('Currently released | ',num2str(data(kk,1:taille-1)))}];#
+    #        end#
+    #    end   #
+    #end#
+        nk = nrow(data)#
+        r = ncol(data)#
+        ni = r - 1#
+        data = t(data)#
+        nature = data[r,] # il s'agit de indic_mixanbasis'#
+        data = data[-r,] # on la supprime !!!#
+        tri = which(nature!=0) # coordonnees des bases#
+        nj = length(tri) # nombre de bases#
+        tri = c(tri,which(nature==0)) # ajout des coordonnees des melanges#
+        M = data[,tri] # on renumerote bases et melanges#
+        totk = apply(M,2,sum) # effectif des colonnes#
+        CoorMelVide = which(totk[(nj+1):nk]==0)#
+        if (!(length(CoorMelVide)==0)) M = M[,-CoorMelVide]#
+        nk = ncol(M)#
+        totk = apply(M,2,sum) # actualisation des effectifs des colonnes#
+        # Si aucune base n'est vide & si melanges
+# NEW definition des bases#
+        	Np = t(M[,1:nj]) #
+        	# definition des melanges#
+        	Mp = t(M[,(nj+1):nk])#
+        	# calcul des coefficients du melanges#
+        	res = coef_mixtures(Mp,Np)#
+        	Q = res$P#
+        	P = res$PI#
+        	A = res$GAM#
+        	Q = rbind(P,Q)#
+        	# calcul des valeurs attendues        #
+        	theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)#
+        	# calcul du nombre de degre de liberte #
+        	df = (nk-nj)*(ni-nj)#
+        	# test LR
+theoriques
+df
+gof_test(1,c(M),c(theoriques))
+c(M)
+c(theoriques)
+observes=c(M)
+theoriques=c(theoriques)
+cache1 = (observes == 0)#
+cache2 = (theoriques < 0.01)
+cache1
+cache2
+sum(cache1)>0
+if (sum(cache1)>0){#
+observes=observes[!cache1]#
+theoriques=theoriques[!cache1]#
+}
+observes
+theoriques
+sum(cache2)>0
+if (sum(cache2)>0){#
+		observes = observes[!cache2]#
+		theoriques = theoriques[!cache2]#
+		}
+observes
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+?optim
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+?optim
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+source('multimarray.R')#
+source('group_data.R')#
+source('group_data_gen.R')#
+source('repmat.R')#
+source('expval_table.R')#
+source('test3Gwbwa.R')#
+source('pooling_ct.R')#
+source('coef_mixtures.R')#
+source('reconstitution.R')#
+source('deviance_mixture.R')#
+source('inv_logit_gen.R')#
+source('pooling_mixtures.R')#
+source('gof_test.R')#
+source('testMitec.R')#
+source('testMltec.R')
+testMltec(X,freq)
+test3Gsr(X,freq)
+test3Gsm(X,freq)
+test3Gwbwa(X,freq)
+testMitec(X,freq)
+testMltec(X,freq)
+library("devtools")#
+library(roxygen2)#
+#library(root)#
+#
+# create package skeleton#
+setwd("/Users/gimenez/Dropbox/OG/GitHub")#
+create("R2ucare")
+setwd("/Users/gimenez/Dropbox/OG/GitHub/R2ucare")#
+dir()#
+document()
+warnings()
