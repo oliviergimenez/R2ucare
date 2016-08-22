@@ -1,6 +1,6 @@
 # R2ucare: An R package to test the goodness of fit of capture-recapture models
 
-Author: [Olivier Gimenez](https://oliviergimenez.wordpress.com/)
+Authors: [Olivier Gimenez](https://oliviergimenez.wordpress.com/), Roger Pradel, Jean-Dominique Lebreton, Rémi Choquet, Anne-Marie Reboulet
 
 Vignette: to come
 
@@ -15,11 +15,11 @@ Ths package contains R functions to perform goodness-of-fit tests for capture-re
 Despite what its name might suggest, **you do not need** to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009). 
 For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). [Chapter 5 of the Gentle Introduction to MARK](http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf) also provides a good start for understanding goodness-of-fit test. 
 
-**Warning**: to date, no goodness-of-fit test exists for models with individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, remove these covariates from your dataset before using it with R2ucare. For groups, just treat the group separately as in the Dipper example below. 
+**Warning**: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, remove these covariates from your dataset before using it with R2ucare. For groups, just treat the group separately as in the Dipper example below. 
 
 ## To install the package
 
-This repository hosts the development version of the package. It will also be available soon on CRAN (translation: I have to drastically reduce the to-do list below). For the time being, just use the working version:
+This repository hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:
 
 ```R
 if(!require(devtools)) install.packages("devtools")
@@ -66,6 +66,9 @@ test3sm_females
 test2ct_females
 test2cl_females
 
+# or all tests at once:
+overall_CJS(X,freq)
+
 # perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for males
 test3sr_males = test3sr(dip.mal.hist, dip.mal.freq)
 test3sm_males = test3sm(dip.mal.hist, dip.mal.freq)
@@ -78,12 +81,16 @@ test3sr_males
 test3sm_males
 test2ct_males
 test2cl_males
+
+# or all tests at once:
+overall_CJS(X,freq)
+
 ```
 
 ## Goodness-of-fit tests for the Arnason-Schwarz model
 
 ```R
-# read in the classical dipper dataset using package RMark
+# read in the geese dataset using package RMark
 library(RMark)
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = convert.inp(geese)
@@ -105,7 +112,29 @@ test3Gsm(X,freq)
 test3Gwbwa(X,freq)
 testMitec(X,freq)
 testMltec(X,freq)
+
+# or all tests at once:
+overall_JMV(X,freq)
 ```
+
+## Various functions that might be useful
+
+Several U-CARE functions to manipulate and process capture-recapture data can be mimicked with R built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:
+```R
+# Assuming the geese dataset has been read in R (see above):
+geese.hist[geese.hist>1] = 1
+```
+Also, reversing time is not that tough:
+```R
+# Assuming the male dipper dataset has been read in R (see above):
+t(apply(dip.mal.hist,1,rev))
+```
+
+However, several useful functions need a proper R equivalent. I have coded a few of them, see the list below and ?name-of-the-function for more details (more to follow hopefully, suggestions and help welcome). 
+
+* `marray` build the m-array for single-site/state capture-recapture data;
+* `multimarray` build the m-array for multi-site/state capture-recapture data;
+* `group_data` pool together individuals with the same encounter capture-recapture history.
 
 ## References 
 
@@ -117,16 +146,14 @@ testMltec(X,freq)
 ## Yet to be done
 
 1. Stuff to write
-    + add AS and JMV fitting to complete multisite gof test
-    + add function to perform overall test (sum of all components)
-    + add functions to manipulate data as in U-CARE (in R, many of the functions that are proposed in U-CARE tp manipulate the data can be mimicked with R built-in functions. For example, recoding states or reversing time. However, several functions are still useful and need their own R function like, e.g.: read Headed format, write Headed/mark format, clean data, suppress first encounter, pool / unpool, m-array). 
+    + add more functions to manipulate data as in U-CARE (clean data, suppress first encounter, ungroup, ...)
     + write vignette 
     + add signed tests
     + allow reading in files with Headed format
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
     + add verbose with the option to print tables
-    + make readme similar to [stm](https://github.com/bstewart/stm)
+    + add AS and JMV fitting to complete multisite gof test (https://github.com/oliviergimenez/multievent_jags_R; translate in C++ using Rcpp to speed up fitting process)
 
 2. Debugging
     + check df for test3Gsm
@@ -134,8 +161,8 @@ testMltec(X,freq)
     + check the behavior of the R chisq/Fisher.test functions when cells are deleted and the contingency table is no longer a square or a rectangle
     
 3. Not so urgent
-    + pass testMitec and testMltec in C++
+    + pass testMitec and testMltec in C++ using Rcpp
     + plan a sequence of unit tests
-    + add filtre like in MATLAB code (?)
+    + add filtre like in MATLAB code for ghost states
     + add mosaic plot for wbwa, and other ways to visually represent contingency tables for the other tests
     + class ucare?

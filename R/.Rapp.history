@@ -1,0 +1,124 @@
+library(RMark)#
+dipper = system.file("extdata", "ed.inp", package = "R2ucare")#
+dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))#
+#
+# add spaces between columns#
+dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)#
+#
+# get counts and encounter histories#
+dip.freq = dipper$freq#
+dip.group = dipper$sex#
+#
+# split tha dataset in females/males#
+mask = (dip.group == 'Female')#
+dip.fem.hist = dip.hist[mask,]#
+dip.fem.freq = dip.freq[mask]#
+mask = (dip.group == 'Male')#
+dip.mal.hist = dip.hist[mask,]#
+dip.mal.freq = dip.freq[mask]#
+#
+# load R2ucare package#
+library(R2ucare)#
+#
+# perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females#
+test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)#
+test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)#
+X = dip.fem.hist#
+freq = dip.fem.freq#
+m = marray(X,freq)$m[,,]#
+test2ct_females = test2ct(m)#
+test2cl_females = test2cl(m)#
+test3sr_females#
+test3sm_females#
+test2ct_females#
+test2cl_females
+test3sr
+res_test3sr = test3sr(X, freq)#
+res_test3sm = test3sm(X, freq)#
+m = marray(X,freq)$m[,,]#
+res_test2ct = test2ct(m)#
+res_test2cl = test2cl(m)
+res_test3sr
+res_test3sr$test3sr
+res_test3sm
+res_test2ct
+res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1]
+res_test3sr$test3sr[1]
+res_test3sm$test3sm[1]
+res_test2ct$test2ct[1]
+res_test2cl$test2cl[1]
+stat = res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1]#
+dof = res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2]#
+pval = 1 - pchisq(stat,dof)#
+pval = round(pval,rounding)#
+#
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c(stat,dof,pval)
+stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
+dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2],rounding)#
+pval = 1 - pchisq(stat,dof)#
+pval = round(pval,rounding)
+rounding=3
+stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
+dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2],rounding)#
+pval = 1 - pchisq(stat,dof)#
+pval = round(pval,rounding)
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c(stat,dof,pval)
+# compute overall test as the sum#
+stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
+dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2])#
+pval = 1 - pchisq(stat,dof)#
+pval = round(pval,rounding)#
+#
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c(stat,dof,pval)
+dof
+# compute overall test as the sum#
+stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
+dof = res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2]#
+pval = 1 - pchisq(stat,dof)#
+pval = round(pval,rounding)#
+#
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c(stat,dof,pval)
+dof
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
+cat('overall gof test for CJS model')#
+cat('chi2, degree of freedom and p-value')#
+c('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
+data.frame('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
+data.frame(chi2 = stat,degree of freedom = dof,p-value = pval)
+data.frame(chi2 = stat,degree of freedom = dof,p-value = pval)
+data.frame(chi2 = stat,degree of freedom = dof,p_value = pval)
+data.frame(chi2 = stat,degree of freedom = dof,pvalue = pval)
+data.frame(chi2 = stat,degree_of_freedom = dof,pvalue = pval)
+res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)
+row.names(res)
+res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
+row.names(res) = NULL#
+res
+res = vector(chi2 = stat,degree_of_freedom = dof,p_value = pval)
+res = c(chi2 = stat,degree_of_freedom = dof,p_value = pval)
+res
+res = c(chi2 = stat,degree_of_freedom = dof,p_value = pval)
+res
+cat('overall gof test for CJS model')#
+#cat('chi2, degree of freedom and p-value')#
+res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
+row.names(res) = 'CJS'#
+res
+row.names(res) = 'gof test for CJS model'
+res
+row.names(res) = 'Gof test for CJS model:'
+res
+#cat('chi2, degree of freedom and p-value')#
+res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
+row.names(res) = 'Gof test for CJS model:'#
+res

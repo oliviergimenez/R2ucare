@@ -3,8 +3,10 @@
 #' This function performs Test3G.SR
 #' @param X is a matrix of encounter histories with K occasions
 #' @param freq is a vector of the number of individuals with the corresponding encounter history
-#' @return This function returns a data.frame with occasion, site, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
+#' @param verbose controls the level of the details in the outputs; default is TRUE for all details
+#' @param rounding is the level of rounding for outputs; default is 3
+#' @return This function returns a list with first component the overall test and second component a data.frame with occasion, site, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
 #' @examples
@@ -27,7 +29,7 @@
 #' # perform Test3.GSR
 #' test3Gsr(X,freq)
 
-test3Gsr <- function(X,freq){
+test3Gsr <- function(X,freq,verbose=TRUE,rounding=3){
 
 # various quantities to define
 k = ncol(X)
@@ -168,5 +170,16 @@ for (i in 2:(k-1)){ # loop on date
 
         }
     }
-    table_multi_3sr
+# compute overall test:
+stat = sum(as.numeric(table_multi_3sr[,3]))
+stat = round(stat,rounding)
+dof = sum(as.numeric(table_multi_3sr[,4]))
+pval = 1 - pchisq(stat,dof)
+pval = round(pval,rounding)
+# if user specifies all outputs
+if (verbose==TRUE) return(list(test3Gsr=c(stat=stat,df=dof,p_val=pval),details=table_multi_3sr))
+# otherwise
+if (verbose==FALSE) return(list(test3Gsr=c(stat=stat,df=dof,p_val=pval)))
+
 }
+

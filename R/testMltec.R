@@ -3,7 +3,9 @@
 #' This function performs TestM.LTEC
 #' @param X is a matrix of encounter histories with K occasions
 #' @param freq is a vector of the number of individuals with the corresponding encounter history
-#' @return This function returns a data.frame with occasion, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
+#' @param verbose controls the level of the details in the outputs; default is TRUE for all details
+#' @param rounding is the level of rounding for outputs; default is 3
+#' @return This function returns a list with first component the overall test and second component a data.frame with occasion, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
 #' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
@@ -27,7 +29,7 @@
 #' # perform TestM.LTEC
 #' testMltec(X,freq)
 
-testMltec <- function(X,freq){
+testMltec <- function(X,freq,verbose=TRUE,rounding=3){
 
 
 #derocc=1-min(filtre);
@@ -144,5 +146,17 @@ for (i in 2:(k-3)){ # boucle sur les occasions
         	table_multi_litec[i-1,5] = 'None'
         	}
 }
-table_multi_litec
+
+# compute overall test:
+stat = sum(as.numeric(table_multi_litec[,2]))
+stat = round(stat,rounding)
+dof = sum(as.numeric(table_multi_litec[,3]))
+pval = 1 - pchisq(stat,dof)
+pval = round(pval,rounding)
+# if user specifies all outputs
+if (verbose==TRUE) return(list(testMltec=c(stat=stat,df=dof,p_val=pval),details=table_multi_litec))
+# otherwise
+if (verbose==FALSE) return(list(testMltec=c(stat=stat,df=dof,p_val=pval)))
+
+
 } # function

@@ -3,7 +3,9 @@
 #' This function performs Test3G.WBWA
 #' @param X is a matrix of encounter histories with K occasions
 #' @param freq is a vector of the number of individuals with the corresponding encounter history
-#' @return This function returns a data.frame with occasion, site, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
+#' @param verbose controls the level of the details in the outputs; default is TRUE for all details
+#' @param rounding is the level of rounding for outputs; default is 3
+#' @return This function returns a list with first component the overall test and second component a data.frame with occasion, site, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
 #' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
@@ -27,7 +29,7 @@
 #' # perform Test.3GWBWA
 #' test3Gwbwa(X,freq)
 
-test3Gwbwa <- function(X,freq){
+test3Gwbwa <- function(X,freq,verbose=TRUE,rounding=3){
 #testwbwa <- function(X,freq,filtre,verbosity)
 
 # various quantities to define
@@ -219,7 +221,17 @@ for (i in 2:(k-1)){ # loop on date
                 table_wbwa[where_in_table_wbwa,6] = 'Chi-square'
             }
         }
-    }
-table_wbwa
+}
+# compute overall test:
+stat = sum(as.numeric(table_wbwa[,3]))
+stat = round(stat,rounding)
+dof = sum(as.numeric(table_wbwa[,4]))
+pval = 1 - pchisq(stat,dof)
+pval = round(pval,rounding)
+# if user specifies all outputs
+if (verbose==TRUE) return(list(test3Gwbwa=c(stat=stat,df=dof,p_val=pval),details=table_wbwa))
+# otherwise
+if (verbose==FALSE) return(list(test3Gwbwa=c(stat=stat,df=dof,p_val=pval)))
+
 }
 

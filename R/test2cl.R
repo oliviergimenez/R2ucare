@@ -5,7 +5,7 @@
 #' @param verbose controls the level of the details in the outputs; default is TRUE for all details
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a list with first component the overall test and second component a data.frame with 5 columns for components i (2:K-3) (in rows) of test2.cli following Pradel 1993 (in Lebreton and North, Birkhauser Verlag): component, degree of freedom, statistic of the test, p-value, test performed.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
 #' @keywords package
 #' @export
 #' @examples
@@ -13,12 +13,12 @@
 #' library(RMark)
 #' dipper = system.file("extdata", "ed.inp", package = "R2ucare")
 #' dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
-#' 
+#'
 #' # add spaces between columns
 #' dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
 #' dip.freq = dipper$freq
 #' dip.group = dipper$sex
-#' 
+#'
 #' # split the dataset in males/females
 #' mask = (dip.group == 'Female')
 #' dip.fem.hist = dip.hist[mask,]
@@ -26,7 +26,7 @@
 #' mask = (dip.group == 'Male')
 #' dip.mal.hist = dip.hist[mask,]
 #' dip.mal.freq = dip.freq[mask]
-#' 
+#'
 #' # for males
 #' X = dip.mal.hist
 #' freq = dip.mal.freq
@@ -62,7 +62,7 @@ else {
 df=0 # empty table
 }
 # end of df calculation
-if (df>0){ 
+if (df>0){
 	U = ind_test_rc(cont_tab) # test of ind
 }
 else {
@@ -71,8 +71,8 @@ else {
 
      result[indice,2] = U[3] # df = 1 or 0
      result[indice,3] = U[1]
-     result[indice,4] = U[2]     
-     result[indice,5] = U[4]     
+     result[indice,4] = U[2]
+     result[indice,5] = U[4]
 }
 # compute overall test:
 stat = sum(as.numeric(result[,3]))

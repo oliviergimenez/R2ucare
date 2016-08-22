@@ -4,15 +4,19 @@
 \alias{testMitec}
 \title{TestM.ITEC}
 \usage{
-testMitec(X, freq)
+testMitec(X, freq, verbose = TRUE, rounding = 3)
 }
 \arguments{
 \item{X}{is a matrix of encounter histories with K occasions}
 
 \item{freq}{is a vector of the number of individuals with the corresponding encounter history}
+
+\item{verbose}{controls the level of the details in the outputs; default is TRUE for all details}
+
+\item{rounding}{is the level of rounding for outputs; default is 3}
 }
 \value{
-This function returns a data.frame with occasion, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
+This function returns a list with first component the overall test and second component a data.frame with occasion, the value of the test statistic, degree of freedom, p-value and test performed (chi-square, Fisher or none).
 }
 \description{
 This function performs TestM.ITEC
