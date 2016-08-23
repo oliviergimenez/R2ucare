@@ -90,11 +90,7 @@ dof
 cat('overall gof test for CJS model')#
 cat('chi2, degree of freedom and p-value')#
 c('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
 data.frame('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
-data.frame(chi2 = stat,degree of freedom = dof,p-value = pval)
 data.frame(chi2 = stat,degree of freedom = dof,p-value = pval)
 data.frame(chi2 = stat,degree of freedom = dof,p_value = pval)
 data.frame(chi2 = stat,degree of freedom = dof,pvalue = pval)
@@ -122,3 +118,504 @@ res
 res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
 row.names(res) = 'Gof test for CJS model:'#
 res
+?sign
+X = matrix(round(runif(30)),nrow=10)
+freq=c(4,3,8,123,1,-5,10,55,1,0)
+cbind(X,freq)
+if (is.vector(effX)) g = 1#
+if (is.matrix(effX)) g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)
+effX=freq
+if (is.vector(effX)) g = 1#
+if (is.matrix(effX)) g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)
+g
+s
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)
+g
+effX
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}
+ma
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1
+while (i <= nrow(X)){#
+	i0 = i#
+	for (gr in 1:g){#
+		comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}  #
+		if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)#
+	}#
+	comp_init = comp_fin#
+	i = i + 1#
+} # while
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)#
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}#
+#
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1#
+while (i <= nrow(X)){#
+	i0 = i#
+	for (gr in 1:g){#
+		comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}  #
+		if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)#
+	}#
+	comp_init = comp_fin#
+	i = i + 1#
+} # while
+effX
+X
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)#
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}#
+#
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1
+i0 = i
+gr=1
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+comp
+(i < nrow(X))
+(sum(X[i+1,]==X[i,])==s)
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}
+}
+comp_fin = max(comp_fin,comp)
+comp_fin
+comp_init = comp_fin#
+	i = i + 1
+i
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]
+for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)
+comp_init = comp_fin#
+	i = i + 1
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)
+comp_init = comp_fin#
+	i = i + 1
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)
+comp_init = comp_fin#
+	i = i + 1
+i
+X
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]
+for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin#
+	i = i + 1
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin
+i = i + 1
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]
+for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin
+i = i + 1
+i
+X
+i0 = i
+effX
+freq=c(4,3,8,123,1,-5,10,55,1,10)
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)#
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}#
+#
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1#
+while (i <= nrow(X)){#
+	i0 = i#
+	for (gr in 1:g){#
+		comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}  #
+		if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)#
+	}#
+	comp_init = comp_fin#
+	i = i + 1#
+} # while
+X = matrix(round(runif(30)),nrow=3)
+X
+X = matrix(round(runif(9)),nrow=3)
+freq=c(4,3,-8)
+cbind(X,freq)
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)#
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1
+effY
+i0 = i
+i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin#
+	i = i + 1
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin
+i = i + 1
+i
+i0 = i
+comp = comp_init#
+		i = i0#
+		e = effX[i,gr]
+for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}
+if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}
+comp_fin = max(comp_fin,comp)
+comp_init = comp_fin
+i = i + 1
+i
+nrow(X)
+effX = as.matrix(effX)#
+g = ncol(effX)#
+bloc = matrix(0,nrow=1,ncol=g)#
+i = 1#
+ma = 0#
+s = ncol(X)#
+while (i <= nrow(X)){#
+	bloc = abs(effX[i,])#
+	if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+		bloc = bloc + abs(effX[i+1,])#
+		i = i + 1#
+	}#
+	ma = ma + max(bloc)#
+	i = i + 1#
+}
+effY = matrix(nrow=ma,ncol=g)#
+Y = matrix(0,nrow=ma,ncol=ncol(X))#
+comp_init = 1#
+comp_fin = 1#
+i = 1#
+while (i <= nrow(X)){#
+	i0 = i#
+	for (gr in 1:g){#
+		comp = comp_init#
+		i = i0#
+		e = effX[i,gr]#
+		for (j in 1:abs(e)){#
+			Y[comp,] = X[i,]#
+			effY[comp,gr] = sign(e)#
+			comp=comp+1#
+		}  #
+		if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){#
+			i = i0 + 1#
+			e = effX[i,gr]#
+			for (j in 1:abs(e)){#
+				Y[comp,] = X[i,]#
+				effY[comp,gr] = sign(e)#
+				comp = comp + 1#
+			}#
+		}#
+		comp_fin = max(comp_fin,comp)#
+	}#
+	comp_init = comp_fin#
+	i = i + 1#
+} # while
+Y
+effY
+ls()
+setwd('/Users/gimenez/Dropbox/OG/GitHub/R2ucare/R')
+source('ungroup_data.R')
+effX
+X
+effX=freq
+effX
+ungroup_data(X,effX)
+source('ungroup_data.R')
+ungroup_data(X,effX)

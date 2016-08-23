@@ -8,7 +8,11 @@
 #' @keywords package
 #' @export
 #' @examples
-#' group_data()
+#' Generate fake capture-recapture dataset
+#' X = matrix(round(runif(300)),nrow=100)
+#' freq=rep(1,100) # fake counts (ungrouped data)
+#' cbind(X,freq) # display fake dataset
+#' group_data(X,freq)
 
 group_data <- function(X,effX){
 

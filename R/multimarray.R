@@ -8,7 +8,24 @@
 #' @keywords package
 #' @export
 #' @examples
-#' multimarray()
+#' # read in the geese dataset using package RMark
+#' library(RMark)
+#' geese = system.file("extdata", "geese.inp", package = "R2ucare")
+#' geese = convert.inp(geese)
+#'
+#' # add spaces between columns
+#' geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
+#' geese.freq = geese$freq
+#'
+#' # encounter histories and number of individuals with corresponding histories
+#' X = geese.hist
+#' freq = geese.freq
+#'
+#' # load R2ucare package
+#' library(R2ucare)
+#'
+#' # build m-array
+#' multimarray(X,freq)
 
 multimarray <- function(X,freq){
 

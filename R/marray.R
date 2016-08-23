@@ -8,10 +8,31 @@
 #' @keywords package
 #' @export
 #' @examples
-#' marray()
+#' # read in the classical dipper dataset using package RMark
+#' library(RMark)
+#' dipper = system.file("extdata", "ed.inp", package = "R2ucare")
+#' dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+#'
+#' # add spaces between columns
+#' dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
+#'
+#' # get counts and encounter histories
+#' dip.freq = dipper$freq
+#' dip.group = dipper$sex
+#'
+#' # get female data
+#' mask = (dip.group == 'Female')
+#' dip.fem.hist = dip.hist[mask,]
+#' dip.fem.freq = dip.freq[mask]
+#'
+#' # load R2ucare package
+#' library(R2ucare)
+#'
+#' # get number of released individuals (R), the m-array (m) and the number of individuals never seen again (never)
+#' marray(dip.fem.hist,dip.fem.freq)
 
 marray <- function(X,freq){
-	
+
 # INITIALIZATION
 n = dim(X)[1]
 k = dim(X)[2]
@@ -32,10 +53,10 @@ for (i in 1:n){ # loop on encounter histories
    ncap=length(dates) # find number of captures
    if (ncap>0){ # more than 1 capture
       d1 = dates[1] # first capture
-      dnext = d1 - 1 
-      for (j in 2:ncap){ # loop on dates of capture 
+      dnext = d1 - 1
+      for (j in 2:ncap){ # loop on dates of capture
          if (ncap<2) break # manage reverse loop
-         dlast = dnext+1 # date of last capture 
+         dlast = dnext+1 # date of last capture
          dnext = dates[j] - 1 # date of next capture shifted left (to fill m)
          for (gg in 1:g){ # loop on groups
             R[dlast,gg] = R[dlast,gg] + ae[gg]
@@ -45,7 +66,7 @@ for (i in 1:n){ # loop on encounter histories
       # treat last release : nobody in m
       dlast = dnext + 1
       for (gg in 1:g){
-         if ((e[gg]>0) & (dlast<k)) R[dlast,gg] = R[dlast,gg] + e[gg] 
+         if ((e[gg]>0) & (dlast<k)) R[dlast,gg] = R[dlast,gg] + e[gg]
       }
    } # if ncap>0
 } # for (i in 1:n)

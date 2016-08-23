@@ -18,7 +18,11 @@ matrix with grouped capture-recapture histories and counts in the last column
 This function pools together individuals with the same encounter capture-recapture history.
 }
 \examples{
-group_data()
+Generate fake capture-recapture dataset
+X = matrix(round(runif(300)),nrow=100)
+freq=rep(1,100) # fake counts (ungrouped data)
+cbind(X,freq) # display fake dataset
+group_data(X,freq)
 }
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet

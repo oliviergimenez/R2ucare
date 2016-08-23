@@ -18,7 +18,28 @@ This function returns a list with R the number of released individuals (K-1 x g 
 This function calculates the m-array, the number of released and never seen again individuals; deals with more than 1 group
 }
 \examples{
-marray()
+# read in the classical dipper dataset using package RMark
+library(RMark)
+dipper = system.file("extdata", "ed.inp", package = "R2ucare")
+dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+
+# add spaces between columns
+dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
+
+# get counts and encounter histories
+dip.freq = dipper$freq
+dip.group = dipper$sex
+
+# get female data
+mask = (dip.group == 'Female')
+dip.fem.hist = dip.hist[mask,]
+dip.fem.freq = dip.freq[mask]
+
+# load R2ucare package
+library(R2ucare)
+
+# get number of released individuals (R), the m-array (m) and the number of individuals never seen again (never)
+marray(dip.fem.hist,dip.fem.freq)
 }
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
