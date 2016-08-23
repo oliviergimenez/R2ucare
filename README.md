@@ -30,6 +30,7 @@ Despite what its name might suggest, **you do not need** to download and install
 
 The simplest way to get started is to have a look to the R2ucare vignette. Just type in R:
 ```R
+library(R2ucare)
 vignette('vignette_R2ucare')
 ```
 
