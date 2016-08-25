@@ -24,7 +24,7 @@ The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the dev
 ```
 if(!require(devtools)) install.packages("devtools")
 library("devtools")
-install_github('oliviergimenez/R2ucare')
+install_github('oliviergimenez/R2ucare',dependencies=TRUE,build_vignettes=TRUE)
 ```
 
 Despite what its name might suggest, **you do not need** to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009). 
@@ -43,7 +43,7 @@ dipper = system.file("extdata", "ed.inp", package = "R2ucare")
 dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 ```
 
-Get encounter histories:
+Get encounter histories, counts and groups:
 ```{r, message=FALSE, warning=FALSE}
 dip.hist = dipper$encounter_histories
 dip.freq = dipper$sample_size

@@ -22,23 +22,16 @@ This function returns a list with first component the overall test and second co
 This function performs Test3G.SM
 }
 \examples{
-# read in Geese dataset
-library(RMark)
+Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
-geese = convert.inp(geese)
+geese = read_inp(geese)
 
-geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
-geese.freq = geese$freq
-
-# encounter histories and number of individuals with corresponding histories
-X = geese.hist
-freq = geese.freq
-
-# load R2ucare package
-library(R2ucare)
+# Get encounter histories and number of individuals with corresponding histories
+geese.hist = geese$encounter_histories
+geese.freq = geese$sample_size
 
 # perform Test.3.GSm
-test3Gsm(X,freq)
+test3Gsm(geese.hist,geese.freq)
 }
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel

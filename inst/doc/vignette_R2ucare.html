@@ -85,7 +85,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The repository on GitHub <a href="https://github.com/oliviergimenez/R2ucare" class="uri">https://github.com/oliviergimenez/R2ucare</a> hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:</p>
 <pre><code>if(!require(devtools)) install.packages(&quot;devtools&quot;)
 library(&quot;devtools&quot;)
-install_github('oliviergimenez/R2ucare')</code></pre>
+install_github('oliviergimenez/R2ucare',dependencies=TRUE,build_vignettes=TRUE)</code></pre>
 <p>Despite what its name might suggest, <strong>you do not need</strong> to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009).</p>
 </div>
 <div id="goodness-of-fit-tests-for-the-cormack-jolly-seber-model" class="section level2">
@@ -95,7 +95,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <p>Let’s begin by reading in the classical dipper using the <code>read_inp</code> function. Note that data with the Headed format can also be read using the function <code>read_headed</code>. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dipper =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
 dipper =<span class="st"> </span><span class="kw">read_inp</span>(dipper,<span class="dt">group.df=</span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="st">'Male'</span>,<span class="st">'Female'</span>)))</code></pre></div>
-<p>Get encounter histories:</p>
+<p>Get encounter histories, counts and groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dip.hist =<span class="st"> </span>dipper$encounter_histories
 dip.freq =<span class="st"> </span>dipper$sample_size
 dip.group =<span class="st"> </span>dipper$groups</code></pre></div>

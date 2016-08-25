@@ -10,24 +10,16 @@
 #' @keywords package
 #' @export
 #' @examples
-#' # read in Geese dataset
-#' library(RMark)
+#' Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
-#' geese = convert.inp(geese)
-#'
-# add spaces between columns
-#' geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
-#' geese.freq = geese$freq
-#'
-#' # encounter histories and number of individuals with corresponding histories
-#' X = geese.hist
-#' freq = geese.freq
-#'
-#' # load R2ucare package
-#' library(R2ucare)
+#' geese = read_inp(geese)
+#' 
+#' # Get encounter histories and number of individuals with corresponding histories
+#' geese.hist = geese$encounter_histories
+#' geese.freq = geese$sample_size
 #'
 #' # perform Test.3GWBWA
-#' test3Gwbwa(X,freq)
+#' test3Gwbwa(geese.hist,geese.freq)
 
 test3Gwbwa <- function(X,freq,verbose=TRUE,rounding=3){
 #testwbwa <- function(X,freq,filtre,verbosity)

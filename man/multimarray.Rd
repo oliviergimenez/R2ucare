@@ -18,24 +18,16 @@ This function returns a matrix in which R the number of released individuals is 
 This function calculates the m-array for multistate capture-recapture data, the number of released and never seen again individuals.
 }
 \examples{
-# read in the geese dataset using package RMark
-library(RMark)
+Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
-geese = convert.inp(geese)
+geese = read_inp(geese)
 
-# add spaces between columns
-geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
-geese.freq = geese$freq
-
-# encounter histories and number of individuals with corresponding histories
-X = geese.hist
-freq = geese.freq
-
-# load R2ucare package
-library(R2ucare)
+# Get encounter histories and number of individuals with corresponding histories
+geese.hist = geese$encounter_histories
+geese.freq = geese$sample_size
 
 # build m-array
-multimarray(X,freq)
+multimarray(geese.hist, geese.freq)
 }
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel

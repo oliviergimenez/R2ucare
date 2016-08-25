@@ -22,15 +22,14 @@ This function returns a list with first component the overall test and second co
 This function performs Test3.SR
 }
 \examples{
-# read in Dipper dataset
-library(RMark)
+# read in the classical dipper dataset
 dipper = system.file("extdata", "ed.inp", package = "R2ucare")
-dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 
-# add spaces between columns
-dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
-dip.freq = dipper$freq
-dip.group = dipper$sex
+# Get encounter histories, counts and groups:
+dip.hist = dipper$encounter_histories
+dip.freq = dipper$sample_size
+dip.group = dipper$groups
 
 # split the dataset in males/females
 mask = (dip.group == 'Female')

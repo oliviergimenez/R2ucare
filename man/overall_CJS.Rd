@@ -21,15 +21,14 @@ This function performs the overall goodness-of-fit test for the Cormack-Jolly-Se
 It is obtained as the sum of the 4 components Test3.SR, Test3.SM, Test2.CT and Test2.CL.
 }
 \examples{
-# read in Dipper dataset
-library(RMark)
+# read in the classical dipper dataset
 dipper = system.file("extdata", "ed.inp", package = "R2ucare")
-dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 
-# add spaces between columns
-dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)
-dip.freq = dipper$freq
-dip.group = dipper$sex
+# Get encounter histories, counts and groups:
+dip.hist = dipper$encounter_histories
+dip.freq = dipper$sample_size
+dip.group = dipper$groups
 
 # split the dataset in males/females
 mask = (dip.group == 'Female')
