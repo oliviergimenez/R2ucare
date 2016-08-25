@@ -43,7 +43,6 @@ vignette('vignette_R2ucare')
 ## Yet to be done
 
 1. Stuff to write
-    + add signed tests
     + add gof for recoveries
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
