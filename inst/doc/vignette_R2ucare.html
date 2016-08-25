@@ -12,7 +12,7 @@
 
 <meta name="author" content="Olivier Gimenez" />
 
-<meta name="date" content="2016-08-23" />
+<meta name="date" content="2016-08-25" />
 
 <title>How to use the R2ucare package to assess the fit of capture-recapture to data?</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">How to use the R2ucare package to assess the fit of capture-recapture to data?</h1>
 <h4 class="author"><em>Olivier Gimenez</em></h4>
-<h4 class="date"><em>2016-08-23</em></h4>
+<h4 class="date"><em>2016-08-25</em></h4>
 
 
 
@@ -83,32 +83,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="to-install-the-package" class="section level2">
 <h2>To install the package</h2>
 <p>The repository on GitHub <a href="https://github.com/oliviergimenez/R2ucare" class="uri">https://github.com/oliviergimenez/R2ucare</a> hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(!<span class="kw">require</span>(devtools)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-<span class="kw">library</span>(<span class="st">&quot;devtools&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">'oliviergimenez/R2ucare'</span>)</code></pre></div>
+<pre><code>if(!require(devtools)) install.packages(&quot;devtools&quot;)
+library(&quot;devtools&quot;)
+install_github('oliviergimenez/R2ucare')</code></pre>
 <p>Despite what its name might suggest, <strong>you do not need</strong> to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009).</p>
 </div>
 <div id="goodness-of-fit-tests-for-the-cormack-jolly-seber-model" class="section level2">
 <h2>Goodness-of-fit tests for the Cormack-Jolly-Seber model</h2>
-<p>Let’s begin by reading in the classical dipper dataset using package <code>RMark</code>. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data). Note that you do not need to install <code>MARK</code> (the executable) at that stage, unless you’d like to actually fit models to data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(!<span class="kw">require</span>(RMark)) <span class="kw">install.packages</span>(<span class="st">&quot;RMark&quot;</span>)
-<span class="kw">library</span>(RMark)
-dipper =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
-dipper =<span class="st"> </span><span class="kw">convert.inp</span>(dipper,<span class="dt">group.df=</span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="st">'Male'</span>,<span class="st">'Female'</span>)))</code></pre></div>
-<p>Let’s add spaces between columns:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dip.hist =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">as.numeric</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(dipper$ch, <span class="st">''</span>))),<span class="dt">nrow=</span><span class="kw">nrow</span>(dipper),<span class="dt">byrow=</span>T)</code></pre></div>
-<p>Get counts and encounter histories:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dip.freq =<span class="st"> </span>dipper$freq
-dip.group =<span class="st"> </span>dipper$sex</code></pre></div>
-<p>Split tha dataset in females/males:</p>
+<p>First things first, load the <code>R2ucare</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(R2ucare)</code></pre></div>
+<p>Let’s begin by reading in the classical dipper using the <code>read_inp</code> function. Note that data with the Headed format can also be read using the function <code>read_headed</code>. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dipper =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
+dipper =<span class="st"> </span><span class="kw">read_inp</span>(dipper,<span class="dt">group.df=</span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="st">'Male'</span>,<span class="st">'Female'</span>)))</code></pre></div>
+<p>Get encounter histories:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dip.hist =<span class="st"> </span>dipper$encounter_histories
+dip.freq =<span class="st"> </span>dipper$sample_size
+dip.group =<span class="st"> </span>dipper$groups</code></pre></div>
+<p>Split the dataset in females/males:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mask =<span class="st"> </span>(dip.group ==<span class="st"> 'Female'</span>)
 dip.fem.hist =<span class="st"> </span>dip.hist[mask,]
 dip.fem.freq =<span class="st"> </span>dip.freq[mask]
 mask =<span class="st"> </span>(dip.group ==<span class="st"> 'Male'</span>)
 dip.mal.hist =<span class="st"> </span>dip.hist[mask,]
 dip.mal.freq =<span class="st"> </span>dip.freq[mask]</code></pre></div>
-<p>Load the <code>R2ucare</code> package</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(R2ucare)</code></pre></div>
 <p>Tadaaaaan, now you’re ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test3sr_females =<span class="st"> </span><span class="kw">test3sr</span>(dip.fem.hist, dip.fem.freq)
 test3sm_females =<span class="st"> </span><span class="kw">test3sm</span>(dip.fem.hist, dip.fem.freq)
@@ -169,20 +166,14 @@ test3sr_females</code></pre></div>
 </div>
 <div id="goodness-of-fit-tests-for-the-arnason-schwarz-model" class="section level2">
 <h2>Goodness-of-fit tests for the Arnason-Schwarz model</h2>
-<p>Read in the geese dataset using package <code>RMark</code>. The dataset is provided with the package (thanks to Jay Hesbeck for sharing his data). Note that you do not need to install <code>MARK</code> (the executable) at that stage, unless you’d like to actually fit models to data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RMark)
-geese =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;geese.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
-geese =<span class="st"> </span><span class="kw">convert.inp</span>(geese)</code></pre></div>
-<p>Add spaces between columns:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geese.hist =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">as.numeric</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(geese$ch, <span class="st">''</span>))),<span class="dt">nrow=</span><span class="kw">nrow</span>(geese),<span class="dt">byrow=</span>T)
-geese.freq =<span class="st"> </span>geese$freq</code></pre></div>
+<p>Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geese =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;geese.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
+geese =<span class="st"> </span><span class="kw">read_inp</span>(geese)</code></pre></div>
 <p>Get encounter histories and number of individuals with corresponding histories</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X =<span class="st"> </span>geese.hist
-freq =<span class="st"> </span>geese.freq</code></pre></div>
-<p>Load the <code>R2ucare</code> package</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(R2ucare)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geese.hist =<span class="st"> </span>geese$encounter_histories
+geese.freq =<span class="st"> </span>geese$sample_size</code></pre></div>
 <p>And now, perform Test3.GSr, Test.3.GSm, Test3G.wbwa, TestM.ITEC and TestM.LTEC:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsr</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsr</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>## $test3Gsr
 ##    stat      df   p_val 
 ## 117.753  12.000   0.000 
@@ -201,7 +192,7 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 ## 10        5    1 1.101349e+01  1 9.045141e-04 Chi-square
 ## 11        5    2 1.292013e-01  1 7.192616e-01 Chi-square
 ## 12        5    3 2.978513e+01  1 4.826802e-08 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsm</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsm</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>## $test3Gsm
 ##    stat      df   p_val 
 ## 302.769 124.000   0.000 
@@ -220,7 +211,7 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 ## 10        5    1  9.061514  3 2.848411e-02 Chi-square
 ## 11        5    2  5.974357  4 2.010715e-01 Chi-square
 ## 12        5    3 29.217786  4 7.060092e-06 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gwbwa</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gwbwa</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>## $test3Gwbwa
 ##    stat      df   p_val 
 ## 472.855  20.000   0.000 
@@ -239,7 +230,7 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 ## 10        5    1 43.6547442  1 3.917264e-11 Chi-square
 ## 11        5    2 50.9264976  2 8.738795e-12 Chi-square
 ## 12        5    3 29.4763896  2 3.974507e-07 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMitec</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMitec</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>## $testMitec
 ##   stat     df  p_val 
 ## 68.862 27.000  0.000 
@@ -249,7 +240,7 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 ## 1        2 14.86116  9 0.0948209561 Chi-square
 ## 2        3 30.87309  9 0.0003112416 Chi-square
 ## 3        4 23.12741  9 0.0059164218 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMltec</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMltec</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>## $testMltec
 ##   stat     df  p_val 
 ## 14.491 19.000  0.754 
@@ -259,7 +250,7 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 ## 1        2 10.41330 10 0.4050110 Chi-square
 ## 2        3  4.07758  9 0.9062325 Chi-square</code></pre>
 <p>Or all tests at once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">overall_JMV</span>(X,freq)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">overall_JMV</span>(geese.hist,geese.freq)</code></pre></div>
 <pre><code>##                           chi2 degree_of_freedom p_value
 ## Gof test for JMV model: 976.73               202       0</code></pre>
 </div>
@@ -267,36 +258,36 @@ freq =<span class="st"> </span>geese.freq</code></pre></div>
 <h2>Various useful functions</h2>
 <p>Several U-CARE functions to manipulate and process capture-recapture data can be mimicked with R built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-X[X&gt;<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></code></pre></div>
+geese.hist[geese.hist&gt;<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></code></pre></div>
 <p>So is recoding states:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-X[X==<span class="dv">3</span>]=<span class="dv">2</span> <span class="co"># all 3s become 2s</span></code></pre></div>
+geese.hist[geese.hist==<span class="dv">3</span>]=<span class="dv">2</span> <span class="co"># all 3s become 2s</span></code></pre></div>
 <p>Also, reversing time is not that difficult:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the male dipper dataset has been read in R (see above):</span>
-<span class="kw">t</span>(<span class="kw">apply</span>(X,<span class="dv">1</span>,rev))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
+<span class="kw">t</span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,rev))</code></pre></div>
 <p>What about cleaning data, i.e. deleting empty histories, and histories with no individuals?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the male dipper dataset has been read in R (see above):</span>
-mask =<span class="st"> </span>(<span class="kw">apply</span>(X,<span class="dv">1</span>,sum)&gt;<span class="dv">0</span> &amp;<span class="st"> </span>freq&gt;<span class="dv">0</span>) <span class="co"># select non-empty histories, and histories with at least one individual</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
+mask =<span class="st"> </span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,sum)&gt;<span class="dv">0</span> &amp;<span class="st"> </span>dip.fem.freq&gt;<span class="dv">0</span>) <span class="co"># select non-empty histories, and histories with at least one individual</span>
 <span class="kw">sum</span>(!mask) <span class="co"># how many histories are to be dropped?</span>
-X[mask,] <span class="co"># drop these histories from dataset</span>
-freq[mask] <span class="co"># from counts</span></code></pre></div>
+dip.fem.hist[mask,] <span class="co"># drop these histories from dataset</span>
+dip.fem.freq[mask] <span class="co"># from counts</span></code></pre></div>
 <p>Selecting or gathering occasions is as simple as that:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the male dipper dataset has been read in R (see above):</span>
-X[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)</span>
-gather_146 =<span class="st"> </span><span class="kw">apply</span>(X[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)],<span class="dv">1</span>,max) <span class="co"># gather occasions 1, 4 and 6 by taking the max</span>
-X[,<span class="dv">1</span>] =<span class="st"> </span>gather_146 <span class="co"># replace occasion 1 by new occasion</span>
-X =<span class="st"> </span>X[,-<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># drop occasions 4 and 6</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
+dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)</span>
+gather_146 =<span class="st"> </span><span class="kw">apply</span>(dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)],<span class="dv">1</span>,max) <span class="co"># gather occasions 1, 4 and 6 by taking the max</span>
+dip.fem.hist[,<span class="dv">1</span>] =<span class="st"> </span>gather_146 <span class="co"># replace occasion 1 by new occasion</span>
+dip.fem.hist =<span class="st"> </span>dip.fem.hist[,-<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># drop occasions 4 and 6</span></code></pre></div>
 <p>Finally, suppressing the first encounter is achieved as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(X)){
-occasion_first_encounter =<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(X[i,]!=<span class="dv">0</span>)) <span class="co"># look for occasion of first encounter</span>
-X[i,occasion_first_encounter] =<span class="st"> </span><span class="dv">0</span> <span class="co"># replace the first non zero by a zero</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(geese.hist)){
+occasion_first_encounter =<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(geese.hist[i,]!=<span class="dv">0</span>)) <span class="co"># look for occasion of first encounter</span>
+geese.hist[i,occasion_first_encounter] =<span class="st"> </span><span class="dv">0</span> <span class="co"># replace the first non zero by a zero</span>
 }
 <span class="co"># delete empty histories from the new dataset</span>
-mask =<span class="st"> </span>(<span class="kw">apply</span>(X,<span class="dv">1</span>,sum)&gt;<span class="dv">0</span>) <span class="co"># select non-empty histories</span>
+mask =<span class="st"> </span>(<span class="kw">apply</span>(geese.hist,<span class="dv">1</span>,sum)&gt;<span class="dv">0</span>) <span class="co"># select non-empty histories</span>
 <span class="kw">sum</span>(!mask) <span class="co"># how many histories are to be dropped?</span>
-X[mask,] <span class="co"># drop these histories from dataset</span>
-freq[mask] <span class="co"># from counts</span></code></pre></div>
+geese.hist[mask,] <span class="co"># drop these histories from dataset</span>
+geese.freq[mask] <span class="co"># from counts</span></code></pre></div>
 <p>The R packages <code>plyr</code>, <code>dplyr</code> and <code>tidyr</code> might also be very useful to work with capture-recapture datasets.</p>
 <p>Besides these simple manipulations, several useful U-CARE functions need a proper R equivalent. I have coded a few of them, see the list below and ?name-of-the-function for more details.</p>
 <ul>

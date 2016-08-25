@@ -17,11 +17,11 @@ For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992
 
 **Warning**: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, remove these covariates from your dataset before using it with R2ucare. For groups, just treat the group separately as in the Dipper example below. 
 
-## To install and load the package
+## To install the package
 
 The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:
 
-```{r, message=FALSE, warning=FALSE}
+```
 if(!require(devtools)) install.packages("devtools")
 library("devtools")
 install_github('oliviergimenez/R2ucare')
@@ -29,14 +29,14 @@ install_github('oliviergimenez/R2ucare')
 
 Despite what its name might suggest, **you do not need** to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009). 
 
-Load the `R2ucare` package
+## Goodness-of-fit tests for the Cormack-Jolly-Seber model
+
+First things first, load the `R2ucare` package:
 ```{r, message=FALSE, warning=FALSE}
 library(R2ucare)
 ```
 
-## Goodness-of-fit tests for the Cormack-Jolly-Seber model
-
-Let's begin by reading in the classical dipper using the `read.inp` function. Note that data with the Headed format can also be read using the function `read.headed`. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data).
+Let's begin by reading in the classical dipper using the `read_inp` function. Note that data with the Headed format can also be read using the function `read_headed`. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data).
 
 ```{r, message=FALSE, warning=FALSE}
 dipper = system.file("extdata", "ed.inp", package = "R2ucare")
@@ -50,7 +50,7 @@ dip.freq = dipper$sample_size
 dip.group = dipper$groups
 ```
 
-Split tha dataset in females/males:
+Split the dataset in females/males:
 ```{r, message=FALSE, warning=FALSE}
 mask = (dip.group == 'Female')
 dip.fem.hist = dip.hist[mask,]
@@ -145,7 +145,7 @@ dip.fem.hist = dip.fem.hist[,-c(4,6)] # drop occasions 4 and 6
 Finally, suppressing the first encounter is achieved as follows:
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Assuming the geese dataset has been read in R (see above):
-for (i in 1:nrow(X)){
+for (i in 1:nrow(geese.hist)){
 occasion_first_encounter = min(which(geese.hist[i,]!=0)) # look for occasion of first encounter
 geese.hist[i,occasion_first_encounter] = 0 # replace the first non zero by a zero
 }

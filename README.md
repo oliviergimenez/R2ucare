@@ -28,7 +28,10 @@ Despite what its name might suggest, **you do not need** to download and install
 
 ## Getting started
 
-The simplest way to get started is to have a look to the [R2ucare vignette](https://github.com/oliviergimenez/R2ucare/blob/master/inst/doc/vignette_R2ucare.Rmd).
+The simplest way to get started is to have a look to the [R2ucare vignette](https://github.com/oliviergimenez/R2ucare/blob/master/inst/doc/vignette_R2ucare.Rmd). It can be accessed directly from R using:
+```R 
+vignette('vignette_R2ucare')
+```
 
 ## References 
 
