@@ -19,7 +19,7 @@
 read_inp <- function(file,group.df=NULL){
 
 # read in data, all columns as character, and ignore comments
-data = convert.inp(file,group.df=group.df)
+data = RMark::convert.inp(file,group.df=group.df)
 
 # add spaces between columns:
 enc_hist = matrix(as.numeric(unlist(strsplit(data$ch, ''))),nrow=nrow(data),byrow=T)

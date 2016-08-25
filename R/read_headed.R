@@ -24,9 +24,9 @@ data = read.table(file,header=T,colClasses='character', comment.char = '/')
 headers = names(data)
 
 # get the columns with pre-defined E-SURGE labels (note that ':' has become '.' and '$' is now 'X' after reading the dataset)
-where_occasions = which(as.logical(str_count(headers, "H.")))
-where_sample_size = which(as.logical(str_count(headers, "S.")))
-where_covariates = which(as.logical(str_count(headers, "X.COV.")))
+where_occasions = which(as.logical(stringr::str_count(headers, "H.")))
+where_sample_size = which(as.logical(stringr::str_count(headers, "S.")))
+where_covariates = which(as.logical(stringr::str_count(headers, "X.COV.")))
 
 # initialize the group covariate(s)
 group = NULL
