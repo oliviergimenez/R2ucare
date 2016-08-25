@@ -49,5 +49,4 @@ pval = round(pval,rounding)
 res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)
 row.names(res) = 'Gof test for CJS model:'
 res
-
 }

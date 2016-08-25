@@ -14,7 +14,7 @@ test2ct(m, verbose = TRUE, rounding = 3)
 \item{rounding}{is the level of rounding for outputs; default is 3}
 }
 \value{
-This function returns a list with first component the overall test and second component a data.frame with 5 columns for components i (2:K-2) (in rows) of test2.Cti: component, degree of freedom, statistic of the test, p-value, test performed.
+This function returns a list with first component the overall test and second component a data.frame with 5 columns for components i (2:K-2) (in rows) of test2.Cti: component, degree of freedom, statistic of the test, p-value, signed test, test performed.
 }
 \description{
 This function performs Test2.CT

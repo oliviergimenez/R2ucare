@@ -14,7 +14,7 @@ ind_test_22(M, threshold = 2, rounding = 3)
 \item{rounding}{is the level of rounding for outputs; default is 3}
 }
 \value{
-This function returns a vector with statistic of quadratic chi2 or inv chi2 corresponding to pvalue of Fisher test, p-value of quadratic chi2 test or Fisher test for low numbers and test performed (Chi-square, Fisher or None).
+This function returns a vector with statistic of quadratic chi2 or inv chi2 corresponding to pvalue of Fisher test, p-value of quadratic chi2 test or Fisher test for low numbers, signed test and test performed (Chi-square, Fisher or None).
 }
 \description{
 This function tests independence in 2x2 contingency tables

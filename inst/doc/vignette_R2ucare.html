@@ -116,16 +116,16 @@ test2cl_females =<span class="st"> </span><span class="kw">test2cl</span>(m)
 <span class="co"># display results:</span>
 test3sr_females</code></pre></div>
 <pre><code>## $test3sr
-##  stat    df p_val 
-## 4.985 5.000 0.418 
+##      stat        df     p_val sign_test 
+##     4.985     5.000     0.418     1.428 
 ## 
 ## $details
-##   component  stat p_val  test_perf
-## 1         2 0.858 0.354 Chi-square
-## 2         3 3.586 0.058 Chi-square
-## 3         4 0.437 0.509 Chi-square
-## 4         5 0.103 0.748 Chi-square
-## 5         6 0.001 0.982 Chi-square</code></pre>
+##   component  stat p_val signed_test  test_perf
+## 1         2 0.858 0.354       0.926 Chi-square
+## 2         3 3.586 0.058       1.894 Chi-square
+## 3         4 0.437 0.509       0.661 Chi-square
+## 4         5 0.103 0.748      -0.321 Chi-square
+## 5         6 0.001 0.982       0.032 Chi-square</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test3sm_females</code></pre></div>
 <pre><code>## $test3sm
 ##  stat    df p_val 
@@ -140,15 +140,15 @@ test3sr_females</code></pre></div>
 ## 5         6     0  0     0      None</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test2ct_females</code></pre></div>
 <pre><code>## $test2ct
-##  stat    df p_val 
-## 3.250 4.000 0.517 
+##      stat        df     p_val sign_test 
+##     3.250     4.000     0.517    -0.902 
 ## 
 ## $details
-##   component dof stat p_val test_perf
-## 1         2   1    0     1    Fisher
-## 2         3   1    0     1    Fisher
-## 3         4   1    0     1    Fisher
-## 4         5   1 3.25 0.071    Fisher</code></pre>
+##   component dof stat p_val signed_test test_perf
+## 1         2   1    0     1           0    Fisher
+## 2         3   1    0     1           0    Fisher
+## 3         4   1    0     1           0    Fisher
+## 4         5   1 3.25 0.071      -1.803    Fisher</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test2cl_females</code></pre></div>
 <pre><code>## $test2cl
 ##  stat    df p_val 
