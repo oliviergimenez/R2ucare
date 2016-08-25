@@ -42,11 +42,9 @@ The simplest way to get started is to have a look to the [R2ucare vignette](http
 1. Stuff to write
     + add signed tests
     + add gof for recoveries
-    + allow reading in files with Headed format (see [here](https://github.com/hadley/haven), [here](http://blog.analytixware.com/2015/02/reading-sas-into-r.html) and [here](http://rconvert.com/sas-vs-r-code-compare/5-ways-to-convert-sas-data-to-r/))
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
     + add verbose with the option to print tables
-    + add AS and JMV fitting to complete multisite gof test (https://github.com/oliviergimenez/multievent_jags_R)
 
 2. Debugging
     + check df for test3Gsm
