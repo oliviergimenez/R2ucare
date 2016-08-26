@@ -40,6 +40,7 @@ The simplest way to get started is to have a look to the [R2ucare vignette](http
 ## Yet to be done
 
 1. Stuff to write
+    + test codes on several single- and multi-site datasets - and debug errors 
     + add gof for recoveries
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
