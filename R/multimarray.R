@@ -81,7 +81,7 @@ multimarray <- function(X,freq){
     }
   }
   deb = seq(1,ncol(marray),by=s*km1)
-  fin = seq(15,ncol(marray),by=s*km1)
+  fin = seq(s*km1,ncol(marray),by=s*km1)
   marray2 = NULL
   for (j in 1:km1){
     marray2 = rbind(marray2,marray[,deb[j]:fin[j]])

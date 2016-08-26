@@ -13,7 +13,7 @@
 #' Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
-#' 
+#'
 #' # Get encounter histories and number of individuals with corresponding histories
 #' geese.hist = geese$encounter_histories
 #' geese.freq = geese$sample_size
@@ -127,8 +127,8 @@ for (i in 2:(k-2)){ # boucle sur les occasions
         	A = res$GAM
         	Q = rbind(P,Q)
         	# calcul des valeurs attendues
-        	theoriques = matrix(rep(rep(1,ni)*totk,length(totk)),byrow=T,nrow=length(totk)) * t(Q)
-        	# calcul du nombre de degre de liberte
+        	theoriques = matrix(rep(totk,ni),byrow=T,nrow=ni) * t(Q)
+        	# calcul du nombre de degres de liberte
         	df = (nk-nj)*(ni-nj)
         	# test LR
         	tempchi2 = gof_test(1,c(M),c(theoriques))
