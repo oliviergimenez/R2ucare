@@ -76,7 +76,7 @@ for (j in it3){ # scan occasions of capture from 2 to K-1
 # compute overall test:
 stat = sum(as.numeric(result[,2]))
 stat = round(stat,rounding)
-dof = K-2
+dof = sum(result$test_perf != 'None')
 pval = 1 - pchisq(stat,dof)
 pval = round(pval,rounding)
 tot_signed = round(sum(as.numeric(result$signed_test))/sqrt(length(result$signed_test)),rounding)

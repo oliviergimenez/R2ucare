@@ -46,7 +46,7 @@ for (indice in 1:km4){
      cl = (i+1):km1
      cont_tab = matrix(0,nrow=2,ncol=length(cl))
      if (i>2){
-        cont_tab[1,] = sum(m[rw,cl])
+        cont_tab[1,] = apply(m[rw,cl],2,sum)
      } else {
         cont_tab[1,] = m[rw,cl]
      }
@@ -55,16 +55,15 @@ for (indice in 1:km4){
      MC = apply(cont_tab,2,sum)
      ML = apply(cont_tab,1,sum)
 # calculate df
-      if (any(as.logical(cont_tab))){ # non empty table
-df=(sum(ML>0)-1)*(sum(MC>0)-1)} # account for empty rows and columns
-else {
-df=0 # empty table
+if (any(as.logical(cont_tab))){ # non empty table
+	df=(sum(ML>0)-1)*(sum(MC>0)-1) # account for empty rows and columns
+} else {
+	df=0 # empty table
 }
 # end of df calculation
 if (df>0){
 	U = ind_test_rc(cont_tab) # test of ind
-}
-else {
+} else {
 	U = c(0,0,0,'None')
 }
 
