@@ -35,7 +35,8 @@ if (df>0){
    TT = (1/N) * ML[rw] %*% t(MC[cl]) # calculate expected values on this subtable
    test_low = (sum(TT<threshold)>0)
    if (test_low) { # low numbers
-      res[2] = fisher.test(M)$p.value
+      res[2] = as.numeric(fisher.test(M)$p.value) # zero machine issue
+      if (1-res[2] < 0.000000000000001) res[2] = 1 # zero machine issue
       res[1] = qchisq(1-res[2],df)      
 	  res[1] = round(res[1],rounding)
       res[2] = round(res[2],rounding)
