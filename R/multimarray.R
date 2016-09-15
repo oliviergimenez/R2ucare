@@ -11,7 +11,7 @@
 #' Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
-#' 
+#'
 #' # Get encounter histories and number of individuals with corresponding histories
 #' geese.hist = geese$encounter_histories
 #' geese.freq = geese$sample_size
@@ -47,8 +47,8 @@ multimarray <- function(X,freq){
       if (ncap>1){
         dlast = dates[1:(ncap-1)]
         dnext = dates[2:ncap]
-        sd = h[dlast]
-        sa = h[dnext]
+        sd = unlist(h[dlast])
+        sa = unlist(h[dnext])
         dnext = dnext-1
         for (j in 1:(ncap-1)){
           R[sd[j],dlast[j]] = R[sd[j],dlast[j]] + ae
@@ -56,8 +56,8 @@ multimarray <- function(X,freq){
         }
       } # if (ncap>1)
       dl = dates[ncap]
-      sdl = h[dl]
-      if (dl<k) R[sdl,dl] = R[sdl,dl] + 0.5*(e+ae)
+      sdl = unlist(h[dl])
+      if (dl<k) R[sdl,dl] = R[sdl,dl] + 0.5 * (e + ae)
     } # if (ncap>0)
   } # for (i in 1:n)
 

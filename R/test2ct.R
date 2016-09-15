@@ -62,7 +62,7 @@ for (indice in 1:km3){
      if (df==TRUE){
      	U = ind_test_22(cont_tab,2)
     }else {
-    		U = c(0,0,'None')
+    		U = c(0,0,0,'None')
     }
      result[indice,2] = as.numeric(df) # df = 1 or 0
      result[indice,3] = U[1]
