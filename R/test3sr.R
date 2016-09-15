@@ -41,7 +41,7 @@ before = rep(0,n) # nr of captures before 1
 after = apply(X,1,sum) - X[,1] # nr of captures after 1
 i = 0
 for (j in it3){ # scan occasions of capture from 2 to K-1
-   U = matrix(0,nrow = 1,ncol = 4)
+   U = c(0,0,0,'None')
    i = i+1 # index from 1 to K-1 (rows of result)
    result[i,1] = j
    before = before + X[,j-1] # nr of captures before j
