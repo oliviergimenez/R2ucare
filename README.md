@@ -40,21 +40,14 @@ The simplest way to get started is to have a look to the [R2ucare vignette](http
 ## Yet to be done
 
 1. Stuff to write
-    + test codes on several single- and multi-site datasets - and debug errors 
     + add gof for recoveries
     + add gof for mixture of recapture and recoveries (Rachel)
     + add test for heterogeneity (Anita)
     + add verbose with the option to print tables
 
-2. Debugging
-    + check df for test3Gsm
-    + check all next/break conditions (unit tests)
-    + check the behavior of the R chisq/Fisher.test functions when cells are deleted and the contingency table is no longer a square or a rectangle
-    
-3. Not so urgent
+2. Not so urgent
     + pass testMitec, testMltec and AS/JMV model fitting in C++ using Rcpp
     + plan a sequence of unit tests
-    + add filters like in MATLAB code for ghost states
     + add mosaic plot for wbwa, and other ways to visually represent contingency tables for the other tests
     + gof tests for closed pop models, and occupancy models
     + class ucare?
