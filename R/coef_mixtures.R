@@ -25,13 +25,18 @@ nbmel = nrow(M) # nb of mixtures
 dim(M) = c(1,nbmel*n)
 dim(N) = c(1,s*n)
 
-# initial values
-x = matrix(0,nrow=nbmel*(s-1)+s*(n-1),ncol=1)
-x = matrix(runif(nbmel*(s-1)+s*(n-1)),nrow=nbmel*(s-1)+s*(n-1),ncol=1)
 
+# run 5 times the optimization procedure to try and handle with local minima
+# initial values
+x = matrix(runif(nbmel*(s-1)+s*(n-1)),nrow=nbmel*(s-1)+s*(n-1),ncol=1)
 # Minimization
-tmpmin = optim(x,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001
-,abstol=.000001))
+tmpmin = optim(x,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001,abstol=.000001))
+for (i in 1:4){
+  x2 = matrix(runif(nbmel*(s-1)+s*(n-1)),nrow=nbmel*(s-1)+s*(n-1),ncol=1)
+  # Minimization
+  tmpmin2 = optim(x2,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001,abstol=.000001))
+  if (tpmin2$value < tpmin$value) {tpmin = tpmin2}
+  }
 x <- tmpmin$par
 
 # reconstruction of Gam,Pi,P
