@@ -1,108 +1,3 @@
-library(RMark)#
-dipper = system.file("extdata", "ed.inp", package = "R2ucare")#
-dipper = convert.inp(dipper,group.df=data.frame(sex=c('Male','Female')))#
-#
-# add spaces between columns#
-dip.hist = matrix(as.numeric(unlist(strsplit(dipper$ch, ''))),nrow=nrow(dipper),byrow=T)#
-#
-# get counts and encounter histories#
-dip.freq = dipper$freq#
-dip.group = dipper$sex#
-#
-# split tha dataset in females/males#
-mask = (dip.group == 'Female')#
-dip.fem.hist = dip.hist[mask,]#
-dip.fem.freq = dip.freq[mask]#
-mask = (dip.group == 'Male')#
-dip.mal.hist = dip.hist[mask,]#
-dip.mal.freq = dip.freq[mask]#
-#
-# load R2ucare package#
-library(R2ucare)#
-#
-# perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females#
-test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)#
-test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)#
-X = dip.fem.hist#
-freq = dip.fem.freq#
-m = marray(X,freq)$m[,,]#
-test2ct_females = test2ct(m)#
-test2cl_females = test2cl(m)#
-test3sr_females#
-test3sm_females#
-test2ct_females#
-test2cl_females
-test3sr
-res_test3sr = test3sr(X, freq)#
-res_test3sm = test3sm(X, freq)#
-m = marray(X,freq)$m[,,]#
-res_test2ct = test2ct(m)#
-res_test2cl = test2cl(m)
-res_test3sr
-res_test3sr$test3sr
-res_test3sm
-res_test2ct
-res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1]
-res_test3sr$test3sr[1]
-res_test3sm$test3sm[1]
-res_test2ct$test2ct[1]
-res_test2cl$test2cl[1]
-stat = res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1]#
-dof = res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2]#
-pval = 1 - pchisq(stat,dof)#
-pval = round(pval,rounding)#
-#
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c(stat,dof,pval)
-stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
-dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2],rounding)#
-pval = 1 - pchisq(stat,dof)#
-pval = round(pval,rounding)
-rounding=3
-stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
-dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2],rounding)#
-pval = 1 - pchisq(stat,dof)#
-pval = round(pval,rounding)
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c(stat,dof,pval)
-# compute overall test as the sum#
-stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
-dof = round(res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2])#
-pval = 1 - pchisq(stat,dof)#
-pval = round(pval,rounding)#
-#
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c(stat,dof,pval)
-dof
-# compute overall test as the sum#
-stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)#
-dof = res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2]#
-pval = 1 - pchisq(stat,dof)#
-pval = round(pval,rounding)#
-#
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c(stat,dof,pval)
-dof
-cat('overall gof test for CJS model')#
-cat('chi2, degree of freedom and p-value')#
-c('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
-data.frame('chi2' = stat,'degree of freedom' = dof,'p-value' = pval)
-data.frame(chi2 = stat,degree of freedom = dof,p-value = pval)
-data.frame(chi2 = stat,degree of freedom = dof,p_value = pval)
-data.frame(chi2 = stat,degree of freedom = dof,pvalue = pval)
-data.frame(chi2 = stat,degree_of_freedom = dof,pvalue = pval)
-res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)
-row.names(res)
-res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
-row.names(res) = NULL#
-res
-res = vector(chi2 = stat,degree_of_freedom = dof,p_value = pval)
-res = c(chi2 = stat,degree_of_freedom = dof,p_value = pval)
-res
 res = c(chi2 = stat,degree_of_freedom = dof,p_value = pval)
 res
 cat('overall gof test for CJS model')#
@@ -748,3 +643,657 @@ if (is.null(group.df)){#
 geese
 read_inp(geese)
 ?sign
+library(R2ucare)
+?test3Gsr
+geese = system.file("extdata", "geese.inp", package = "R2ucare")#
+geese = read_inp(geese)#
+geese.hist = geese$encounter_histories#
+geese.freq = geese$sample_size
+test3Gsr(geese.hist,geese.freq)
+test3Gwbwa(geese.hist,geese.freq)
+test3Gsm(geese.hist,geese.freq)
+X=geese.hist
+freq= geese.freq
+verbose=T
+rounding=3
+k = ncol(X)#
+res = group_data(X,freq)#
+his = res[,1:k]#
+eff = res[,k+1]#
+nh = nrow(his)#
+a = max(his)#
+ns = a#
+kplusun = k + 1#
+#
+# initialization#
+table_multi_3sm = data.frame(occasion = rep(NA,a*(k-2)),site = rep(NA,a*(k-2)),stat = rep(NA,a*(k-2)), df = rep(NA,a*(k-2)), p_val = rep(NA,a*(k-2)), test_perf = rep(FALSE,a*(k-2)))#
+where_in_table_3sm = 0#
+#nsitereel=sum(filtre)#
+stattotal = NULL
+i=2
+l=1
+#if filtre(l)#
+            fisheroupas=0#
+#
+            masque = (his[,i]==l)#
+            batch = his[masque,] # select encounter histories containing l in column i#
+            if (length(batch)==0){ # if no release at date i on site l, no test#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = 0#
+                table_multi_3sm[where_in_table_3sm,4] = 0#
+                table_multi_3sm[where_in_table_3sm,5] = 0#
+                table_multi_3sm[where_in_table_3sm,6] = 'None'#
+                next#
+            }#
+            batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i#
+            res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k#
+            batchpost = res[,1:ncol(res)-1]#
+            batcheffpost = res[,ncol(res)]#
+            # look site on which previous obs occurred#
+            if (i!=2){#
+            		tt = t(apply(batchpost[,1:(i-1)],1,rev))#
+                eante = apply(tt!=0,1,which.max)#
+                eante = i - eante#
+            } else {#
+                eante = rep(1,nrow(batchpost))#
+            }#
+            # on cherche le site d'observation suivant#
+            if (i!=(k-1)){#
+                epost = apply(batchpost[,(i+1):k]!=0,1,which.max)#
+            } else {#
+                epost = rep(1,nrow(batchpost))#
+            }#
+            # build table of obs at date i on site l in rows#
+            # according to site of previous obs and in columns#
+            # according to site and date of next obs#
+            # PS: on first row, never seen before#
+            #     on last column, never seen again#
+            j = 0#
+            ind = (k-i)*a+1#
+            table = matrix(0,nrow=a+1,ncol=ind)#
+            cpt = matrix(0,nrow=a+1,ncol=1)#
+            while (j<nrow(batchpost)){ # go through encounter histories#
+                j=j+1#
+                date = epost[j]#
+                site = batchpost[j,i+date]#
+                if (site==0){#
+                    col = ind # never seen again#
+                } else{#
+                    col = (date-1)*a+site # seen again at date and site#
+                }#
+                if (j==1){#
+                    cold = col#
+                } else if (col!=cold){#
+                    table[,cold] = cpt#
+                    cpt = matrix(0,nrow=a+1,ncol=1)#
+                    cold = col#
+                }#
+                tempo = batchpost[j,eante[j]] + 1 # site of previous obs + 1#
+                if (site==0){#
+                    cpt[tempo] = cpt[tempo] + batcheffpost[j] * (batcheffpost[j]>0)#
+                } else {#
+                    cpt[tempo]=cpt[tempo]+abs(batcheffpost[j])#
+                }#
+            }#
+            table[,cold] = cpt
+table1 = table[1,1:(ncol(table)-1)]#
+            table2 = table[1,ncol(table)]#
+            tablerevu = table[2:(1+ns),1:(ncol(table)-1)]#
+            table4 = table[2:(1+ns),ncol(table)]#
+#
+            #   affichage des tables au fur et a mesure de leur creation#
+            table = rbind(table1,apply(tablerevu,2,sum))
+if (is.null(dim(table))) {table=as.matrix(table)} # if table is a vector
+table
+expval_table(table)
+(nrow(table)*ncol(table))>=4
+table = pooling_ct(table)
+table
+(nrow(table)-1)*(ncol(table)-1)
+where_in_table_3sm
+any(expval_table(table)<2)
+where_in_table_3sm = where_in_table_3sm + 1#
+        #if filtre(l)#
+            fisheroupas=0#
+#
+            masque = (his[,i]==l)#
+            batch = his[masque,] # select encounter histories containing l in column i#
+            if (length(batch)==0){ # if no release at date i on site l, no test#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = 0#
+                table_multi_3sm[where_in_table_3sm,4] = 0#
+                table_multi_3sm[where_in_table_3sm,5] = 0#
+                table_multi_3sm[where_in_table_3sm,6] = 'None'#
+                next#
+            }#
+            batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i#
+            res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k#
+            batchpost = res[,1:ncol(res)-1]#
+            batcheffpost = res[,ncol(res)]#
+            # look site on which previous obs occurred#
+            if (i!=2){#
+            		tt = t(apply(batchpost[,1:(i-1)],1,rev))#
+                eante = apply(tt!=0,1,which.max)#
+                eante = i - eante#
+            } else {#
+                eante = rep(1,nrow(batchpost))#
+            }#
+            # on cherche le site d'observation suivant#
+            if (i!=(k-1)){#
+                epost = apply(batchpost[,(i+1):k]!=0,1,which.max)#
+            } else {#
+                epost = rep(1,nrow(batchpost))#
+            }#
+            # build table of obs at date i on site l in rows#
+            # according to site of previous obs and in columns#
+            # according to site and date of next obs#
+            # PS: on first row, never seen before#
+            #     on last column, never seen again#
+            j = 0#
+            ind = (k-i)*a+1#
+            table = matrix(0,nrow=a+1,ncol=ind)#
+            cpt = matrix(0,nrow=a+1,ncol=1)#
+            while (j<nrow(batchpost)){ # go through encounter histories#
+                j=j+1#
+                date = epost[j]#
+                site = batchpost[j,i+date]#
+                if (site==0){#
+                    col = ind # never seen again#
+                } else{#
+                    col = (date-1)*a+site # seen again at date and site#
+                }#
+                if (j==1){#
+                    cold = col#
+                } else if (col!=cold){#
+                    table[,cold] = cpt#
+                    cpt = matrix(0,nrow=a+1,ncol=1)#
+                    cold = col#
+                }#
+                tempo = batchpost[j,eante[j]] + 1 # site of previous obs + 1#
+                if (site==0){#
+                    cpt[tempo] = cpt[tempo] + batcheffpost[j] * (batcheffpost[j]>0)#
+                } else {#
+                    cpt[tempo]=cpt[tempo]+abs(batcheffpost[j])#
+                }#
+            }#
+            table[,cold] = cpt ##
+#
+            # ===================================================#
+            # Build table for test3G SM with pooling#
+            # No distinction between bases and mixtures, pooling is performed#
+            # on rows/columns indistinctively#
+            # ===================================================#
+#
+            table1 = table[1,1:(ncol(table)-1)]#
+            table2 = table[1,ncol(table)]#
+            tablerevu = table[2:(1+ns),1:(ncol(table)-1)]#
+            table4 = table[2:(1+ns),ncol(table)]#
+#
+            #   affichage des tables au fur et a mesure de leur creation#
+            table = rbind(table1,apply(tablerevu,2,sum))#
+            if (is.null(dim(table))) {table=as.matrix(table)} # if table is a vector#
+            if ((nrow(table)*ncol(table))>=4){#
+                table = pooling_ct(table)#
+                #if verbosity>=3#
+                #    strtable=[ strtable {'============================================================================='} ];#
+                #    strtable=[ strtable {strcat('component test3G SM, occasion: ',num2str(i),' site: ',num2str(l))} ];#
+                #    strtable=[ strtable {strcat('New from everywhere --------- |',num2str(table(1,:))) }];#
+                #    strtable=[ strtable {strcat('Has been seen early somewhere |',num2str(table(2,:))) }];#
+                #    %             table#
+                #end#
+#
+            if (any(expval_table(table)<2)){#
+                fish = fisher.test(table)#
+                pvalfish = fish$p.value#
+                dffish = (nrow(table)-1)*(ncol(table)-1)#
+				stafish = qchisq(1-pvalfish, dffish)#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stafish#
+                table_multi_3sm[where_in_table_3sm,4] = dffish#
+                table_multi_3sm[where_in_table_3sm,5] = pvalfish#
+                table_multi_3sm[where_in_table_3sm,6] = 'Fisher'#
+            } else {#
+            	   	old.warn <- options()$warn # to suppress the warning messages#
+            	   	options(warn = -1)#
+            	   	chi2 = chisq.test(table,correct=F)#
+            	   	options(warn = old.warn)#
+                pvalchi2 = chi2$p.value#
+                dfchi2 = chi2$parameter#
+				stachi2 = chi2$statistic#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stachi2#
+                table_multi_3sm[where_in_table_3sm,4] = dfchi2#
+                table_multi_3sm[where_in_table_3sm,5] = pvalchi2#
+                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'#
+            }#
+                #if verbosity>=3#
+                #    strtable=[ strtable {strcat('Associated test of the last table :',num2str(stat(1:3))) } ];#
+                #end#
+            }#
+#
+            if (ns>1){ # not defined for single site#
+                table = cbind(apply(tablerevu,1,sum),table4)#
+                 if ((nrow(table)*ncol(table))>=4){#
+                    table = pooling_ct(table)#
+             #       if verbosity>=3#
+             #           strtable=[ strtable {'------------------------------------------------------------'} ];#
+             #           strtable=[ strtable {'------------------- Are seen again (and) not seen again'} ];#
+             #           for kk=1:size(table,1)#
+             #               strtable=[ strtable {strcat('previously seen at site_',num2str(kk),' | ',num2str(table(kk,:)))} ];#
+             #           end#
+             #           %             table#
+             #       end#
+#
+            if (any(expval_table(table)<2)){#
+                fish = fisher.test(table)#
+                pvalfish = fish$p.value#
+                dffish = (nrow(table)-1)*(ncol(table)-1)#
+				stafish = qchisq(1-pvalfish, dffish)#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]#
+                table_multi_3sm[where_in_table_3sm,4] = dffish + table_multi_3sm[where_in_table_3sm,4]#
+                table_multi_3sm[where_in_table_3sm,5] = pvalfish#
+                table_multi_3sm[where_in_table_3sm,6] = 'Fisher'#
+                #           if verbosity>=3#
+             #               strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))} ];#
+             #           end#
+            } else {#
+            	   	old.warn <- options()$warn # to suppress the warning messages#
+            	   	options(warn = -1)#
+            	   	chi2 = chisq.test(table,correct=F)#
+            	   	options(warn = old.warn)#
+                pvalchi2 = chi2$p.value#
+                dfchi2 = chi2$parameter#
+				stachi2 = chi2$statistic#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]#
+                table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]#
+                table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]#
+                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'#
+             #           if verbosity>=3#
+             #               strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))} ];#
+             #           end#
+            }#
+         }
+#if verbosity>=3#
+                #    strtable=[ strtable {'------------------------------------------------------------'} ];#
+                #    strtable=[ strtable {strcat('For this table, only next reencounters on site ',num2str(l) ,' are kept')} ];#
+                #end#
+#
+                for (j in 1:ns){#
+                    table = tablerevu[,seq(j,ncol(tablerevu),by=ns)]#
+                    if (is.null(dim(table))) {table=as.matrix(table)} # if table is a vector#
+                   if ((nrow(table)*ncol(table))>=4){#
+                        table = pooling_ct(table)#
+               #         if verbosity>=3#
+               #             strtable=[ strtable {strcat('------------------- date of next reencounter on site ',num2str(j) ,' (after pooling)')} ];#
+               #             for kk=1:size(table,1)#
+               #                 strtable=[ strtable {strcat('previously seen at site_',num2str(kk),' | ',num2str(table(kk,:)))} ];#
+               #             end#
+               #         end#
+#
+                       if (any(expval_table(table)<2)){#
+                fish = fisher.test(table)#
+                pvalfish = fish$p.value#
+                dffish = (nrow(table)-1)*(ncol(table)-1)#
+		     stafish = qchisq(1-pvalfish, dffish)#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]#
+                table_multi_3sm[where_in_table_3sm,4] = dffish + table_multi_3sm[where_in_table_3sm,4]#
+                table_multi_3sm[where_in_table_3sm,5] = pvalfish#
+                table_multi_3sm[where_in_table_3sm,6] = 'Fisher'#
+                #            if verbosity>=3#
+                #                strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))}];#
+                #            end#
+                       } else {#
+                old.warn <- options()$warn # to suppress the warning messages#
+                options(warn = -1)#
+                chi2 = chisq.test(table,correct=F)#
+                options(warn = old.warn)#
+                pvalchi2 = chi2$p.value#
+                dfchi2 = chi2$parameter#
+                stachi2 = chi2$statistic#
+                table_multi_3sm[where_in_table_3sm,1] = i#
+                table_multi_3sm[where_in_table_3sm,2] = l#
+                table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]#
+                table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]#
+                table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]#
+                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'#
+                #            if verbosity>=3#
+                #                strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))}];#
+                #            end#
+                        end#
+               }#
+#
+                }#
+             }#
+                table_multi_3sm[where_in_table_3sm,5] = 1-pchisq(table_multi_3sm[where_in_table_3sm,3],table_multi_3sm[where_in_table_3sm,4])#
+      } # if ns>1#
+            #stattotal = cbind(stattotal,table_multi_3sm[where_in_table_3sm,])
+table_multi_3sm
+dfchi2
+table
+testMitec(geese.hist,geese.freq)
+testMltec(geese.hist,geese.freq)
+geese = system.file("extdata", "sooty.inp", package = "R2ucare")#
+geese = read_inp(geese)#
+geese.hist = geese$encounter_histories#
+geese.freq = geese$sample_size
+geese.hist
+test3Gwbwa(geese.hist,geese.freq)
+verbose
+rounding
+X= geese.hist
+freq=geese.freq
+# various quantities to define#
+k = ncol(X)#
+res = group_data(X,freq)#
+his = res[,1:k]#
+eff = res[,k+1]#
+nh = nrow(his)#
+a = max(his)#
+kplusun = k + 1#
+#
+# initialization#
+table_wbwa = data.frame(occasion = rep(NA,a*(k-2)),site = rep(NA,a*(k-2)),stat = rep(NA,a*(k-2)), df = rep(NA,a*(k-2)), p_val = rep(NA,a*(k-2)), test_perf = rep(FALSE,a*(k-2)))#
+where_in_table_wbwa = 0#
+#nsitereel=sum(filtre);
+i=2
+l=1
+where_in_table_wbwa = where_in_table_wbwa + 1#
+        #if nsitereel>1 & filtre(l)==1#
+            fisheroupas = 0#
+            fisherWBWA = 0#
+            masque = (his[,i]==l)#
+            batch = his[masque,] # select encounter histories containing l in column i#
+            if (length(batch)==0){ # if no release at date i on site l, no test#
+                table_wbwa[where_in_table_wbwa,1] = i#
+                table_wbwa[where_in_table_wbwa,2] = l#
+                table_wbwa[where_in_table_wbwa,3] = 0#
+                table_wbwa[where_in_table_wbwa,4] = 0#
+                table_wbwa[where_in_table_wbwa,5] = 0#
+                table_wbwa[where_in_table_wbwa,6] = 'None'#
+                next#
+            }#
+            batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i#
+            res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k#
+            batchpost = res[,1:ncol(res)-1]#
+            batcheffpost = res[,ncol(res)]#
+            # look site on which previous obs occurred#
+            if (i!=2){#
+            		tt = t(apply(batchpost[,1:(i-1)],1,rev))#
+                eante = apply(tt!=0,1,which.max)#
+                eante = i - eante#
+            } else {#
+                eante = rep(1,nrow(batchpost))#
+            }#
+            # on cherche le site d'observation suivant#
+            if (i!=(k-1)){#
+                epost = apply(batchpost[,(i+1):k]!=0,1,which.max)#
+            } else {#
+                epost = rep(1,nrow(batchpost))#
+            }#
+            # build table of obs at date i on site l in rows#
+            # according to site of previous obs and in columns#
+            # according to site and date of next obs#
+            # PS: on first row, never seen before#
+            #     on last column, never seen again#
+            j = 0#
+            ind = (k-i)*a+1#
+            table = matrix(0,nrow=a+1,ncol=ind)#
+            cpt = matrix(0,nrow=a+1,ncol=1)#
+            while (j<nrow(batchpost)){ # go through encounter histories#
+                j=j+1#
+                date = epost[j]#
+                site = batchpost[j,i+date]#
+                if (site==0){#
+                    col = ind # never seen again#
+                } else{#
+                    col = (date-1)*a+site # seen again at date and site#
+                }#
+                if (j==1){#
+                    cold = col#
+                } else if (col!=cold){#
+                    table[,cold] = cpt#
+                    cpt = matrix(0,nrow=a+1,ncol=1)#
+                    cold = col#
+                }#
+                tempo = batchpost[j,eante[j]] + 1 # site of previous obs + 1#
+                if (site==0){#
+                    cpt[tempo] = cpt[tempo] + batcheffpost[j] * (batcheffpost[j]>0)#
+                } else {#
+                    cpt[tempo]=cpt[tempo]+abs(batcheffpost[j])#
+                }#
+            }#
+            table[,cold] = cpt
+table
+compoWBWA = table#
+            compoWBWA = compoWBWA[-1,]#
+            colWBWA = ncol(compoWBWA)#
+			compoWBWA = compoWBWA[,-colWBWA]#
+#
+            for (j in 1:((colWBWA-1)/a-1)){#
+            	    if (((colWBWA-1)/a-1)<1) break#
+                compoWBWA[,1:a] = compoWBWA[,1:a] + compoWBWA[,(a+1):(2*a)]#
+                compoWBWA = compoWBWA[,-((a+1):(2*a))]#
+            }#
+#
+            expvalWBWA = expval_table(compoWBWA) # table of expected values#
+            # reperer la plus faible valeur attendue de coord (nline,ncol)#
+            ind1 = apply(expvalWBWA,2,min)#
+            ind2 = apply(expvalWBWA,2,which.min)#
+            ncol = which.min(ind1)#
+            nline = ind2[ncol]#
+            vec_direction = c(ncol,nline)
+while (expvalWBWA[nline,ncol]<2){#
+                if (sum(compoWBWA[nline,])/ncol(compoWBWA) > sum(compoWBWA[,ncol])/nrow(compoWBWA)){#
+                    pooldim = 1 # on poole la colonne de la plus faible valeur attendue#
+                } else {#
+                    pooldim = 2#
+                }#
+                # on teste les dimensions de la table fraichement poolée#
+                # - soit aucune des dim ne vaut 2, alors on continue#
+                # - soit l'une des 2 dimensions vaut 2, on poole alors selon l'autre#
+                # - soit les 2 dimensions valent 2 et alors on s'arrete de pooler mais on rend test fisher#
+                # si ya encore des valeurs attendues < 2#
+                flag = which(dim(compoWBWA)==2)#
+                if (length(flag)==1){#
+                    pooldim = flag#
+                } else if (length(flag)==2){#
+                    fisherWBWA = 1#
+                    break # on sort du while et on garde la table 2 x 2 avec des valeurs attendues < 2#
+                }#
+                # je cherche la colonne ou ligne d'effectif le plus faible#
+                marge = apply(t(compoWBWA),pooldim,sum)#
+                marge[vec_direction[pooldim]] = max(marge) + 1 # on fixe la ligne ou la colonne qui contient#
+                # la valeur attendue la plus faible au max des obs.#
+                ind1 = min(marge)#
+                ind2 = which.min(marge) # ind2 = indice de la colonne ou de la ligne d'efectif la plus faible#
+                # il faut tester pooldim pour savoir si on poole les lignes ou les colonnes#
+                if (pooldim==1){#
+                    compoWBWA[,ncol] = compoWBWA[,ncol] + compoWBWA[,ind2]#
+                    compoWBWA = compoWBWA[,-ind2]#
+                } else {#
+                    compoWBWA[nline,] = compoWBWA[nline,] + compoWBWA[ind2,]#
+                    compoWBWA = compoWBWA[-ind2,]#
+                }#
+                expvalWBWA = expval_table(compoWBWA) # table des valeurs attendues#
+                # reperer la plus faible valeur attendue de coord (nline,ncol)#
+	            ind1 = apply(expvalWBWA,2,min)#
+    	        ind2 = apply(expvalWBWA,2,which.min)#
+        	    ncol = which.min(ind1)#
+            	nline = ind2[ncol]#
+                vec_direction = c(ncol,nline)#
+             }
+expvalWBWA
+fisherWBWA
+# WBWA#
+            if (fisherWBWA == 1){#
+                fish = fisher.test(compoWBWA)#
+                pvalfish = fish$p.value#
+                dffish = (nrow(compoWBWA)-1)*(ncol(compoWBWA)-1)#
+				stafish = qchisq(1-pvalfish, dffish)#
+                table_wbwa[where_in_table_wbwa,1] = i#
+                table_wbwa[where_in_table_wbwa,2] = l#
+                table_wbwa[where_in_table_wbwa,3] = stafish#
+                table_wbwa[where_in_table_wbwa,4] = dffish#
+                table_wbwa[where_in_table_wbwa,5] = pvalfish#
+                table_wbwa[where_in_table_wbwa,6] = 'Fisher'#
+            } else {#
+            	   	old.warn <- options()$warn # to suppress the warning messages#
+            	   	options(warn = -1)#
+            	   	chi2 = chisq.test(compoWBWA,correct=F)#
+            	   	options(warn = old.warn)#
+                pvalchi2 = chi2$p.value#
+                dfchi2 = chi2$parameter#
+				stachi2 = chi2$statistic#
+                table_wbwa[where_in_table_wbwa,1] = i#
+                table_wbwa[where_in_table_wbwa,2] = l#
+                table_wbwa[where_in_table_wbwa,3] = stachi2#
+                table_wbwa[where_in_table_wbwa,4] = dfchi2#
+                table_wbwa[where_in_table_wbwa,5] = pvalchi2#
+                table_wbwa[where_in_table_wbwa,6] = 'Chi-square'#
+            }
+l
+l=2
+where_in_table_wbwa = where_in_table_wbwa + 1#
+        #if nsitereel>1 & filtre(l)==1#
+            fisheroupas = 0#
+            fisherWBWA = 0#
+            masque = (his[,i]==l)#
+            batch = his[masque,] # select encounter histories containing l in column i#
+            if (length(batch)==0){ # if no release at date i on site l, no test#
+                table_wbwa[where_in_table_wbwa,1] = i#
+                table_wbwa[where_in_table_wbwa,2] = l#
+                table_wbwa[where_in_table_wbwa,3] = 0#
+                table_wbwa[where_in_table_wbwa,4] = 0#
+                table_wbwa[where_in_table_wbwa,5] = 0#
+                table_wbwa[where_in_table_wbwa,6] = 'None'#
+                next#
+            }#
+            batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i#
+            res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k#
+            batchpost = res[,1:ncol(res)-1]#
+            batcheffpost = res[,ncol(res)]#
+            # look site on which previous obs occurred#
+            if (i!=2){#
+            		tt = t(apply(batchpost[,1:(i-1)],1,rev))#
+                eante = apply(tt!=0,1,which.max)#
+                eante = i - eante#
+            } else {#
+                eante = rep(1,nrow(batchpost))#
+            }#
+            # on cherche le site d'observation suivant#
+            if (i!=(k-1)){#
+                epost = apply(batchpost[,(i+1):k]!=0,1,which.max)#
+            } else {#
+                epost = rep(1,nrow(batchpost))#
+            }#
+            # build table of obs at date i on site l in rows#
+            # according to site of previous obs and in columns#
+            # according to site and date of next obs#
+            # PS: on first row, never seen before#
+            #     on last column, never seen again#
+            j = 0#
+            ind = (k-i)*a+1#
+            table = matrix(0,nrow=a+1,ncol=ind)#
+            cpt = matrix(0,nrow=a+1,ncol=1)#
+            while (j<nrow(batchpost)){ # go through encounter histories#
+                j=j+1#
+                date = epost[j]#
+                site = batchpost[j,i+date]#
+                if (site==0){#
+                    col = ind # never seen again#
+                } else{#
+                    col = (date-1)*a+site # seen again at date and site#
+                }#
+                if (j==1){#
+                    cold = col#
+                } else if (col!=cold){#
+                    table[,cold] = cpt#
+                    cpt = matrix(0,nrow=a+1,ncol=1)#
+                    cold = col#
+                }#
+                tempo = batchpost[j,eante[j]] + 1 # site of previous obs + 1#
+                if (site==0){#
+                    cpt[tempo] = cpt[tempo] + batcheffpost[j] * (batcheffpost[j]>0)#
+                } else {#
+                    cpt[tempo]=cpt[tempo]+abs(batcheffpost[j])#
+                }#
+            }#
+            table[,cold] = cpt
+table
+compoWBWA = table#
+            compoWBWA = compoWBWA[-1,]#
+            colWBWA = ncol(compoWBWA)#
+			compoWBWA = compoWBWA[,-colWBWA]#
+#
+            for (j in 1:((colWBWA-1)/a-1)){#
+            	    if (((colWBWA-1)/a-1)<1) break#
+                compoWBWA[,1:a] = compoWBWA[,1:a] + compoWBWA[,(a+1):(2*a)]#
+                compoWBWA = compoWBWA[,-((a+1):(2*a))]#
+            }#
+#
+            expvalWBWA = expval_table(compoWBWA) # table of expected values#
+            # reperer la plus faible valeur attendue de coord (nline,ncol)#
+            ind1 = apply(expvalWBWA,2,min)#
+            ind2 = apply(expvalWBWA,2,which.min)#
+            ncol = which.min(ind1)#
+            nline = ind2[ncol]#
+            vec_direction = c(ncol,nline)#
+            while (expvalWBWA[nline,ncol]<2){#
+                if (sum(compoWBWA[nline,])/ncol(compoWBWA) > sum(compoWBWA[,ncol])/nrow(compoWBWA)){#
+                    pooldim = 1 # on poole la colonne de la plus faible valeur attendue#
+                } else {#
+                    pooldim = 2#
+                }#
+                # on teste les dimensions de la table fraichement poolée#
+                # - soit aucune des dim ne vaut 2, alors on continue#
+                # - soit l'une des 2 dimensions vaut 2, on poole alors selon l'autre#
+                # - soit les 2 dimensions valent 2 et alors on s'arrete de pooler mais on rend test fisher#
+                # si ya encore des valeurs attendues < 2#
+                flag = which(dim(compoWBWA)==2)#
+                if (length(flag)==1){#
+                    pooldim = flag#
+                } else if (length(flag)==2){#
+                    fisherWBWA = 1#
+                    break # on sort du while et on garde la table 2 x 2 avec des valeurs attendues < 2#
+                }#
+                # je cherche la colonne ou ligne d'effectif le plus faible#
+                marge = apply(t(compoWBWA),pooldim,sum)#
+                marge[vec_direction[pooldim]] = max(marge) + 1 # on fixe la ligne ou la colonne qui contient#
+                # la valeur attendue la plus faible au max des obs.#
+                ind1 = min(marge)#
+                ind2 = which.min(marge) # ind2 = indice de la colonne ou de la ligne d'efectif la plus faible#
+                # il faut tester pooldim pour savoir si on poole les lignes ou les colonnes#
+                if (pooldim==1){#
+                    compoWBWA[,ncol] = compoWBWA[,ncol] + compoWBWA[,ind2]#
+                    compoWBWA = compoWBWA[,-ind2]#
+                } else {#
+                    compoWBWA[nline,] = compoWBWA[nline,] + compoWBWA[ind2,]#
+                    compoWBWA = compoWBWA[-ind2,]#
+                }#
+                expvalWBWA = expval_table(compoWBWA) # table des valeurs attendues#
+                # reperer la plus faible valeur attendue de coord (nline,ncol)#
+	            ind1 = apply(expvalWBWA,2,min)#
+    	        ind2 = apply(expvalWBWA,2,which.min)#
+        	    ncol = which.min(ind1)#
+            	nline = ind2[ncol]#
+                vec_direction = c(ncol,nline)#
+             }
+compoWBWA
+fish = fisher.test(compoWBWA)
+fish
+test3Gsr(geese.hist,geese.freq)
+test3Gsm(geese.hist,geese.freq)
+testMitec(geese.hist,geese.freq)
+testMltec(geese.hist,geese.freq)
+geese = system.file("extdata", "polar_bear.inp", package = "R2ucare")
+geese

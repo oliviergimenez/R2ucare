@@ -13,7 +13,7 @@
 #' Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
-#' 
+#'
 #' # Get encounter histories and number of individuals with corresponding histories
 #' geese.hist = geese$encounter_histories
 #' geese.freq = geese$sample_size
@@ -136,8 +136,14 @@ for (i in 2:(k-1)){ # loop on date
             if (any(expval_table(table)<2)){
                 fish = fisher.test(table)
                 pvalfish = fish$p.value
-                dffish = (nrow(table)-1)*(ncol(table)-1)
-				stafish = qchisq(1-pvalfish, dffish)
+                zeros_rows = (apply(table,1,sum)==0)
+                zeros_cols = (apply(table,2,sum)==0)
+                if (sum(!zeros_rows)+sum(!zeros_cols)==0){
+                  dffish = 0
+                } else {
+                  dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
+                }
+				        stafish = qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish
@@ -145,19 +151,19 @@ for (i in 2:(k-1)){ # loop on date
                 table_multi_3sm[where_in_table_3sm,5] = pvalfish
                 table_multi_3sm[where_in_table_3sm,6] = 'Fisher'
             } else {
-            	   	old.warn <- options()$warn # to suppress the warning messages
-            	   	options(warn = -1)
-            	   	chi2 = chisq.test(table,correct=F)
-            	   	options(warn = old.warn)
-                pvalchi2 = chi2$p.value
-                dfchi2 = chi2$parameter
-				stachi2 = chi2$statistic
-                table_multi_3sm[where_in_table_3sm,1] = i
-                table_multi_3sm[where_in_table_3sm,2] = l
-                table_multi_3sm[where_in_table_3sm,3] = stachi2
-                table_multi_3sm[where_in_table_3sm,4] = dfchi2
-                table_multi_3sm[where_in_table_3sm,5] = pvalchi2
-                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
+            	 old.warn <- options()$warn # to suppress the warning messages
+            	 options(warn = -1)
+            	 chi2 = chisq.test(table,correct=F)
+            	 options(warn = old.warn)
+               pvalchi2 = chi2$p.value
+               dfchi2 = chi2$parameter
+				       stachi2 = chi2$statistic
+               table_multi_3sm[where_in_table_3sm,1] = i
+               table_multi_3sm[where_in_table_3sm,2] = l
+               table_multi_3sm[where_in_table_3sm,3] = stachi2
+               table_multi_3sm[where_in_table_3sm,4] = dfchi2
+               table_multi_3sm[where_in_table_3sm,5] = pvalchi2
+               table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
             }
                 #if verbosity>=3
                 #    strtable=[ strtable {strcat('Associated test of the last table :',num2str(stat(1:3))) } ];
@@ -180,8 +186,14 @@ for (i in 2:(k-1)){ # loop on date
             if (any(expval_table(table)<2)){
                 fish = fisher.test(table)
                 pvalfish = fish$p.value
-                dffish = (nrow(table)-1)*(ncol(table)-1)
-				stafish = qchisq(1-pvalfish, dffish)
+                zeros_rows = (apply(table,1,sum)==0)
+                zeros_cols = (apply(table,2,sum)==0)
+                if (sum(!zeros_rows)+sum(!zeros_cols)==0){
+                  dffish = 0
+                } else {
+                  dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
+                }
+                stafish = qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]
@@ -196,9 +208,9 @@ for (i in 2:(k-1)){ # loop on date
             	   	options(warn = -1)
             	   	chi2 = chisq.test(table,correct=F)
             	   	options(warn = old.warn)
-                pvalchi2 = chi2$p.value
-                dfchi2 = chi2$parameter
-				stachi2 = chi2$statistic
+                  pvalchi2 = chi2$p.value
+                  dfchi2 = chi2$parameter
+				        stachi2 = chi2$statistic
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]
@@ -231,8 +243,14 @@ for (i in 2:(k-1)){ # loop on date
                        if (any(expval_table(table)<2)){
                 fish = fisher.test(table)
                 pvalfish = fish$p.value
-                dffish = (nrow(table)-1)*(ncol(table)-1)
-		     stafish = qchisq(1-pvalfish, dffish)
+                zeros_rows = (apply(table,1,sum)==0)
+                zeros_cols = (apply(table,2,sum)==0)
+                if (sum(!zeros_rows)+sum(!zeros_cols)==0){
+                  dffish = 0
+                } else {
+                  dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
+                }
+    		        stafish = qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]
