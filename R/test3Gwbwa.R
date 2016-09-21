@@ -13,7 +13,7 @@
 #' Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
-#' 
+#'
 #' # Get encounter histories and number of individuals with corresponding histories
 #' geese.hist = geese$encounter_histories
 #' geese.freq = geese$sample_size
@@ -189,8 +189,14 @@ for (i in 2:(k-1)){ # loop on date
             if (fisherWBWA == 1){
                 fish = fisher.test(compoWBWA)
                 pvalfish = fish$p.value
-                dffish = (nrow(compoWBWA)-1)*(ncol(compoWBWA)-1)
-				stafish = qchisq(1-pvalfish, dffish)
+                zeros_rows = (apply(compoWBWA,1,sum)==0)
+                zeros_cols = (apply(compoWBWA,2,sum)==0)
+                if (sum(!zeros_rows)+sum(!zeros_cols)==0){
+                  dffish = 0
+                } else {
+                  dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
+                }
+        				stafish = qchisq(1-pvalfish, dffish)
                 table_wbwa[where_in_table_wbwa,1] = i
                 table_wbwa[where_in_table_wbwa,2] = l
                 table_wbwa[where_in_table_wbwa,3] = stafish
