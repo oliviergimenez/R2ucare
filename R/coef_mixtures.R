@@ -26,16 +26,16 @@ dim(M) = c(1,nbmel*n)
 dim(N) = c(1,s*n)
 
 
-# run 5 times the optimization procedure to try and handle with local minima
+# run 15 times the optimization procedure to try and handle with local minima
 # initial values
 x = matrix(runif(nbmel*(s-1)+s*(n-1)),nrow=nbmel*(s-1)+s*(n-1),ncol=1)
 # Minimization
 tmpmin = optim(x,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001,abstol=.000001))
-for (i in 1:10){
+for (i in 1:14){
   x2 = matrix(runif(nbmel*(s-1)+s*(n-1)),nrow=nbmel*(s-1)+s*(n-1),ncol=1)
   # Minimization
   tmpmin2 = optim(x2,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001,abstol=.000001))
-  tmpmin2$value
+  #tmpmin2$value
   if (tmpmin2$value < tmpmin$value) {tmpmin = tmpmin2}
   }
 x <- tmpmin$par
