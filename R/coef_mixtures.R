@@ -26,7 +26,7 @@ dim(M) = c(1,nbmel*n)
 dim(N) = c(1,s*n)
 
 # initial values
-x = matrix(0.1,nrow=nbmel*(s-1)+s*(n-1),ncol=1)
+x = matrix(0,nrow=nbmel*(s-1)+s*(n-1),ncol=1)
 
 # Minimization
 tmpmin = optim(x,deviance_mixture,NULL,hessian=FALSE,M,N,s,n,nbmel,method="BFGS",control=list(trace=0, reltol=.0000001
