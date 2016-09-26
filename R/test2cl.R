@@ -1,7 +1,8 @@
 #' Test2.CL
 #'
 #' This function performs Test2.CL
-#' @param m is a triangular m-array (in a K-1 by K-1 array)
+#' @param X is a matrix of encounter histories with K occasions
+#' @param freq is a vector of the number of individuals with the corresponding encounter history
 #' @param verbose controls the level of the details in the outputs; default is TRUE for all details
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a list with first component the overall test and second component a data.frame with 5 columns for components i (2:K-3) (in rows) of test2.cli following Pradel 1993 (in Lebreton and North, Birkhauser Verlag): component, degree of freedom, statistic of the test, p-value, test performed.
@@ -29,13 +30,14 @@
 #' # for males
 #' X = dip.mal.hist
 #' freq = dip.mal.freq
-#' res.mal = marray(X,freq)
-#' m = res.mal$m[,,] # marray returns an array
-#' res.males = test2cl(m)
+#' res.males = test2cl(X,freq)
 #' res.males
 
-test2cl <- function(m,verbose=TRUE,rounding=3){
+test2cl <- function(X,freq,verbose=TRUE,rounding=3){
 
+# build m-array
+m_array = marray(X,freq)
+m = m_array$m[,,] # marray returns an array
 km1 = dim(m)[1]
 km4 = km1 - 3
 result = data.frame(component=rep(NA, km4),dof=rep(NA, km4),stat=rep(NA, km4),p_val=rep(NA, km4),test_perf=rep(TRUE, km4))

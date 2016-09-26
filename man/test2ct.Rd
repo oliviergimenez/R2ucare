@@ -4,10 +4,12 @@
 \alias{test2ct}
 \title{Test2.CT}
 \usage{
-test2ct(m, verbose = TRUE, rounding = 3)
+test2ct(X, freq, verbose = TRUE, rounding = 3)
 }
 \arguments{
-\item{m}{is a triangular m-array (in a K-1 by K-1 array)}
+\item{X}{is a matrix of encounter histories with K occasions}
+
+\item{freq}{is a vector of the number of individuals with the corresponding encounter history}
 
 \item{verbose}{controls the level of the details in the outputs; default is TRUE for all details}
 
@@ -40,9 +42,7 @@ dip.mal.freq = dip.freq[mask]
 # for females
 X = dip.fem.hist
 freq = dip.fem.freq
-res.fem = marray(X,freq)
-m = res.fem$m[,,] # marray returns an array
-res.females = test2ct(m)
+res.females = test2ct(X,freq)
 res.females
 }
 \author{

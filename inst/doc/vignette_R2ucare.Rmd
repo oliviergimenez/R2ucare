@@ -64,10 +64,8 @@ Tadaaaaan, now you're ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl 
 ```{r, message=FALSE, warning=FALSE}
 test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
 test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
-# we need the m-array to perform test2ct and test2cl
-m = marray(dip.fem.hist,dip.fem.freq)$m[,,]
-test2ct_females = test2ct(m)
-test2cl_females = test2cl(m)
+test2ct_females = test2ct(dip.fem.hist, dip.fem.freq)
+test2cl_females = test2cl(dip.fem.hist, dip.fem.freq)
 # display results:
 test3sr_females
 test3sm_females

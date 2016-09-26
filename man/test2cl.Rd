@@ -4,10 +4,12 @@
 \alias{test2cl}
 \title{Test2.CL}
 \usage{
-test2cl(m, verbose = TRUE, rounding = 3)
+test2cl(X, freq, verbose = TRUE, rounding = 3)
 }
 \arguments{
-\item{m}{is a triangular m-array (in a K-1 by K-1 array)}
+\item{X}{is a matrix of encounter histories with K occasions}
+
+\item{freq}{is a vector of the number of individuals with the corresponding encounter history}
 
 \item{verbose}{controls the level of the details in the outputs; default is TRUE for all details}
 
@@ -40,9 +42,7 @@ dip.mal.freq = dip.freq[mask]
 # for males
 X = dip.mal.hist
 freq = dip.mal.freq
-res.mal = marray(X,freq)
-m = res.mal$m[,,] # marray returns an array
-res.males = test2cl(m)
+res.males = test2cl(X,freq)
 res.males
 }
 \author{

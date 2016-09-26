@@ -1,7 +1,8 @@
 #' Test2.CT
 #'
 #' This function performs Test2.CT
-#' @param m is a triangular m-array (in a K-1 by K-1 array)
+#' @param X is a matrix of encounter histories with K occasions
+#' @param freq is a vector of the number of individuals with the corresponding encounter history
 #' @param verbose controls the level of the details in the outputs; default is TRUE for all details
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a list with first component the overall test and second component a data.frame with 5 columns for components i (2:K-2) (in rows) of test2.Cti: component, degree of freedom, statistic of the test, p-value, signed test, test performed.
@@ -29,13 +30,14 @@
 #' # for females
 #' X = dip.fem.hist
 #' freq = dip.fem.freq
-#' res.fem = marray(X,freq)
-#' m = res.fem$m[,,] # marray returns an array
-#' res.females = test2ct(m)
+#' res.females = test2ct(X,freq)
 #' res.females
 
-test2ct <- function(m,verbose=TRUE,rounding=3){
+test2ct <- function(X,freq,verbose=TRUE,rounding=3){
 
+# build m-array
+m_array = marray(X,freq)
+m = m_array$m[,,] # marray returns an array
 km1 = dim(m)[1]
 km3 = km1 - 2
 cont_tab = matrix(0,nrow=2,ncol=2)

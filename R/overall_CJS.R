@@ -35,9 +35,8 @@ overall_CJS <- function(X,freq,rounding=3){
 # compute each component
 res_test3sr = test3sr(X, freq)
 res_test3sm = test3sm(X, freq)
-m = marray(X,freq)$m[,,]
-res_test2ct = test2ct(m)
-res_test2cl = test2cl(m)
+res_test2ct = test2ct(X, freq)
+res_test2cl = test2cl(X, freq)
 
 # compute overall test as the sum
 stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)
