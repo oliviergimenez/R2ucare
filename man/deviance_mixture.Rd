@@ -25,9 +25,6 @@ This function returns the value of the deviance for mixture distributions.
 \description{
 This function calculates the deviance of multinomial mixture distributions.
 }
-\examples{
-deviance_mixture()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

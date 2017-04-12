@@ -19,11 +19,8 @@ This function returns a vector with statistic of quadratic chi2 or inv chi2 corr
 \description{
 This function tests independence in 2x2 contingency tables
 }
-\examples{
-ind_test_22()
-}
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
 

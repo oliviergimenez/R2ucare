@@ -15,11 +15,8 @@ This function returns a matrix with the pooled contingency table.
 \description{
 This function pools rows and columns of a rxc contingency table according to Pradel et al. (2003).
 }
-\examples{
-pooling_ct()
-}
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \references{
 Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model. Biometrics 59: 43-53.

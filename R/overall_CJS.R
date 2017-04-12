@@ -6,7 +6,7 @@
 #' @param freq is a vector of the number of individuals with the corresponding encounter history
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a data.frame with the value of the test statistic, the degrees of freedom and the p-value of the test.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
 #' @examples

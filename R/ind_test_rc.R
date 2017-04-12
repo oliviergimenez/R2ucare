@@ -5,11 +5,9 @@
 #' @param threshold is a threshold for low expected numbers; default is 2
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a vector with statistic of quadratic chi2 or inv chi2 corresponding to pvalue of Fisher test, p-value of quadratic chi2 test or Fisher test for low numbers, degree of freedom and test performed (Chi-square, Fisher or None).
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
-#' @examples
-#' ind_test_rc()
 
 ind_test_rc <- function(M,threshold=2,rounding=3){
 
@@ -37,7 +35,7 @@ if (df>0){
    if (test_low) { # low numbers
       res[2] = as.numeric(fisher.test(M)$p.value) # zero machine issue
       if (1-res[2] < 0.000000000000001) res[2] = 1 # zero machine issue
-      res[1] = qchisq(1-res[2],df)      
+      res[1] = qchisq(1-res[2],df)
 	  res[1] = round(res[1],rounding)
       res[2] = round(res[2],rounding)
       res[4] = 'Fisher'
@@ -47,7 +45,7 @@ if (df>0){
    	res.tempo = chisq.test(M,correct=F)
    options(warn = old.warn)
    res[1] = as.numeric(res.tempo$statistic)
-   res[1] = round(res[1],rounding)   
+   res[1] = round(res[1],rounding)
    res[2] = res.tempo$p.value
    res[2] = round(res[2],rounding)
    res[4] = 'Chi-square'}

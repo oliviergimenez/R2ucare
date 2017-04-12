@@ -4,7 +4,7 @@
 #' @param X a matrix of encounter histories over K occasions
 #' @param freq is a vector with the number of individuals having the corresponding encounter history
 #' @return This function returns a list with R the number of released individuals (K-1 x g matrix), m the m-array (K-1 x K-1 x g array) with upper triangle filled only and never the number of individuals never recaptured (K-1 x g matrix).
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
 #' @examples
@@ -22,7 +22,9 @@
 #' dip.fem.hist = dip.hist[mask,]
 #' dip.fem.freq = dip.freq[mask]
 #'
-#' # get number of released individuals (R), the m-array (m) and the number of individuals never seen again (never)
+#' # get number of released individuals (R), 
+#' # the m-array (m) and 
+#' # the number of individuals never seen again (never)
 #' marray(dip.fem.hist,dip.fem.freq)
 
 marray <- function(X,freq){

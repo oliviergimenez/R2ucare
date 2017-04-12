@@ -8,12 +8,10 @@
 #' @param n number of cell probabilities
 #' @param nbmel number of mixtures
 #' @return This function returns the value of the deviance for mixture distributions.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @references Yantis, S., Meyer, D. E., and Smith, J. E. K. (1991). Analyses of multinomial mixture distributions: New tests for stochastic models of cognition and action. Psychological Bulletin 110, 350–374.
 #' @export
-#' @examples
-#' deviance_mixture()
 
 deviance_mixture <- function(x,M,N,s,n,nbmel){
 

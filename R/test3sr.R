@@ -6,7 +6,7 @@
 #' @param verbose controls the level of the details in the outputs; default is TRUE for all details
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a list with first component the overall test and second component a data.frame with 4 columns for components i (2:K-1) (in rows) of test3.sri: component, statistic of the test, p-value, signed test, test performed.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
 #' @examples

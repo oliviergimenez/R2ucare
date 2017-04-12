@@ -30,7 +30,7 @@ library(RMark)
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = convert.inp(geese)
 
-geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
+geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=TRUE)
 geese.freq = geese$freq
 
 # encounter histories and number of individuals with corresponding histories
@@ -44,7 +44,7 @@ library(R2ucare)
 overall_JMV(X, freq)
 }
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
 

@@ -9,11 +9,9 @@
 #' @return P matrix of cell probabilities estimates for mixtures
 #' @return PI matrix of mixture probabilities
 #' @return GAM matrix of cell probabilities estimates for bases
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
-#' @examples
-#' reconstitution()
 
 reconstitution <- function(x,s,n,nbmel){
 

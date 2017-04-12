@@ -1,6 +1,6 @@
 # R2ucare: An R package to test the goodness of fit of capture-recapture models
 
-Authors: [Olivier Gimenez](https://oliviergimenez.wordpress.com/), Roger Pradel, Jean-Dominique Lebreton, Rémi Choquet, Anne-Marie Reboulet
+Authors: [Olivier Gimenez](https://oliviergimenez.wordpress.com/), Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 
 Please email all comments/questions to olivier.gimenez [AT] cefe.cnrs.fr
 

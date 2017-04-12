@@ -18,10 +18,10 @@ matrix with ungrouped capture-recapture histories and counts in the last column 
 This function splits encounter histories in as many individual histories as required.
 }
 \examples{
-Generate fake capture-recapture dataset
+# Generate fake capture-recapture dataset
 X = matrix(round(runif(9)),nrow=3)
-freq=c(4,3,-8) # fake counts (grouped data)
-cbind(X,freq) # display fake dataset
+freq=c(4,3,-8)
+cbind(X,freq)
 ungroup_data(X,freq)
 }
 \author{

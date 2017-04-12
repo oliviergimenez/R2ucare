@@ -27,9 +27,6 @@ GAM matrix of cell probabilities estimates for bases
 \description{
 This function reformat the outputs of multinomial mixture distributions parameters.
 }
-\examples{
-reconstitution()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

@@ -21,9 +21,6 @@ This function creates a large matrix consisting of an m-by-n tiling of copies of
 The dimensions of the returned matrix are nrow(X)*m x ncol(X)*n.
 This is the equivalent of the repmat MATLAB function.
 }
-\examples{
-reconstitution()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
 }

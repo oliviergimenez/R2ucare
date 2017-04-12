@@ -18,7 +18,7 @@ This function returns a matrix in which R the number of released individuals is 
 This function calculates the m-array for multistate capture-recapture data, the number of released and never seen again individuals.
 }
 \examples{
-Read in Geese dataset:
+# Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = read_inp(geese)
 
@@ -30,7 +30,7 @@ geese.freq = geese$sample_size
 multimarray(geese.hist, geese.freq)
 }
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
 

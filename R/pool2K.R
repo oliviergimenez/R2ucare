@@ -4,11 +4,9 @@
 #' @param M is a 2 by K contingency table (or a K by 2 table)
 #' @param low is a threshold for low expected numbers; default is 2 (if this argument is big enough, the table is pooled down to 2 x 2; if this argument is 0, the table is not pooled)
 #' @return This function returns a matrix with the pooled contingency table.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 #' @keywords package
 #' @export
-#' @examples
-#' pool2K()
 
 pool2K <- function(M,low=2){
 
@@ -55,7 +53,7 @@ if (cl>2){ # more than two columns
      } else {
         Mpooled = M
      }
-     
+
      if (transp==1) Mpooled = t(Mpooled)
 }  else { # M is full of zeros
      Mpooled = matrix(0,nrow=2,ncol=2)
@@ -67,4 +65,3 @@ Mpooled
 }
 
 
-   

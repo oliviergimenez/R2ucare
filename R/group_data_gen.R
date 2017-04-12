@@ -5,11 +5,9 @@
 #' @param effX vector with numbers of individuals with that particular capture-recapture history
 #' @param s scalar or vector of columns along which the grouping should be done
 #' @return matrix with grouped capture-recapture histories and counts in the last column
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
-#' @examples
-#' group_data_gen()
 
 group_data_gen <- function(X,effX, s){
 

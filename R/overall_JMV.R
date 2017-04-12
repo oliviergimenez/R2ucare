@@ -10,7 +10,7 @@
 #' @param freq is a vector of the number of individuals with the corresponding encounter history
 #' @param rounding is the level of rounding for outputs; default is 3
 #' @return This function returns a data.frame with the value of the test statistic, the degrees of freedom and the p-value of the test.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
 #' @examples
@@ -19,8 +19,8 @@
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = convert.inp(geese)
 #'
-# add spaces between columns
-#' geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=T)
+#  # add spaces between columns
+#' geese.hist = matrix(as.numeric(unlist(strsplit(geese$ch, ''))),nrow=nrow(geese),byrow=TRUE)
 #' geese.freq = geese$freq
 #'
 #' # encounter histories and number of individuals with corresponding histories

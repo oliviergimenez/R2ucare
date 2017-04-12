@@ -15,9 +15,6 @@ ev vector of transformed values
 \description{
 This function computes the inverse (or reciprocal) of the generalized logit link function.
 }
-\examples{
-inv_logit_gen()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

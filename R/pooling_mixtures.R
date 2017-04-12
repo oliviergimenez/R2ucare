@@ -11,8 +11,6 @@
 #' @keywords package
 #' @references Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model. Biometrics 59: 43-53.
 #' @export
-#' @examples
-#' pooling_mixtures()
 
 pooling_mixtures <- function(nk,nj,a,mixandbases){
 

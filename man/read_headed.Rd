@@ -13,7 +13,7 @@ read_headed(file)
 list with first component the matrix of encounter histories, second components the vector of number of individuals with corresponding histories and, if relevant, third component vector/matrix with group(s)
 }
 \description{
-This function reads in capture-recapture dataset with the Headed format. 
+This function reads in capture-recapture dataset with the Headed format.
 It ignores all forms of censorship for now, and drops continuous covariates because no goodness-of-fit test exists for such models
 }
 \examples{

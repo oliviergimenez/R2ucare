@@ -22,7 +22,7 @@ This function returns a list with first component the overall test and second co
 This function performs Test3G.WBWA
 }
 \examples{
-Read in Geese dataset:
+# Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = read_inp(geese)
 
@@ -34,7 +34,7 @@ geese.freq = geese$sample_size
 test3Gwbwa(geese.hist,geese.freq)
 }
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
 

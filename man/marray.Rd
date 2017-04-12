@@ -32,11 +32,13 @@ mask = (dip.group == 'Female')
 dip.fem.hist = dip.hist[mask,]
 dip.fem.freq = dip.freq[mask]
 
-# get number of released individuals (R), the m-array (m) and the number of individuals never seen again (never)
+# get number of released individuals (R), 
+# the m-array (m) and 
+# the number of individuals never seen again (never)
 marray(dip.fem.hist,dip.fem.freq)
 }
 \author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
 

@@ -7,12 +7,10 @@
 #' @return P matrix of cell probabilities estimates for mixtures
 #' @return PI matrix of mixture probabilities
 #' @return GAM matrix of cell probabilities estimates for bases
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @references Yantis, S., Meyer, D. E., and Smith, J. E. K. (1991). Analyses of multinomial mixture distributions: New tests for stochastic models of cognition and action. Psychological Bulletin 110, 350–374.
 #' @export
-#' @examples
-#' coef_mixtures()
 
 coef_mixtures <- function(Mp,Np){
 

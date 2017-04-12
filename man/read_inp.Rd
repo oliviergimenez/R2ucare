@@ -15,7 +15,7 @@ read_inp(file, group.df = NULL)
 list with first component the matrix of encounter histories, second components the vector of number of individuals with corresponding histories and, if relevant, third component vector/matrix with group(s)
 }
 \description{
-This function reads in capture-recapture dataset with the Input format. 
+This function reads in capture-recapture dataset with the Input format.
 It is a wrapper for the function convert.inp from package RMark. It drops continuous covariates because no goodness-of-fit test exists for such models
 }
 \examples{

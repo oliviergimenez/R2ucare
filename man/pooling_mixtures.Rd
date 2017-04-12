@@ -22,9 +22,6 @@ This function returns a matrix with the pooled table.
 This function pools rows and columns of a rxc bases and mixture table according to Pradel et al. (2003).
 It provides the components of TestM in the multisite goodness-of-fit tests.
 }
-\examples{
-pooling_mixtures()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
 }

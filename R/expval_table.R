@@ -3,11 +3,9 @@
 #' This function calculates expected values for a rxc contingency table.
 #' @param M a matrix of observed probabilities
 #' @return A matrix of expected values.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
-#' @examples
-#' expval_table()
 
 expval_table <- function(M) {
 

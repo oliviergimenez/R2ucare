@@ -19,9 +19,6 @@ matrix with grouped capture-recapture histories and counts in the last column
 \description{
 This function pools together individuals with the same encounter capture-recapture history along specified directions given by columns.
 }
-\examples{
-group_data_gen()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

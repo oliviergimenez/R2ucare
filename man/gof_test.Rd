@@ -19,9 +19,6 @@ This function returns the value of the goodness-of-fit statistic.
 \description{
 This function carries out goodness-of-fit tests for contingency tables from the power-divergence family.
 }
-\examples{
-gof_test()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

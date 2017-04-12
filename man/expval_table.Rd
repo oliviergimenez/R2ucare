@@ -15,9 +15,6 @@ A matrix of expected values.
 \description{
 This function calculates expected values for a rxc contingency table.
 }
-\examples{
-expval_table()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

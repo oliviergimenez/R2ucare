@@ -23,9 +23,6 @@ GAM matrix of cell probabilities estimates for bases
 \description{
 This function performs maximum likelihood inference for multinomial mixture distributions.
 }
-\examples{
-coef_mixtures()
-}
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }

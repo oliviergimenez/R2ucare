@@ -7,11 +7,9 @@
 #' @param m row dimension of replication
 #' @param n column dimension of replication
 #' @return A replicated matrix of X with dimensions nrow(X)*m x ncol(X)*n.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
 #' @keywords package
 #' @export
-#' @examples
-#' reconstitution()
 
 repmat = function(X,m,n){
 mx = dim(X)[1]

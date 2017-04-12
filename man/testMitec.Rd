@@ -22,7 +22,7 @@ This function returns a list with first component the overall test and second co
 This function performs TestM.ITEC
 }
 \examples{
-Read in Geese dataset:
+# Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = read_inp(geese)
 

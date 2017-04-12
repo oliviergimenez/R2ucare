@@ -5,11 +5,9 @@
 #' @param observes vector of observed probabilities
 #' @param theoriques vector of theoretical/expected probabilities
 #' @return This function returns the value of the goodness-of-fit statistic.
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
-#' @examples
-#' gof_test()
 
 gof_test <- function(lambda, observes, theoriques) {
 

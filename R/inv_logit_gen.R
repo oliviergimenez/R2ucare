@@ -3,11 +3,9 @@
 #' This function computes the inverse (or reciprocal) of the generalized logit link function.
 #' @param petitv vector of values to be transformed
 #' @return ev vector of transformed values
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
-#' @examples
-#' inv_logit_gen()
 
 inv_logit_gen <- function(petitv){
 bound = rep(10,length(petitv))

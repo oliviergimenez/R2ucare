@@ -4,14 +4,14 @@
 #' @param X matrix of capture-recapture histories
 #' @param effX vector with numbers of individuals with that particular capture-recapture history
 #' @return matrix with grouped capture-recapture histories and counts in the last column
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
 #' @examples
-#' Generate fake capture-recapture dataset
+#' # Generate fake capture-recapture dataset
 #' X = matrix(round(runif(300)),nrow=100)
-#' freq=rep(1,100) # fake counts (ungrouped data)
-#' cbind(X,freq) # display fake dataset
+#' freq=rep(1,100)
+#' cbind(X,freq)
 #' group_data(X,freq)
 
 group_data <- function(X,effX){

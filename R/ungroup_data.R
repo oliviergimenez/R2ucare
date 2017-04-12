@@ -4,14 +4,14 @@
 #' @param X matrix of encounter capture-recapture histories
 #' @param effX vector with numbers of individuals with that particular encounter history
 #' @return matrix with ungrouped capture-recapture histories and counts in the last column (should be 1s)
-#' @author Olivier Gimenez <olivier.gimenez@@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+#' @author Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 #' @keywords package
 #' @export
 #' @examples
-#' Generate fake capture-recapture dataset
+#' # Generate fake capture-recapture dataset
 #' X = matrix(round(runif(9)),nrow=3)
-#' freq=c(4,3,-8) # fake counts (grouped data)
-#' cbind(X,freq) # display fake dataset
+#' freq=c(4,3,-8)
+#' cbind(X,freq)
 #' ungroup_data(X,freq)
 
 ungroup_data <- function(X,effX){
@@ -49,7 +49,7 @@ while (i <= nrow(X)){
 			Y[comp,] = X[i,]
 			effY[comp,gr] = sign(e)
 			comp=comp+1
-		}  
+		}
 		if ((i < nrow(X))&&(sum(X[i+1,]==X[i,])==s)){
 			i = i0 + 1
 			e = effX[i,gr]
