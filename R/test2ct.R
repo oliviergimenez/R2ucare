@@ -77,7 +77,7 @@ for (indice in 1:km3){
 stat = sum(as.numeric(result[,3]))
 stat = round(stat,rounding)
 dof = sum(result[,2])
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 tot_signed = round(sum(as.numeric(result$signed_test))/sqrt(length(result$signed_test)),rounding)
 # if user specifies all outputs

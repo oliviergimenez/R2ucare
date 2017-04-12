@@ -22,7 +22,6 @@
 #' test3Gwbwa(geese.hist,geese.freq)
 
 test3Gwbwa <- function(X,freq,verbose=TRUE,rounding=3){
-#testwbwa <- function(X,freq,filtre,verbosity)
 
 # various quantities to define
 k = ncol(X)
@@ -187,7 +186,7 @@ for (i in 2:(k-1)){ # loop on date
 
             # WBWA
             if (fisherWBWA == 1){
-                fish = fisher.test(compoWBWA)
+                fish = stats::fisher.test(compoWBWA)
                 pvalfish = fish$p.value
                 zeros_rows = (apply(compoWBWA,1,sum)==0)
                 zeros_cols = (apply(compoWBWA,2,sum)==0)
@@ -196,7 +195,7 @@ for (i in 2:(k-1)){ # loop on date
                 } else {
                   dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
                 }
-        				stafish = qchisq(1-pvalfish, dffish)
+        				stafish = stats::qchisq(1-pvalfish, dffish)
                 table_wbwa[where_in_table_wbwa,1] = i
                 table_wbwa[where_in_table_wbwa,2] = l
                 table_wbwa[where_in_table_wbwa,3] = stafish
@@ -206,7 +205,7 @@ for (i in 2:(k-1)){ # loop on date
             } else {
             	   	old.warn <- options()$warn # to suppress the warning messages
             	   	options(warn = -1)
-            	   	chi2 = chisq.test(compoWBWA,correct=F)
+            	   	chi2 = stats::chisq.test(compoWBWA,correct=F)
             	   	options(warn = old.warn)
                 pvalchi2 = chi2$p.value
                 dfchi2 = chi2$parameter
@@ -224,7 +223,7 @@ for (i in 2:(k-1)){ # loop on date
 stat = sum(as.numeric(table_wbwa[,3]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(table_wbwa[,4]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(test3Gwbwa=c(stat=stat,df=dof,p_val=pval),details=table_wbwa))

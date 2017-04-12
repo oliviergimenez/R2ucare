@@ -128,7 +128,7 @@ for (i in 2:(k-3)){ # boucle sur les occasions
         	table_multi_litec[i-1,1] = i
         	table_multi_litec[i-1,2] = tempchi2
         	table_multi_litec[i-1,3] = df
-        	table_multi_litec[i-1,4] = 1-pchisq(tempchi2,df)
+        	table_multi_litec[i-1,4] = 1 - stats::pchisq(tempchi2,df)
         	table_multi_litec[i-1,5] = 'Chi-square'
         	} else {
         	table_multi_litec[i-1,1] = i
@@ -143,7 +143,7 @@ for (i in 2:(k-3)){ # boucle sur les occasions
 stat = sum(as.numeric(table_multi_litec[,2]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(table_multi_litec[,3]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(testMltec=c(stat=stat,df=dof,p_val=pval),details=table_multi_litec))

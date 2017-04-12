@@ -33,8 +33,8 @@ if (df>0){ # perform test
    test_low = (sum(TT<threshold)>0)
    res[3] = test_low
    if (test_low) {
-   res[2] = fisher.test(M)$p.value
-   res[1] = qchisq(1-res[2],1)
+   res[2] = stats::fisher.test(M)$p.value
+   res[1] = stats::qchisq(1-res[2],1)
    res[1] = round(res[1],rounding)
    res[2] = round(res[2],rounding)
    res[3] = round(sign(D[1,1]) * sqrt(res[1]),rounding)
@@ -42,7 +42,7 @@ if (df>0){ # perform test
    else {
    	old.warn <- options()$warn # to suppress the warning messages
    	options(warn = -1)
-   	res.tempo = chisq.test(M,correct=F)
+   	res.tempo = stats::chisq.test(M,correct=F)
    options(warn = old.warn)
    res[1] = res.tempo$statistic
    res[1] = round(res[1],rounding)

@@ -78,7 +78,7 @@ if (df>0){
 stat = sum(as.numeric(result[,3]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(result[,2]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(test2cl=c(stat=stat,df=dof,p_val=pval),details=result))

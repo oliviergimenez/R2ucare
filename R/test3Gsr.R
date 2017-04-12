@@ -134,10 +134,10 @@ for (i in 2:(k-1)){ # loop on date
             # calcul des tests pour  3G_SR
             #
             if (fisher3GSR == 1){
-                fish = fisher.test(compo3GSR)
+                fish = stats::fisher.test(compo3GSR)
                 pvalfish = fish$p.value
                 dffish = (nrow(compo3GSR)-1)*(ncol(compo3GSR)-1)
-				stafish = qchisq(1-pvalfish, dffish)
+				stafish = stats::qchisq(1-pvalfish, dffish)
                 table_multi_3sr[where_in_table_3sr,1] = i
                 table_multi_3sr[where_in_table_3sr,2] = l
                 table_multi_3sr[where_in_table_3sr,3] = stafish
@@ -147,7 +147,7 @@ for (i in 2:(k-1)){ # loop on date
             } else {
             	   	old.warn <- options()$warn # to suppress the warning messages
             	   	options(warn = -1)
-            	   	chi2 = chisq.test(compo3GSR,correct=F)
+            	   	chi2 = stats::chisq.test(compo3GSR,correct=F)
             	   	options(warn = old.warn)
                 pvalchi2 = chi2$p.value
                 dfchi2 = chi2$parameter
@@ -166,7 +166,7 @@ for (i in 2:(k-1)){ # loop on date
 stat = sum(as.numeric(table_multi_3sr[,3]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(table_multi_3sr[,4]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(test3Gsr=c(stat=stat,df=dof,p_val=pval),details=table_multi_3sr))

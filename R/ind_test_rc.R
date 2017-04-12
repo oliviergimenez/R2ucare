@@ -33,16 +33,16 @@ if (df>0){
    TT = (1/N) * ML[rw] %*% t(MC[cl]) # calculate expected values on this subtable
    test_low = (sum(TT<threshold)>0)
    if (test_low) { # low numbers
-      res[2] = as.numeric(fisher.test(M)$p.value) # zero machine issue
+      res[2] = as.numeric(stats::fisher.test(M)$p.value) # zero machine issue
       if (1-res[2] < 0.000000000000001) res[2] = 1 # zero machine issue
-      res[1] = qchisq(1-res[2],df)
+      res[1] = stats::qchisq(1-res[2],df)
 	  res[1] = round(res[1],rounding)
       res[2] = round(res[2],rounding)
       res[4] = 'Fisher'
  }  else { # no low numbers
    	old.warn <- options()$warn # to suppress the warning messages
    	options(warn = -1)
-   	res.tempo = chisq.test(M,correct=F)
+   	res.tempo = stats::chisq.test(M,correct=F)
    options(warn = old.warn)
    res[1] = as.numeric(res.tempo$statistic)
    res[1] = round(res[1],rounding)

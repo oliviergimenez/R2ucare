@@ -1,5 +1,3 @@
-res = c(chi2 = stat,degree_of_freedom = dof,p_value = pval)
-res
 cat('overall gof test for CJS model')#
 #cat('chi2, degree of freedom and p-value')#
 res = data.frame(chi2 = stat,degree_of_freedom = dof,p_value = pval)#
@@ -1297,3 +1295,6 @@ testMitec(geese.hist,geese.freq)
 testMltec(geese.hist,geese.freq)
 geese = system.file("extdata", "polar_bear.inp", package = "R2ucare")
 geese
+?optim
+source("/var/folders/zy/tlmzcg095r1755zdjjy1tbbc0000gn/T//RtmpGEJvdm/file427553afc163")#
+unlink("/var/folders/zy/tlmzcg095r1755zdjjy1tbbc0000gn/T//RtmpGEJvdm/file427553afc163")

@@ -97,7 +97,7 @@ for (j in it3){ # scan occasions of capture 2:K-1
 stat = sum(as.numeric(result[,2]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(result[,3]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(test3sm=c(stat=stat,df=dof,p_val=pval),details=result))

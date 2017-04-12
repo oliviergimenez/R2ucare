@@ -18,7 +18,7 @@
 read_headed <- function(file){
 
 # read in data, all columns as character, and ignore comments
-data = read.table(file,header=T,colClasses='character', comment.char = '/')
+data = utils::read.table(file,header=T,colClasses='character', comment.char = '/')
 
 # get columns names
 headers = names(data)

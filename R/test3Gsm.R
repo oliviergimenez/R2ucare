@@ -134,7 +134,7 @@ for (i in 2:(k-1)){ # loop on date
                 #end
 
             if (any(expval_table(table)<2)){
-                fish = fisher.test(table)
+                fish = stats::fisher.test(table)
                 pvalfish = fish$p.value
                 zeros_rows = (apply(table,1,sum)==0)
                 zeros_cols = (apply(table,2,sum)==0)
@@ -143,7 +143,7 @@ for (i in 2:(k-1)){ # loop on date
                 } else {
                   dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
                 }
-				        stafish = qchisq(1-pvalfish, dffish)
+				        stafish = stats::qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish
@@ -153,7 +153,7 @@ for (i in 2:(k-1)){ # loop on date
             } else {
             	 old.warn <- options()$warn # to suppress the warning messages
             	 options(warn = -1)
-            	 chi2 = chisq.test(table,correct=F)
+            	 chi2 = stats::chisq.test(table,correct=F)
             	 options(warn = old.warn)
                pvalchi2 = chi2$p.value
                dfchi2 = chi2$parameter
@@ -184,7 +184,7 @@ for (i in 2:(k-1)){ # loop on date
              #       end
 
             if (any(expval_table(table)<2)){
-                fish = fisher.test(table)
+                fish = stats::fisher.test(table)
                 pvalfish = fish$p.value
                 zeros_rows = (apply(table,1,sum)==0)
                 zeros_cols = (apply(table,2,sum)==0)
@@ -193,7 +193,7 @@ for (i in 2:(k-1)){ # loop on date
                 } else {
                   dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
                 }
-                stafish = qchisq(1-pvalfish, dffish)
+                stafish = stats::qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]
@@ -206,7 +206,7 @@ for (i in 2:(k-1)){ # loop on date
             } else {
             	   	old.warn <- options()$warn # to suppress the warning messages
             	   	options(warn = -1)
-            	   	chi2 = chisq.test(table,correct=F)
+            	   	chi2 = stats::chisq.test(table,correct=F)
             	   	options(warn = old.warn)
                   pvalchi2 = chi2$p.value
                   dfchi2 = chi2$parameter
@@ -241,7 +241,7 @@ for (i in 2:(k-1)){ # loop on date
                #         end
 
                        if (any(expval_table(table)<2)){
-                fish = fisher.test(table)
+                fish = stats::fisher.test(table)
                 pvalfish = fish$p.value
                 zeros_rows = (apply(table,1,sum)==0)
                 zeros_cols = (apply(table,2,sum)==0)
@@ -250,7 +250,7 @@ for (i in 2:(k-1)){ # loop on date
                 } else {
                   dffish = (sum(!zeros_rows)-1)*(sum(!zeros_cols)-1)
                 }
-    		        stafish = qchisq(1-pvalfish, dffish)
+    		        stafish = stats::qchisq(1-pvalfish, dffish)
                 table_multi_3sm[where_in_table_3sm,1] = i
                 table_multi_3sm[where_in_table_3sm,2] = l
                 table_multi_3sm[where_in_table_3sm,3] = stafish + table_multi_3sm[where_in_table_3sm,3]
@@ -263,7 +263,7 @@ for (i in 2:(k-1)){ # loop on date
                        } else {
                 old.warn <- options()$warn # to suppress the warning messages
                 options(warn = -1)
-                chi2 = chisq.test(table,correct=F)
+                chi2 = stats::chisq.test(table,correct=F)
                 options(warn = old.warn)
                 pvalchi2 = chi2$p.value
                 dfchi2 = chi2$parameter
@@ -277,12 +277,12 @@ for (i in 2:(k-1)){ # loop on date
                 #            if verbosity>=3
                 #                strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))}];
                 #            end
-                        end
+                #        end
                }
 
                 }
              }
-                table_multi_3sm[where_in_table_3sm,5] = 1-pchisq(table_multi_3sm[where_in_table_3sm,3],table_multi_3sm[where_in_table_3sm,4])
+                table_multi_3sm[where_in_table_3sm,5] = 1-stats::pchisq(table_multi_3sm[where_in_table_3sm,3],table_multi_3sm[where_in_table_3sm,4])
       } # if ns>1
             #stattotal = cbind(stattotal,table_multi_3sm[where_in_table_3sm,])
      }
@@ -291,7 +291,7 @@ for (i in 2:(k-1)){ # loop on date
 stat = sum(as.numeric(table_multi_3sm[,3]))
 stat = round(stat,rounding)
 dof = sum(as.numeric(table_multi_3sm[,4]))
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 # if user specifies all outputs
 if (verbose==TRUE) return(list(test3Gsm=c(stat=stat,df=dof,p_val=pval),details=table_multi_3sm))

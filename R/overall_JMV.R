@@ -45,7 +45,7 @@ res_test3Gwbwa = test3Gwbwa(X, freq)
 # compute overall test (JMV first, then AS)
 stat_jmv = round(res_test3Gsr$test3Gsr[1] + res_test3Gsm$test3Gsm[1] + res_test3Gwbwa$test3Gwbwa[1] + res_testMitec$testMitec[1] + res_testMltec$testMltec[1],rounding)
 dof_jmv = res_test3Gsr$test3Gsr[2] + res_test3Gsm$test3Gsm[2] + res_test3Gwbwa$test3Gwbwa[2] + res_testMitec$testMitec[2] + res_testMltec$testMltec[2]
-pval_jmv = round(1 - pchisq(stat_jmv,dof_jmv),rounding)
+pval_jmv = round(1 - stats::pchisq(stat_jmv,dof_jmv),rounding)
 
 res = data.frame(chi2 = stat_jmv,degree_of_freedom = dof_jmv,p_value = pval_jmv)
 row.names(res) = 'Gof test for JMV model:'

@@ -41,7 +41,7 @@ res_test2cl = test2cl(X, freq)
 # compute overall test as the sum
 stat = round(res_test3sr$test3sr[1] + res_test3sm$test3sm[1] + res_test2ct$test2ct[1] + res_test2cl$test2cl[1],rounding)
 dof = res_test3sr$test3sr[2] + res_test3sm$test3sm[2] + res_test2ct$test2ct[2] + res_test2cl$test2cl[2]
-pval = 1 - pchisq(stat,dof)
+pval = 1 - stats::pchisq(stat,dof)
 pval = round(pval,rounding)
 
 #cat('chi2, degree of freedom and p-value')
