@@ -21,7 +21,7 @@ For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992
 
 The latest stable version of the package can be downloaded from CRAN with the R command
 ``` 
-install.packages("unmarked")
+install.packages("R2ucare")
 ```
 
 The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package, to install it:
