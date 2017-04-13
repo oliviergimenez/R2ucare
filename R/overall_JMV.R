@@ -14,6 +14,7 @@
 #' @keywords package
 #' @export
 #' @examples
+#' \dontrun{
 #' # read in Geese dataset
 #' library(RMark)
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
@@ -32,6 +33,7 @@
 #'
 #' # perform overall gof test
 #' overall_JMV(X, freq)
+#' }
 
 overall_JMV <- function(X,freq,rounding=3){
 

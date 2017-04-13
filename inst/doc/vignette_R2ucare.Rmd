@@ -19,8 +19,12 @@ For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992
 
 ## To install the package
 
-The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:
+The latest stable version of the package can be downloaded from CRAN with the R command
+``` 
+install.packages("unmarked")
+```
 
+The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package, to install it:
 ```
 if(!require(devtools)) install.packages("devtools")
 library("devtools")
@@ -64,6 +68,7 @@ Tadaaaaan, now you're ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl 
 ```{r, message=FALSE, warning=FALSE}
 test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
 test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
+# we need the m-array to perform test2ct and test2cl
 test2ct_females = test2ct(dip.fem.hist, dip.fem.freq)
 test2cl_females = test2cl(dip.fem.hist, dip.fem.freq)
 # display results:

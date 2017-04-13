@@ -1,13 +1,15 @@
 Package: R2ucare
-Title: Goodness-of-fit tests for capture-recapture models
-Version: 1.0.0
-Authors@R: person("Olivier", "Gimenez", email = "olivier.gimenez@cefe.cnrs.fr", role = c("aut", "cre"))
+Maintainer: Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
+License: GPL (>= 2)
+Title: Goodness-of-Fit Tests for Capture-Recapture Models
+Author: Olivier Gimenez, Jean-Dominique Lebreton, Remi Choquet, Roger Pradel
 Description: Performs goodness-of-fit tests for capture-recapture models. Also contains several functions to process capture-recapture data.
+Version: 1.0.0
+URL: https://github.com/oliviergimenez/R2ucare
 Depends: R (>= 3.3.0)
-License: MIT + file LICENSE
+Suggests: knitr, rmarkdown
+Imports: stringr, RMark, stats, utils
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1.9000
-Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-Imports: stringr, RMark, stats, utils

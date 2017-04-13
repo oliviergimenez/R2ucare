@@ -10,6 +10,7 @@
 #' @keywords package
 #' @export
 #' @examples
+#' \dontrun{
 #' # Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
@@ -20,7 +21,7 @@
 #'
 #' # perform TestM.ITEC
 #' testMitec(geese.hist,geese.freq)
-
+#' }
 testMitec <- function(X,freq,verbose=TRUE,rounding=3){
 
 # test of multinomial mixture / MMLM method Yantis et al.

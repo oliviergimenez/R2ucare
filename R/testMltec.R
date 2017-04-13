@@ -10,6 +10,7 @@
 #' @keywords package
 #' @export
 #' @examples
+#' \dontrun{
 #' # Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
@@ -20,6 +21,7 @@
 #'
 #' # perform TestM.LTEC
 #' testMltec(geese.hist, geese.freq)
+#' }
 
 testMltec <- function(X,freq,verbose=TRUE,rounding=3){
 

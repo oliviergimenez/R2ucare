@@ -19,8 +19,12 @@ For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992
 
 ## To install the package
 
-The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package. It will also be available soon on CRAN (I have to drastically reduce the to-do list below before submitting it; any help welcome!). For the time being, just use the working version:
+The latest stable version of the package can be downloaded from CRAN with the R command
+``` 
+install.packages("unmarked")
+```
 
+The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package, to install it:
 ```
 if(!require(devtools)) install.packages("devtools")
 library("devtools")

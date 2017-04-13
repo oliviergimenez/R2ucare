@@ -22,6 +22,7 @@ This function returns a list with first component the overall test and second co
 This function performs TestM.LTEC
 }
 \examples{
+\dontrun{
 # Read in Geese dataset:
 geese = system.file("extdata", "geese.inp", package = "R2ucare")
 geese = read_inp(geese)
@@ -32,6 +33,7 @@ geese.freq = geese$sample_size
 
 # perform TestM.LTEC
 testMltec(geese.hist, geese.freq)
+}
 }
 \author{
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
