@@ -24,7 +24,8 @@ The latest stable version of the package can be downloaded from CRAN with the R 
 install.packages("R2ucare")
 ```
 
-The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development version of the package, to install it:
+The repository on GitHub https://github.com/oliviergimenez/R2ucare hosts the development 
+version of the package, to install it:
 ```
 if(!require(devtools)) install.packages("devtools")
 library("devtools")
@@ -161,7 +162,8 @@ geese.freq[mask] # from counts
 
 The R packages `plyr`, `dplyr` and `tidyr` might also be very useful to work with capture-recapture datasets.
 
-Besides these simple manipulations, several useful U-CARE functions need a proper R equivalent. I have coded a few of them, see the list below and ?name-of-the-function for more details. 
+Besides these simple manipulations, several useful U-CARE functions need a proper R equivalent. 
+I have coded a few of them, see the list below and ?name-of-the-function for more details. 
 
 * `marray` build the m-array for single-site/state capture-recapture data;
 * `multimarray` build the m-array for multi-site/state capture-recapture data;

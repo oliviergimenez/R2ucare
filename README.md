@@ -40,7 +40,11 @@ This package is basically a Matlab to R translation of U-CARE (Choquet et al. 20
 ## Getting started
 
 The simplest way to get started is to have a look to the 
-[R2ucare vignette](https://github.com/oliviergimenez/R2ucare/blob/master/inst/doc/vignette_R2ucare.Rmd).
+[R2ucare vignette](https://github.com/oliviergimenez/R2ucare/blob/master/inst/doc/vignette_R2ucare.Rmd). It can be accessed in R directly:
+
+```R
+vignette('vignette_R2ucare')
+```
 
 ## References 
 
