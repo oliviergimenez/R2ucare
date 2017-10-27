@@ -23,11 +23,10 @@ GAM matrix of cell probabilities estimates for bases
 \description{
 This function performs maximum likelihood inference for multinomial mixture distributions.
 }
-\author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
-}
 \references{
 Yantis, S., Meyer, D. E., and Smith, J. E. K. (1991). Analyses of multinomial mixture distributions: New tests for stochastic models of cognition and action. Psychological Bulletin 110, 350–374.
 }
+\author{
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
+}
 \keyword{package}
-

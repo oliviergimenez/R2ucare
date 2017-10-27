@@ -28,4 +28,3 @@ read_headed(geese)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
 }
 \keyword{package}
-

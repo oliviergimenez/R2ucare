@@ -19,4 +19,3 @@ This function calculates expected values for a rxc contingency table.
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

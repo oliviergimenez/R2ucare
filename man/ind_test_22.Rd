@@ -23,4 +23,3 @@ This function tests independence in 2x2 contingency tables
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
-

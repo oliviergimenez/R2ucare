@@ -37,4 +37,3 @@ test3Gsr(geese.hist,geese.freq)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
-

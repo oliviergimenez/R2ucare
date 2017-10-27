@@ -23,4 +23,3 @@ This function pools together individuals with the same encounter capture-recaptu
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

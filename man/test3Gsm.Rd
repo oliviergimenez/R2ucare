@@ -37,4 +37,3 @@ test3Gsm(geese.hist,geese.freq)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

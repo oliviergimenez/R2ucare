@@ -22,11 +22,10 @@ This function returns a matrix with the pooled table.
 This function pools rows and columns of a rxc bases and mixture table according to Pradel et al. (2003).
 It provides the components of TestM in the multisite goodness-of-fit tests.
 }
-\author{
-Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
-}
 \references{
 Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model. Biometrics 59: 43-53.
 }
+\author{
+Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Rémi Choquet, Jean-Dominique Lebreton, Anne-Marie Reboulet, Roger Pradel
+}
 \keyword{package}
-

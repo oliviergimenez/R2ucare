@@ -19,4 +19,3 @@ This function computes the inverse (or reciprocal) of the generalized logit link
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

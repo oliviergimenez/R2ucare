@@ -31,4 +31,3 @@ This function reformat the outputs of multinomial mixture distributions paramete
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

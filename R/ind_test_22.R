@@ -40,9 +40,9 @@ if (df>0){ # perform test
    res[3] = round(sign(D[1,1]) * sqrt(res[1]),rounding)
    res[4] = 'Fisher'}
    else {
-   	old.warn <- options()$warn # to suppress the warning messages
-   	options(warn = -1)
-   	res.tempo = stats::chisq.test(M,correct=F)
+   old.warn <- options()$warn # to suppress the warning messages
+   options(warn = -1)
+   res.tempo = stats::chisq.test(M,correct=F)
    options(warn = old.warn)
    res[1] = res.tempo$statistic
    res[1] = round(res[1],rounding)

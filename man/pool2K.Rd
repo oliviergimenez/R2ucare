@@ -21,4 +21,3 @@ This function pools columns of a 2xK contingency table (if needed, ie if low num
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
-

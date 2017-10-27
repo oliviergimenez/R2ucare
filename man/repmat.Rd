@@ -25,4 +25,3 @@ This is the equivalent of the repmat MATLAB function.
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
 }
 \keyword{package}
-

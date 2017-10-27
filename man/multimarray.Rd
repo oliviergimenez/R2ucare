@@ -33,4 +33,3 @@ multimarray(geese.hist, geese.freq)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
-

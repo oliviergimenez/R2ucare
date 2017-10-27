@@ -28,4 +28,3 @@ ungroup_data(X,freq)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-

@@ -41,4 +41,3 @@ marray(dip.fem.hist,dip.fem.freq)
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>,Jean-Dominique Lebreton, Rémi Choquet, Roger Pradel
 }
 \keyword{package}
-

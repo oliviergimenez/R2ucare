@@ -23,4 +23,3 @@ This function carries out goodness-of-fit tests for contingency tables from the 
 Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>, Roger Pradel, Rémi Choquet
 }
 \keyword{package}
-
