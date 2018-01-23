@@ -2,6 +2,34 @@
 library(R2ucare)
 
 ## ---- message=FALSE, warning=FALSE---------------------------------------
+# # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf
+library(RMark)
+data_path <- "/Library/Frameworks/R.framework/Versions/3.4/Resources/library/RMark/extdata/"
+dipper <- import.chdata(paste0(data_path,"dipper.txt"),field.names=c("ch","sex"),header=FALSE)
+dipper <- as.data.frame(table(dipper))
+str(dipper)
+
+## ---- message=FALSE, warning=FALSE---------------------------------------
+dip.hist = matrix(as.numeric(unlist(strsplit(as.character(dipper$ch),""))),nrow=length(dipper$ch),byrow=T)
+dip.freq = dipper$Freq
+dip.group = dipper$sex
+head(dip.hist)
+head(dip.freq)
+head(dip.group)
+
+## ---- message=FALSE, warning=FALSE---------------------------------------
+dipper <- system.file("extdata", "ed.txt", package = "R2ucare")
+dipper <- read_headed(dipper)
+
+## ---- message=FALSE, warning=FALSE---------------------------------------
+dip.hist <- dipper$encounter_histories
+dip.freq <- dipper$sample_size
+dip.group <- dipper$groups
+head(dip.hist)
+head(dip.freq)
+head(dip.group)
+
+## ---- message=FALSE, warning=FALSE---------------------------------------
 dipper = system.file("extdata", "ed.inp", package = "R2ucare")
 dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 
@@ -9,6 +37,9 @@ dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 dip.hist = dipper$encounter_histories
 dip.freq = dipper$sample_size
 dip.group = dipper$groups
+head(dip.hist)
+head(dip.freq)
+head(dip.group)
 
 ## ---- message=FALSE, warning=FALSE---------------------------------------
 mask = (dip.group == 'Female')
@@ -21,7 +52,6 @@ dip.mal.freq = dip.freq[mask]
 ## ---- message=FALSE, warning=FALSE---------------------------------------
 test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
 test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
-# we need the m-array to perform test2ct and test2cl
 test2ct_females = test2ct(dip.fem.hist, dip.fem.freq)
 test2cl_females = test2cl(dip.fem.hist, dip.fem.freq)
 # display results:

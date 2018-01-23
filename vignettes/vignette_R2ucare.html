@@ -12,7 +12,7 @@
 
 <meta name="author" content="Olivier Gimenez" />
 
-<meta name="date" content="2017-10-27" />
+<meta name="date" content="2018-01-23" />
 
 <title>How to use the R2ucare package to assess the fit of capture-recapture to data?</title>
 
@@ -20,46 +20,256 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 </head>
 
@@ -70,52 +280,123 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">How to use the R2ucare package to assess the fit of capture-recapture to data?</h1>
 <h4 class="author"><em>Olivier Gimenez</em></h4>
-<h4 class="date"><em>2017-10-27</em></h4>
+<h4 class="date"><em>2018-01-23</em></h4>
 
 
 
-<div id="what-it-does-and-does-not-do" class="section level2">
+<section id="what-it-does-and-does-not-do" class="level2">
 <h2>What it does (and does not do)</h2>
-<p>Ths package contains R functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data. Please email all suggestions for improvements, questions, comments and bugs to olivier.gimenez [AT] cefe.cnrs.fr.</p>
-<p>For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). <a href="http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf">Chapter 5 of the Gentle Introduction to MARK</a> also provides a good start for understanding goodness-of-fit test.</p>
-<p><strong>Warning</strong>: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, remove these covariates from your dataset before using it with R2ucare. For groups, just treat the group separately as in the Dipper example below.</p>
-</div>
-<div id="to-install-the-package" class="section level2">
+<p>The <code>R2ucare</code> package contains <code>R</code> functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data. Please email all suggestions for improvements, questions, comments and bugs to olivier.gimenez [AT] cefe.cnrs.fr.</p>
+<p>For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). <a href="http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf">Chapter 5 of the Gentle Introduction to MARK (Cooch and White 2017)</a> also provides a good start for understanding goodness-of-fit tests.</p>
+<p><strong>Warning</strong>: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, we suggest you remove these covariates from your dataset before using it with <code>R2ucare</code>. For groups, just treat the group separately as in the Dipper example below.</p>
+</section>
+<section id="to-install-the-package" class="level2">
 <h2>To install the package</h2>
-<p>The latest stable version of the package can be downloaded from CRAN with the R command</p>
+<p>The latest stable version of the package can be downloaded from <code>CRAN</code> with the <code>R</code> command</p>
 <pre><code>install.packages(&quot;R2ucare&quot;)</code></pre>
-<p>The repository on GitHub <a href="https://github.com/oliviergimenez/R2ucare" class="uri">https://github.com/oliviergimenez/R2ucare</a> hosts the development version of the package, to install it:</p>
+<p>The repository on <code>GitHub</code> <a href="https://github.com/oliviergimenez/R2ucare" class="uri">https://github.com/oliviergimenez/R2ucare</a> hosts the development version of the package, to install it:</p>
 <pre><code>if(!require(devtools)) install.packages(&quot;devtools&quot;)
 library(&quot;devtools&quot;)
 install_github('oliviergimenez/R2ucare')</code></pre>
-<p>Despite what its name might suggest, <strong>you do not need</strong> to download and install U-CARE to run the R2ucare package. This package is basically a Matlab to R translation of U-CARE (Choquet et al. 2009).</p>
-</div>
-<div id="goodness-of-fit-tests-for-the-cormack-jolly-seber-model" class="section level2">
-<h2>Goodness-of-fit tests for the Cormack-Jolly-Seber model</h2>
+<p>Despite what its name might suggest, <strong>you do not need</strong> to download and install <code>U-CARE</code> to run the <code>R2ucare</code> package. This package is basically a <code>Matlab</code> to <code>R</code> translation of <code>U-CARE</code> (Choquet et al. 2009).</p>
 <p>First things first, load the <code>R2ucare</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(R2ucare)</code></pre></div>
-<p>Let’s begin by reading in the classical dipper using the <code>read_inp</code> function. Note that data with the Headed format can also be read using the function <code>read_headed</code>. The dataset is provided with the package (thanks to Gilbert Marzolin for sharing his data).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dipper =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
-dipper =<span class="st"> </span><span class="kw">read_inp</span>(dipper,<span class="dt">group.df=</span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="st">'Male'</span>,<span class="st">'Female'</span>)))</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(R2ucare)</a></code></pre></div>
+</section>
+<section id="data-formats" class="level2">
+<h2>Data formats</h2>
+<p>There are 3 main data formats when manipulating capture-recapture data, corresponding to the 3 main computer software available to fit corresponding models: <code>RMark</code>, <code>E-SURGE</code> and <code>Mark</code>. With <code>R2ucare</code>, it is easy to work with any of these formats. We will use the classical dipper dataset, which is provided with the package (thanks to Gilbert Marzolin for sharing his data).</p>
+<section id="read-in-rmark-files" class="level3">
+<h3>Read in <code>RMark</code> files</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(RMark)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">data_path &lt;-<span class="st"> &quot;/Library/Frameworks/R.framework/Versions/3.4/Resources/library/RMark/extdata/&quot;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">dipper &lt;-<span class="st"> </span><span class="kw">import.chdata</span>(<span class="kw">paste0</span>(data_path,<span class="st">&quot;dipper.txt&quot;</span>),<span class="dt">field.names=</span><span class="kw">c</span>(<span class="st">&quot;ch&quot;</span>,<span class="st">&quot;sex&quot;</span>),<span class="dt">header=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">dipper &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">table</span>(dipper))</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">str</span>(dipper)</a></code></pre></div>
+<pre><code>## 'data.frame':    64 obs. of  3 variables:
+##  $ ch  : Factor w/ 32 levels &quot;0000001&quot;,&quot;0000010&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ sex : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Freq: int  22 12 11 7 6 6 10 1 1 5 ...</code></pre>
 <p>Get encounter histories, counts and groups:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dip.hist =<span class="st"> </span>dipper<span class="op">$</span>encounter_histories
-dip.freq =<span class="st"> </span>dipper<span class="op">$</span>sample_size
-dip.group =<span class="st"> </span>dipper<span class="op">$</span>groups</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">dip.hist =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">as.numeric</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(<span class="kw">as.character</span>(dipper<span class="op">$</span>ch),<span class="st">&quot;&quot;</span>))),<span class="dt">nrow=</span><span class="kw">length</span>(dipper<span class="op">$</span>ch),<span class="dt">byrow=</span>T)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">dip.freq =<span class="st"> </span>dipper<span class="op">$</span>Freq</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">dip.group =<span class="st"> </span>dipper<span class="op">$</span>sex</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">head</span>(dip.hist)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    0    0    0    0    0    0    1
+## [2,]    0    0    0    0    0    1    0
+## [3,]    0    0    0    0    0    1    1
+## [4,]    0    0    0    0    1    0    0
+## [5,]    0    0    0    0    1    1    0
+## [6,]    0    0    0    0    1    1    1</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">head</span>(dip.freq)</a></code></pre></div>
+<pre><code>## [1] 22 12 11  7  6  6</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">head</span>(dip.group)</a></code></pre></div>
+<pre><code>## [1] Female Female Female Female Female Female
+## Levels: Female Male</code></pre>
+</section>
+<section id="read-in-e-surge-files" class="level3">
+<h3>Read in <code>E-SURGE</code> files</h3>
+<p>Let’s use the <code>read_headed</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">dipper &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">dipper &lt;-<span class="st"> </span><span class="kw">read_headed</span>(dipper)</a></code></pre></div>
+<p>Get encounter histories, counts and groups:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">dip.hist &lt;-<span class="st"> </span>dipper<span class="op">$</span>encounter_histories</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">dip.freq &lt;-<span class="st"> </span>dipper<span class="op">$</span>sample_size</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">dip.group &lt;-<span class="st"> </span>dipper<span class="op">$</span>groups</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">head</span>(dip.hist)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    1    1    1    1    1    1    0
+## [2,]    1    1    1    1    0    0    0
+## [3,]    1    1    0    0    0    0    0
+## [4,]    1    1    0    0    0    0    0
+## [5,]    1    1    0    0    0    0    0
+## [6,]    1    1    0    0    0    0    0</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">head</span>(dip.freq)</a></code></pre></div>
+<pre><code>## [1] 1 1 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">head</span>(dip.group)</a></code></pre></div>
+<pre><code>## [1] &quot;male&quot; &quot;male&quot; &quot;male&quot; &quot;male&quot; &quot;male&quot; &quot;male&quot;</code></pre>
+</section>
+<section id="read-in-mark-files" class="level3">
+<h3>Read in <code>Mark</code> files</h3>
+<p>Let’s use the <code>read_inp</code> function.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">dipper =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;ed.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">dipper =<span class="st"> </span><span class="kw">read_inp</span>(dipper,<span class="dt">group.df=</span><span class="kw">data.frame</span>(<span class="dt">sex=</span><span class="kw">c</span>(<span class="st">'Male'</span>,<span class="st">'Female'</span>)))</a></code></pre></div>
+<p>Get encounter histories, counts and groups:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">dip.hist =<span class="st"> </span>dipper<span class="op">$</span>encounter_histories</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">dip.freq =<span class="st"> </span>dipper<span class="op">$</span>sample_size</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">dip.group =<span class="st"> </span>dipper<span class="op">$</span>groups</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">head</span>(dip.hist)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    1    1    1    1    1    1    0
+## [2,]    1    1    1    1    0    0    0
+## [3,]    1    1    0    0    0    0    0
+## [4,]    1    1    0    0    0    0    0
+## [5,]    1    1    0    0    0    0    0
+## [6,]    1    1    0    0    0    0    0</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">head</span>(dip.freq)</a></code></pre></div>
+<pre><code>## [1] 1 1 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">head</span>(dip.group)</a></code></pre></div>
+<pre><code>## [1] Male Male Male Male Male Male
+## Levels: Female Male</code></pre>
+</section>
+</section>
+<section id="goodness-of-fit-tests-for-the-cormack-jolly-seber-model" class="level2">
+<h2>Goodness-of-fit tests for the Cormack-Jolly-Seber model</h2>
 <p>Split the dataset in females/males:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mask =<span class="st"> </span>(dip.group <span class="op">==</span><span class="st"> 'Female'</span>)
-dip.fem.hist =<span class="st"> </span>dip.hist[mask,]
-dip.fem.freq =<span class="st"> </span>dip.freq[mask]
-mask =<span class="st"> </span>(dip.group <span class="op">==</span><span class="st"> 'Male'</span>)
-dip.mal.hist =<span class="st"> </span>dip.hist[mask,]
-dip.mal.freq =<span class="st"> </span>dip.freq[mask]</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">mask =<span class="st"> </span>(dip.group <span class="op">==</span><span class="st"> 'Female'</span>)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">dip.fem.hist =<span class="st"> </span>dip.hist[mask,]</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">dip.fem.freq =<span class="st"> </span>dip.freq[mask]</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">mask =<span class="st"> </span>(dip.group <span class="op">==</span><span class="st"> 'Male'</span>)</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">dip.mal.hist =<span class="st"> </span>dip.hist[mask,]</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">dip.mal.freq =<span class="st"> </span>dip.freq[mask]</a></code></pre></div>
 <p>Tadaaaaan, now you’re ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test3sr_females =<span class="st"> </span><span class="kw">test3sr</span>(dip.fem.hist, dip.fem.freq)
-test3sm_females =<span class="st"> </span><span class="kw">test3sm</span>(dip.fem.hist, dip.fem.freq)
-<span class="co"># we need the m-array to perform test2ct and test2cl</span>
-test2ct_females =<span class="st"> </span><span class="kw">test2ct</span>(dip.fem.hist, dip.fem.freq)
-test2cl_females =<span class="st"> </span><span class="kw">test2cl</span>(dip.fem.hist, dip.fem.freq)
-<span class="co"># display results:</span>
-test3sr_females</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">test3sr_females =<span class="st"> </span><span class="kw">test3sr</span>(dip.fem.hist, dip.fem.freq)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">test3sm_females =<span class="st"> </span><span class="kw">test3sm</span>(dip.fem.hist, dip.fem.freq)</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">test2ct_females =<span class="st"> </span><span class="kw">test2ct</span>(dip.fem.hist, dip.fem.freq)</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">test2cl_females =<span class="st"> </span><span class="kw">test2cl</span>(dip.fem.hist, dip.fem.freq)</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="co"># display results:</span></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">test3sr_females</a></code></pre></div>
 <pre><code>## $test3sr
 ##      stat        df     p_val sign_test 
 ##     4.985     5.000     0.418     1.428 
@@ -127,7 +408,7 @@ test3sr_females</code></pre></div>
 ## 3         4 0.437 0.509       0.661 Chi-square
 ## 4         5 0.103 0.748      -0.321 Chi-square
 ## 5         6 0.001 0.982       0.032 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test3sm_females</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">test3sm_females</a></code></pre></div>
 <pre><code>## $test3sm
 ##  stat    df p_val 
 ## 2.041 3.000 0.564 
@@ -139,7 +420,7 @@ test3sr_females</code></pre></div>
 ## 3         4 0.499  1  0.48    Fisher
 ## 4         5     0  0     0      None
 ## 5         6     0  0     0      None</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test2ct_females</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">test2ct_females</a></code></pre></div>
 <pre><code>## $test2ct
 ##      stat        df     p_val sign_test 
 ##     3.250     4.000     0.517    -0.902 
@@ -150,7 +431,7 @@ test3sr_females</code></pre></div>
 ## 2         3   1    0     1           0    Fisher
 ## 3         4   1    0     1           0    Fisher
 ## 4         5   1 3.25 0.071      -1.803    Fisher</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test2cl_females</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">test2cl_females</a></code></pre></div>
 <pre><code>## $test2cl
 ##  stat    df p_val 
 ##     0     0     1 
@@ -161,20 +442,21 @@ test3sr_females</code></pre></div>
 ## 2         3   0    0     0      None
 ## 3         4   0    0     0      None</code></pre>
 <p>Or perform all tests at once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">overall_CJS</span>(dip.fem.hist, dip.fem.freq)</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">overall_CJS</span>(dip.fem.hist, dip.fem.freq)</a></code></pre></div>
 <pre><code>##                           chi2 degree_of_freedom p_value
 ## Gof test for CJS model: 10.276                12   0.592</code></pre>
-</div>
-<div id="goodness-of-fit-tests-for-the-arnason-schwarz-model" class="section level2">
+<p>What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in <code>RMark</code> (Cooch and White 2017; <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">appendix C</a>) or <code>E-SURGE</code> (Choquet et al. 2009). If trap dependence is significant, <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">Cooch and White (2017)</a> illustrate how to use a time-varying individual covariate to account for this effect in <code>RMark</code>, while Gimenez et al. (2003) suggest the use of multistate models that can be fitted with <code>RMark</code> or <code>E-SURGE</code>, and Pradel and Sanz (2012) recommend multievent models that can be fitted in <code>E-SURGE</code> only.</p>
+</section>
+<section id="goodness-of-fit-tests-for-the-arnason-schwarz-model" class="level2">
 <h2>Goodness-of-fit tests for the Arnason-Schwarz model</h2>
 <p>Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geese =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;geese.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)
-geese =<span class="st"> </span><span class="kw">read_inp</span>(geese)</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">geese =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;geese.inp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;R2ucare&quot;</span>)</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">geese =<span class="st"> </span><span class="kw">read_inp</span>(geese)</a></code></pre></div>
 <p>Get encounter histories and number of individuals with corresponding histories</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geese.hist =<span class="st"> </span>geese<span class="op">$</span>encounter_histories
-geese.freq =<span class="st"> </span>geese<span class="op">$</span>sample_size</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">geese.hist =<span class="st"> </span>geese<span class="op">$</span>encounter_histories</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">geese.freq =<span class="st"> </span>geese<span class="op">$</span>sample_size</a></code></pre></div>
 <p>And now, perform Test3.GSr, Test.3.GSm, Test3G.wbwa, TestM.ITEC and TestM.LTEC:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsr</span>(geese.hist,geese.freq)</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">test3Gsr</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>## $test3Gsr
 ##    stat      df   p_val 
 ## 117.753  12.000   0.000 
@@ -193,7 +475,7 @@ geese.freq =<span class="st"> </span>geese<span class="op">$</span>sample_size</
 ## 10        5    1 1.101349e+01  1 9.045141e-04 Chi-square
 ## 11        5    2 1.292013e-01  1 7.192616e-01 Chi-square
 ## 12        5    3 2.978513e+01  1 4.826802e-08 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gsm</span>(geese.hist,geese.freq)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">test3Gsm</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>## $test3Gsm
 ##    stat      df   p_val 
 ## 302.769 119.000   0.000 
@@ -212,7 +494,7 @@ geese.freq =<span class="st"> </span>geese<span class="op">$</span>sample_size</
 ## 10        5    1  9.061514  3 2.848411e-02 Chi-square
 ## 11        5    2  5.974357  4 2.010715e-01 Chi-square
 ## 12        5    3 29.217786  4 7.060092e-06 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test3Gwbwa</span>(geese.hist,geese.freq)</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">test3Gwbwa</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>## $test3Gwbwa
 ##    stat      df   p_val 
 ## 472.855  20.000   0.000 
@@ -231,82 +513,85 @@ geese.freq =<span class="st"> </span>geese<span class="op">$</span>sample_size</
 ## 10        5    1 43.6547442  1 3.917264e-11 Chi-square
 ## 11        5    2 50.9264976  2 8.738795e-12 Chi-square
 ## 12        5    3 29.4763896  2 3.974507e-07 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMitec</span>(geese.hist,geese.freq)</code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">testMitec</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>## $testMitec
 ##   stat     df  p_val 
-## 68.227 27.000  0.000 
+## 68.225 27.000  0.000 
 ## 
 ## $details
 ##   occasion     stat df        p_val  test_perf
-## 1        2 14.26714  9 0.1131348952 Chi-square
-## 2        3 30.84042  9 0.0003152791 Chi-square
-## 3        4 23.11909  9 0.0059343255 Chi-square</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">testMltec</span>(geese.hist,geese.freq)</code></pre></div>
+## 1        2 14.26683  9 0.1131451996 Chi-square
+## 2        3 30.83851  9 0.0003155165 Chi-square
+## 3        4 23.12000  9 0.0059323730 Chi-square</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">testMltec</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>## $testMltec
 ##   stat     df  p_val 
-## 20.980 19.000  0.338 
+## 21.298 19.000  0.321 
 ## 
 ## $details
 ##   occasion      stat df     p_val  test_perf
-## 1        2 14.102645 10 0.1683609 Chi-square
-## 2        3  6.877837  9 0.6498367 Chi-square</code></pre>
+## 1        2 14.409884 10 0.1551029 Chi-square
+## 2        3  6.887895  9 0.6487900 Chi-square</code></pre>
 <p>Or all tests at once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">overall_JMV</span>(geese.hist,geese.freq)</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">overall_JMV</span>(geese.hist,geese.freq)</a></code></pre></div>
 <pre><code>##                            chi2 degree_of_freedom p_value
-## Gof test for JMV model: 982.586               197       0</code></pre>
-</div>
-<div id="various-useful-functions" class="section level2">
+## Gof test for JMV model: 982.584               197       0</code></pre>
+</section>
+<section id="various-useful-functions" class="level2">
 <h2>Various useful functions</h2>
-<p>Several U-CARE functions to manipulate and process capture-recapture data can be mimicked with R built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-geese.hist[geese.hist<span class="op">&gt;</span><span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<p>Several <code>U-CARE</code> functions to manipulate and process capture-recapture data can be mimicked with <code>R</code> built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># Assuming the geese dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">geese.hist[geese.hist<span class="op">&gt;</span><span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <p>So is recoding states:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-geese.hist[geese.hist<span class="op">==</span><span class="dv">3</span>]=<span class="dv">2</span> <span class="co"># all 3s become 2s</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># Assuming the geese dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">geese.hist[geese.hist<span class="op">==</span><span class="dv">3</span>]=<span class="dv">2</span> <span class="co"># all 3s become 2s</span></a></code></pre></div>
 <p>Also, reversing time is not that difficult:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
-<span class="kw">t</span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,rev))</code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">t</span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,rev))</a></code></pre></div>
 <p>What about cleaning data, i.e. deleting empty histories, and histories with no individuals?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
-mask =<span class="st"> </span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,sum)<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>dip.fem.freq<span class="op">&gt;</span><span class="dv">0</span>) <span class="co"># select non-empty histories, and histories with at least one individual</span>
-<span class="kw">sum</span>(<span class="op">!</span>mask) <span class="co"># how many histories are to be dropped?</span>
-dip.fem.hist[mask,] <span class="co"># drop these histories from dataset</span>
-dip.fem.freq[mask] <span class="co"># from counts</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">mask =<span class="st"> </span>(<span class="kw">apply</span>(dip.fem.hist,<span class="dv">1</span>,sum)<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>dip.fem.freq<span class="op">&gt;</span><span class="dv">0</span>) <span class="co"># select non-empty histories, and histories with at least one individual</span></a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="kw">sum</span>(<span class="op">!</span>mask) <span class="co"># how many histories are to be dropped?</span></a>
+<a class="sourceLine" id="cb54-4" data-line-number="4">dip.fem.hist[mask,] <span class="co"># drop these histories from dataset</span></a>
+<a class="sourceLine" id="cb54-5" data-line-number="5">dip.fem.freq[mask] <span class="co"># from counts</span></a></code></pre></div>
 <p>Selecting or gathering occasions is as simple as that:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
-dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)</span>
-gather_<span class="dv">146</span> =<span class="st"> </span><span class="kw">apply</span>(dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)],<span class="dv">1</span>,max) <span class="co"># gather occasions 1, 4 and 6 by taking the max</span>
-dip.fem.hist[,<span class="dv">1</span>] =<span class="st"> </span>gather_<span class="dv">146</span> <span class="co"># replace occasion 1 by new occasion</span>
-dip.fem.hist =<span class="st"> </span>dip.fem.hist[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># drop occasions 4 and 6</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)</span></a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">gather_<span class="dv">146</span> =<span class="st"> </span><span class="kw">apply</span>(dip.fem.hist[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>)],<span class="dv">1</span>,max) <span class="co"># gather occasions 1, 4 and 6 by taking the max</span></a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">dip.fem.hist[,<span class="dv">1</span>] =<span class="st"> </span>gather_<span class="dv">146</span> <span class="co"># replace occasion 1 by new occasion</span></a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">dip.fem.hist =<span class="st"> </span>dip.fem.hist[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)] <span class="co"># drop occasions 4 and 6</span></a></code></pre></div>
 <p>Finally, suppressing the first encounter is achieved as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(geese.hist)){
-occasion_first_encounter =<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(geese.hist[i,]<span class="op">!=</span><span class="dv">0</span>)) <span class="co"># look for occasion of first encounter</span>
-geese.hist[i,occasion_first_encounter] =<span class="st"> </span><span class="dv">0</span> <span class="co"># replace the first non zero by a zero</span>
-}
-<span class="co"># delete empty histories from the new dataset</span>
-mask =<span class="st"> </span>(<span class="kw">apply</span>(geese.hist,<span class="dv">1</span>,sum)<span class="op">&gt;</span><span class="dv">0</span>) <span class="co"># select non-empty histories</span>
-<span class="kw">sum</span>(<span class="op">!</span>mask) <span class="co"># how many histories are to be dropped?</span>
-geese.hist[mask,] <span class="co"># drop these histories from dataset</span>
-geese.freq[mask] <span class="co"># from counts</span></code></pre></div>
-<p>The R packages <code>plyr</code>, <code>dplyr</code> and <code>tidyr</code> might also be very useful to work with capture-recapture datasets.</p>
-<p>Besides these simple manipulations, several useful U-CARE functions need a proper R equivalent. I have coded a few of them, see the list below and ?name-of-the-function for more details.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># Assuming the geese dataset has been read in R (see above):</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(geese.hist)){</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">occasion_first_encounter =<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(geese.hist[i,]<span class="op">!=</span><span class="dv">0</span>)) <span class="co"># look for occasion of first encounter</span></a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">geese.hist[i,occasion_first_encounter] =<span class="st"> </span><span class="dv">0</span> <span class="co"># replace the first non zero by a zero</span></a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6"><span class="co"># delete empty histories from the new dataset</span></a>
+<a class="sourceLine" id="cb56-7" data-line-number="7">mask =<span class="st"> </span>(<span class="kw">apply</span>(geese.hist,<span class="dv">1</span>,sum)<span class="op">&gt;</span><span class="dv">0</span>) <span class="co"># select non-empty histories</span></a>
+<a class="sourceLine" id="cb56-8" data-line-number="8"><span class="kw">sum</span>(<span class="op">!</span>mask) <span class="co"># how many histories are to be dropped?</span></a>
+<a class="sourceLine" id="cb56-9" data-line-number="9">geese.hist[mask,] <span class="co"># drop these histories from dataset</span></a>
+<a class="sourceLine" id="cb56-10" data-line-number="10">geese.freq[mask] <span class="co"># from counts</span></a></code></pre></div>
+<p>The <code>R</code> packages <code>plyr</code>, <code>dplyr</code> and <code>tidyr</code> might also be very useful to work with capture-recapture datasets.</p>
+<p>Besides these simple manipulations, several useful <code>U-CARE</code> functions need a proper <code>R</code> equivalent. I have coded a few of them, see the list below and ?name-of-the-function for more details.</p>
 <ul>
 <li><code>marray</code> build the m-array for single-site/state capture-recapture data;</li>
 <li><code>multimarray</code> build the m-array for multi-site/state capture-recapture data;</li>
 <li><code>group_data</code> pool together individuals with the same encounter capture-recapture history.</li>
 <li><code>ungroup_data</code> split encounter capture-recapture histories in individual ones.</li>
 </ul>
-</div>
-<div id="references" class="section level2">
+</section>
+<section id="references" class="level2">
 <h2>References</h2>
 <ul>
-<li>Choquet, R., Lebreton, J.-D., Gimenez, O., Reboulet, A.-M., and R. Pradel. (2009). <a href="https://dl.dropboxusercontent.com/u/23160641/my-pubs/Choquetetal2009UCARE.pdf">U-CARE: Utilities for performing goodness of fit tests and manipulating CApture-REcapture data</a>. Ecography. 32: 1071-1074.</li>
+<li>Choquet, R., Lebreton, J.-D., Gimenez, O., Reboulet, A.-M., and R. Pradel. (2009). <a href="https://oliviergimenez.github.io/pubs/Choquetetal2009UCARE.pdf">U-CARE: Utilities for performing goodness of fit tests and manipulating CApture-REcapture data</a>. Ecography. 32: 1071-1074.</li>
+<li>Cooch, E.G. and G.C. White (2017). Program MARK – a ‘gentle introduction’. <a href="http://www.phidot.org/software/mark/docs/book/" class="uri">http://www.phidot.org/software/mark/docs/book/</a></li>
+<li>Gimenez O., Choquet R. and J.-D. Lebreton (2003). <a href="https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf">Parameter redundancy in multistate capture-recapture models</a>. Biometrical Journal 45: 704-722.</li>
 <li>Lebreton, J.-D. et al. (1992). Modeling survival and testing biological hypotheses using marked animals: a unified approach with case studies. Ecol. Monogr. 62: 67-118.</li>
-<li>Pradel, R., Gimenez O. and J.-D. Lebreton (2005). <a href="https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2005ABC.pdf">Principles and interest of GOF tests for multistate capture-recapture models</a>. Animal Biodiversity and Conservation 28: 189–204.</li>
-<li>Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). <a href="https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2003Biometrics.pdf">A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model</a>. Biometrics 59: 43-53.</li>
+<li>Pradel, R., Gimenez O. and J.-D. Lebreton (2005). <a href="https://oliviergimenez.github.io/pubs/Pradeletal2005ABC.pdf">Principles and interest of GOF tests for multistate capture-recapture models</a>. Animal Biodiversity and Conservation 28: 189–204.</li>
+<li>Pradel, R. and A. Sanz-Aguilar (2012). <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666">Modeling Trap-Awareness and Related Phenomena in Capture-Recapture Studies</a>. PLoS ONE, 7(3), e32666.</li>
+<li>Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). <a href="https://oliviergimenez.github.io/pubs/Pradeletal2003Biometrics.pdf">A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model</a>. Biometrics 59: 43-53.</li>
 </ul>
-</div>
+</section>
 
 
 
