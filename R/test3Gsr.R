@@ -13,7 +13,7 @@
 #' # Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)
-#' 
+#'
 #' # Get encounter histories and number of individuals with corresponding histories
 #' geese.hist = geese$encounter_histories
 #' geese.freq = geese$sample_size
@@ -57,19 +57,34 @@ for (i in 2:(k-1)){ # loop on date
             }
             batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i
             res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k
-            batchpost = res[,1:ncol(res)-1]
-            batcheffpost = res[,ncol(res)]
+            if (nrow(res)==1){
+              batchpost <- matrix(res[,1:ncol(res)-1],nrow=1)
+              batcheffpost <- res[,ncol(res)]
+            } else {
+              batchpost = res[,1:ncol(res)-1]
+              batcheffpost = res[,ncol(res)]
+            }
             # look site on which previous obs occurred
             if (i!=2){
-            		tt = t(apply(batchpost[,1:(i-1)],1,rev))
+              if (nrow(batchpost)==1){
+                tt = t(rev(batchpost[,1:(i-1)]))
                 eante = apply(tt!=0,1,which.max)
-                eante = i - eante
+              } else{
+                tt = t(apply(batchpost[,1:(i-1)],1,rev))
+                eante = apply(tt!=0,1,which.max)
+              }
+              eante = i - eante
             } else {
                 eante = rep(1,nrow(batchpost))
             }
+
             # on cherche le site d'observation suivant
             if (i!=(k-1)){
+              if (nrow(batchpost)==1){
+                epost = which.max(batchpost[,(i+1):k]!=0)
+              } else {
                 epost = apply(batchpost[,(i+1):k]!=0,1,which.max)
+              }
             } else {
                 epost = rep(1,nrow(batchpost))
             }
