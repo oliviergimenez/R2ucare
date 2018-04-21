@@ -12,7 +12,7 @@ output:
     fig_caption: yes
     keep_tex: yes
     latex_engine: pdflatex
-    template: /Users/oliviergimenez/Dropbox/OG/BOULOT/RECHERCHE/PAPIERS/EN REDACTION/R2ucare/redaction/re_soumission/svm-latex-ms.tex
+    template: svm-latex-ms.tex
   word_document: default
   html_document:
     df_print: paged
