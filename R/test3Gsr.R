@@ -56,6 +56,7 @@ for (i in 2:(k-1)){ # loop on date
                 next
             }
             batcheff = eff[masque] # select counts corresponding to encounter histories with l in column i
+
             res = group_data_gen(batch,batcheff,(i+1):k) # sort according to columns i+1,...,k
             if (nrow(res)==1){
               batchpost <- matrix(res[,1:ncol(res)-1],nrow=1)
