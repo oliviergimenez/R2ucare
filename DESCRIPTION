@@ -1,5 +1,7 @@
 Package: R2ucare
-Maintainer: Olivier Gimenez <olivier.gimenez@cefe.cnrs.fr>
+Authors@R: c(
+    person("Olivier", "Gimenez", , "olivier.gimenez@cefe.cnrs.fr", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-7001-5142")))
 License: GPL (>= 2)
 Title: Goodness-of-Fit Tests for Capture-Recapture Models
 Author: Olivier Gimenez, Jean-Dominique Lebreton, Remi Choquet, Roger Pradel

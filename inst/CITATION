@@ -1,0 +1,19 @@
+citHeader("To cite R2ucare in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "R2ucare: An R package to perform goodness-of-fit tests for capture–recapture models",
+  author   = "Gimenez, Olivier and Lebreton, Jean-Dominique and Choquet, Rémi and Pradel, Roger",
+  journal  = "Methods in Ecology and Evolution",
+  year     = "2018",
+  volume   = "9",
+  number   = "7",
+  pages    = "1749-1754",
+  url      = "https://oliviergimenez.github.io/R2ucare/",
+  textVersion = paste(
+
+  )
+)
+
+
+

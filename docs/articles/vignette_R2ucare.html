@@ -5,14 +5,25 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>vignette_R2ucare • R2ucare</title>
+<title>Introduction to R2ucare • R2ucare</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="vignette_R2ucare">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to R2ucare">
 <meta property="og:description" content="R2ucare">
+<meta property="og:image" content="/R2ucare_logo/r2ucare.png">
+<meta property="og:image:alt" content="R2ucare awesome logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@oaggimenez">
+<meta name="twitter:site" content="@oaggimenez">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -54,9 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/vignette_R2ucare.html">vignette_R2ucare</a>
+      <a href="../articles/vignette_R2ucare.html">Introduction to R2ucare</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -79,11 +93,8 @@
       </header><script src="vignette_R2ucare_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>vignette_R2ucare</h1>
-            <h3 class="subtitle">How to use the R2ucare package to assess the fit of capture-recapture to data?</h3>
-                        <h4 class="author">Olivier Gimenez</h4>
+      <h1 data-toc-skip>Introduction to R2ucare</h1>
             
-            <h4 class="date">2021-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/oliviergimenez/R2ucare/blob/master/vignettes/vignette_R2ucare.Rmd"><code>vignettes/vignette_R2ucare.Rmd</code></a></small>
       <div class="hidden name"><code>vignette_R2ucare.Rmd</code></div>
@@ -95,22 +106,9 @@
 <div id="what-it-does-and-does-not-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-it-does-and-does-not-do" class="anchor"></a>What it does (and does not do)</h2>
-<p>The <code>R2ucare</code> package contains <code>R</code> functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data. Please email all suggestions for improvements, questions, comments and bugs to olivier.gimenez [AT] cefe.cnrs.fr.</p>
-<p>For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). <a href="http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf">Chapter 5 of the Gentle Introduction to MARK (Cooch and White 2017)</a> also provides a good start for understanding goodness-of-fit tests.</p>
-<p><strong>Warning</strong>: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, we suggest you remove these covariates from your dataset before using it with <code>R2ucare</code>. For groups, just treat the group separately as in the Dipper example below.</p>
-</div>
-<div id="to-install-the-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#to-install-the-package" class="anchor"></a>To install the package</h2>
-<p>The latest stable version of the package can be downloaded from <code>CRAN</code> with the <code>R</code> command</p>
-<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("R2ucare")</a></code></pre>
-<p>The repository on <code>GitHub</code> <a href="https://github.com/oliviergimenez/R2ucare" class="uri">https://github.com/oliviergimenez/R2ucare</a> hosts the development version of the package, to install it:</p>
-<pre><code>if(!require(devtools)) install.packages("devtools")
-library("devtools")
-install_github('oliviergimenez/R2ucare')</code></pre>
-<p>Despite what its name might suggest, <strong>you do not need</strong> to download and install <code>U-CARE</code> to run the <code>R2ucare</code> package. This package is basically a <code>Matlab</code> to <code>R</code> translation of <code>U-CARE</code> (Choquet et al. 2009).</p>
+<p>The <code>R2ucare</code> package contains <code>R</code> functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data.</p>
 <p>First things first, load the <code>R2ucare</code> package:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oliviergimenez/R2ucare">R2ucare</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="data-formats" class="section level2">
@@ -120,7 +118,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <div id="read-in-rmark-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-in-rmark-files" class="anchor"></a>Read in <code>RMark</code> files</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RMark</span><span class="op">)</span>
 <span class="va">data_path</span> <span class="op">&lt;-</span> <span class="st">"/Library/Frameworks/R.framework/Versions/4.1/Resources/library/RMark/extdata/"</span>
@@ -132,10 +130,10 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ##  $ sex : Factor w/ 2 levels "Female","Male": 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Freq: int  22 12 11 7 6 6 10 1 1 5 ...</code></pre>
 <p>Get encounter histories, counts and groups:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dip.hist</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">dipper</span><span class="op">$</span><span class="va">ch</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dipper</span><span class="op">$</span><span class="va">ch</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
-<span class="va">dip.freq</span> <span class="op">=</span> <span class="va">dipper</span><span class="op">$</span><span class="va">Freq</span>
-<span class="va">dip.group</span> <span class="op">=</span> <span class="va">dipper</span><span class="op">$</span><span class="va">sex</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dip.hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">dipper</span><span class="op">$</span><span class="va">ch</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dipper</span><span class="op">$</span><span class="va">ch</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
+<span class="va">dip.freq</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">Freq</span>
+<span class="va">dip.group</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">sex</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.hist</span><span class="op">)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 ## [1,]    0    0    0    0    0    0    1
@@ -144,10 +142,10 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## [4,]    0    0    0    0    1    0    0
 ## [5,]    0    0    0    0    1    1    0
 ## [6,]    0    0    0    0    1    1    1</code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 22 12 11  7  6  6</code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.group</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] Female Female Female Female Female Female
 ## Levels: Female Male</code></pre>
@@ -156,11 +154,11 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <h3 class="hasAnchor">
 <a href="#read-in-e-surge-files" class="anchor"></a>Read in <code>E-SURGE</code> files</h3>
 <p>Let’s use the <code>read_headed</code> function.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dipper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"ed.txt"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
 <span class="va">dipper</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_headed.html">read_headed</a></span><span class="op">(</span><span class="va">dipper</span><span class="op">)</span></code></pre></div>
 <p>Get encounter histories, counts and groups:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dip.hist</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">encounter_histories</span>
 <span class="va">dip.freq</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">sample_size</span>
 <span class="va">dip.group</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">groups</span>
@@ -172,10 +170,10 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## [4,]    1    1    0    0    0    0    0
 ## [5,]    1    1    0    0    0    0    0
 ## [6,]    1    1    0    0    0    0    0</code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 1 1</code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.group</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "male" "male" "male" "male" "male" "male"</code></pre>
 </div>
@@ -183,14 +181,14 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <h3 class="hasAnchor">
 <a href="#read-in-mark-files" class="anchor"></a>Read in <code>Mark</code> files</h3>
 <p>Let’s use the <code>read_inp</code> function.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dipper</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"ed.inp"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
-<span class="va">dipper</span> <span class="op">=</span> <span class="fu"><a href="../reference/read_inp.html">read_inp</a></span><span class="op">(</span><span class="va">dipper</span>,group.df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sex<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Male'</span>,<span class="st">'Female'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dipper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"ed.inp"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
+<span class="va">dipper</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_inp.html">read_inp</a></span><span class="op">(</span><span class="va">dipper</span>,group.df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>sex<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Male'</span>,<span class="st">'Female'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Get encounter histories, counts and groups:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dip.hist</span> <span class="op">=</span> <span class="va">dipper</span><span class="op">$</span><span class="va">encounter_histories</span>
-<span class="va">dip.freq</span> <span class="op">=</span> <span class="va">dipper</span><span class="op">$</span><span class="va">sample_size</span>
-<span class="va">dip.group</span> <span class="op">=</span> <span class="va">dipper</span><span class="op">$</span><span class="va">groups</span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dip.hist</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">encounter_histories</span>
+<span class="va">dip.freq</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">sample_size</span>
+<span class="va">dip.group</span> <span class="op">&lt;-</span> <span class="va">dipper</span><span class="op">$</span><span class="va">groups</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.hist</span><span class="op">)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 ## [1,]    1    1    1    1    1    1    0
@@ -199,10 +197,10 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## [4,]    1    1    0    0    0    0    0
 ## [5,]    1    1    0    0    0    0    0
 ## [6,]    1    1    0    0    0    0    0</code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 1 1</code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dip.group</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Male" "Male" "Male" "Male" "Male" "Male"</code></pre>
 </div>
@@ -211,19 +209,19 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <h2 class="hasAnchor">
 <a href="#goodness-of-fit-tests-for-the-cormack-jolly-seber-model" class="anchor"></a>Goodness-of-fit tests for the Cormack-Jolly-Seber model</h2>
 <p>Split the dataset in females/males:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mask</span> <span class="op">=</span> <span class="op">(</span><span class="va">dip.group</span> <span class="op">==</span> <span class="st">'Female'</span><span class="op">)</span>
-<span class="va">dip.fem.hist</span> <span class="op">=</span> <span class="va">dip.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span>
-<span class="va">dip.fem.freq</span> <span class="op">=</span> <span class="va">dip.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span>
-<span class="va">mask</span> <span class="op">=</span> <span class="op">(</span><span class="va">dip.group</span> <span class="op">==</span> <span class="st">'Male'</span><span class="op">)</span>
-<span class="va">dip.mal.hist</span> <span class="op">=</span> <span class="va">dip.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span>
-<span class="va">dip.mal.freq</span> <span class="op">=</span> <span class="va">dip.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mask</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dip.group</span> <span class="op">==</span> <span class="st">'Female'</span><span class="op">)</span>
+<span class="va">dip.fem.hist</span> <span class="op">&lt;-</span> <span class="va">dip.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span>
+<span class="va">dip.fem.freq</span> <span class="op">&lt;-</span> <span class="va">dip.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span>
+<span class="va">mask</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dip.group</span> <span class="op">==</span> <span class="st">'Male'</span><span class="op">)</span>
+<span class="va">dip.mal.hist</span> <span class="op">&lt;-</span> <span class="va">dip.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span>
+<span class="va">dip.mal.freq</span> <span class="op">&lt;-</span> <span class="va">dip.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span></code></pre></div>
 <p>Tadaaaaan, now you’re ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">test3sr_females</span> <span class="op">=</span> <span class="fu"><a href="../reference/test3sr.html">test3sr</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
-<span class="va">test3sm_females</span> <span class="op">=</span> <span class="fu"><a href="../reference/test3sm.html">test3sm</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
-<span class="va">test2ct_females</span> <span class="op">=</span> <span class="fu"><a href="../reference/test2ct.html">test2ct</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
-<span class="va">test2cl_females</span> <span class="op">=</span> <span class="fu"><a href="../reference/test2cl.html">test2cl</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">test3sr_females</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test3sr.html">test3sr</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
+<span class="va">test3sm_females</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test3sm.html">test3sm</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
+<span class="va">test2ct_females</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test2ct.html">test2ct</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
+<span class="va">test2cl_females</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/test2cl.html">test2cl</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span>
 <span class="co"># display results:</span>
 <span class="va">test3sr_females</span></code></pre></div>
 <pre><code>## $test3sr
@@ -237,7 +235,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 3         4 0.437 0.509       0.661 Chi-square
 ## 4         5 0.103 0.748      -0.321 Chi-square
 ## 5         6 0.001 0.982       0.032 Chi-square</code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test3sm_females</span></code></pre></div>
 <pre><code>## $test3sm
 ##  stat    df p_val 
@@ -250,7 +248,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 3         4 0.499  1  0.48    Fisher
 ## 4         5     0  0     0      None
 ## 5         6     0  0     0      None</code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test2ct_females</span></code></pre></div>
 <pre><code>## $test2ct
 ##      stat        df     p_val sign_test 
@@ -262,7 +260,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 2         3   1    0     1           0    Fisher
 ## 3         4   1    0     1           0    Fisher
 ## 4         5   1 3.25 0.071      -1.803    Fisher</code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test2cl_females</span></code></pre></div>
 <pre><code>## $test2cl
 ##  stat    df p_val 
@@ -274,25 +272,25 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 2         3   0    0     0      None
 ## 3         4   0    0     0      None</code></pre>
 <p>Or perform all tests at once:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overall_CJS.html">overall_CJS</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>, <span class="va">dip.fem.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>##                           chi2 degree_of_freedom p_value
 ## Gof test for CJS model: 10.276                12   0.592</code></pre>
-<p>What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in <code>RMark</code> (Cooch and White 2017; <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">appendix C</a>) or <code>E-SURGE</code> (Choquet et al. 2009). If trap dependence is significant, <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">Cooch and White (2017)</a> illustrate how to use a time-varying individual covariate to account for this effect in <code>RMark</code>, while Gimenez et al. (2003) suggest the use of multistate models that can be fitted with <code>RMark</code> or <code>E-SURGE</code>, and Pradel and Sanz (2012) recommend multievent models that can be fitted in <code>E-SURGE</code> only.</p>
+<p>What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in <code>RMark</code> (Cooch and White 2017; <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">appendix C</a>) or <code>E-SURGE</code> (Choquet et al. 2009). If trap dependence is significant, <a href="http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf">Cooch and White (2017)</a> illustrate how to use a time-varying individual covariate to account for this effect in <code>RMark</code>, while <a href="https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf">Gimenez et al. (2003)</a> suggest the use of multistate models that can be fitted with <code>RMark</code> or <code>E-SURGE</code>, and <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666">Pradel and Sanz (2012)</a> recommend multievent models that can be fitted in <code>E-SURGE</code> only.</p>
 </div>
 <div id="goodness-of-fit-tests-for-the-arnason-schwarz-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#goodness-of-fit-tests-for-the-arnason-schwarz-model" class="anchor"></a>Goodness-of-fit tests for the Arnason-Schwarz model</h2>
 <p>Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data).</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">geese</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"geese.inp"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
-<span class="va">geese</span> <span class="op">=</span> <span class="fu"><a href="../reference/read_inp.html">read_inp</a></span><span class="op">(</span><span class="va">geese</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">geese</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"geese.inp"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
+<span class="va">geese</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_inp.html">read_inp</a></span><span class="op">(</span><span class="va">geese</span><span class="op">)</span></code></pre></div>
 <p>Get encounter histories and number of individuals with corresponding histories</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">geese.hist</span> <span class="op">=</span> <span class="va">geese</span><span class="op">$</span><span class="va">encounter_histories</span>
-<span class="va">geese.freq</span> <span class="op">=</span> <span class="va">geese</span><span class="op">$</span><span class="va">sample_size</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">geese.hist</span> <span class="op">&lt;-</span> <span class="va">geese</span><span class="op">$</span><span class="va">encounter_histories</span>
+<span class="va">geese.freq</span> <span class="op">&lt;-</span> <span class="va">geese</span><span class="op">$</span><span class="va">sample_size</span></code></pre></div>
 <p>And now, perform Test3.GSr, Test.3.GSm, Test3G.wbwa, TestM.ITEC and TestM.LTEC:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/test3Gsr.html">test3Gsr</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $test3Gsr
 ##    stat      df   p_val 
@@ -312,7 +310,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 10        5    1 1.101349e+01  1 9.045141e-04 Chi-square
 ## 11        5    2 1.292013e-01  1 7.192616e-01 Chi-square
 ## 12        5    3 2.978513e+01  1 4.826802e-08 Chi-square</code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/test3Gsm.html">test3Gsm</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $test3Gsm
 ##    stat      df   p_val 
@@ -332,7 +330,7 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 10        5    1  9.061514  3 2.848411e-02 Chi-square
 ## 11        5    2  5.974357  4 2.010715e-01 Chi-square
 ## 12        5    3 29.217786  4 7.060092e-06 Chi-square</code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/test3Gwbwa.html">test3Gwbwa</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $test3Gwbwa
 ##    stat      df   p_val 
@@ -352,71 +350,71 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 ## 10        5    1 43.6547442  1 3.917264e-11 Chi-square
 ## 11        5    2 50.9264976  2 8.738795e-12 Chi-square
 ## 12        5    3 29.4763896  2 3.974507e-07 Chi-square</code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMitec.html">testMitec</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMitec
 ##   stat     df  p_val 
-## 68.225 27.000  0.000 
+## 68.224 27.000  0.000 
 ## 
 ## $details
 ##   occasion     stat df        p_val  test_perf
-## 1        2 14.26711  9 0.1131359008 Chi-square
-## 2        3 30.83868  9 0.0003154959 Chi-square
-## 3        4 23.11919  9 0.0059341103 Chi-square</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+## 1        2 14.26614  9 0.1131680083 Chi-square
+## 2        3 30.83941  9 0.0003154058 Chi-square
+## 3        4 23.11878  9 0.0059350028 Chi-square</code></pre>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMltec.html">testMltec</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMltec
 ##   stat     df  p_val 
-## 20.986 19.000  0.338 
+## 20.993 19.000  0.337 
 ## 
 ## $details
 ##   occasion      stat df     p_val  test_perf
-## 1        2 14.104132 10 0.1682946 Chi-square
-## 2        3  6.882024  9 0.6494010 Chi-square</code></pre>
+## 1        2 14.102715 10 0.1683578 Chi-square
+## 2        3  6.890484  9 0.6485205 Chi-square</code></pre>
 <p>Or all tests at once:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overall_JMV.html">overall_JMV</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>##                            chi2 degree_of_freedom p_value
-## Gof test for JMV model: 982.591               197       0</code></pre>
+## Gof test for JMV model: 982.586               197       0</code></pre>
 </div>
 <div id="various-useful-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#various-useful-functions" class="anchor"></a>Various useful functions</h2>
 <p>Several <code>U-CARE</code> functions to manipulate and process capture-recapture data can be mimicked with <code>R</code> built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-<span class="va">geese.hist</span><span class="op">[</span><span class="va">geese.hist</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span></code></pre></div>
+<span class="va">geese.hist</span><span class="op">[</span><span class="va">geese.hist</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></code></pre></div>
 <p>So is recoding states:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
-<span class="va">geese.hist</span><span class="op">[</span><span class="va">geese.hist</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">2</span> <span class="co"># all 3s become 2s</span></code></pre></div>
+<span class="va">geese.hist</span><span class="op">[</span><span class="va">geese.hist</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># all 3s become 2s</span></code></pre></div>
 <p>Also, reversing time is not that difficult:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
 <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>,<span class="fl">1</span>,<span class="va">rev</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>What about cleaning data, i.e. deleting empty histories, and histories with no individuals?</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
 <span class="va">mask</span> <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">dip.fem.hist</span>,<span class="fl">1</span>,<span class="va">sum</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">dip.fem.freq</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="co"># select non-empty histories, and histories with at least one individual</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">mask</span><span class="op">)</span> <span class="co"># how many histories are to be dropped?</span>
 <span class="va">dip.fem.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span> <span class="co"># drop these histories from dataset</span>
 <span class="va">dip.fem.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span> <span class="co"># from counts</span></code></pre></div>
 <p>Selecting or gathering occasions is as simple as that:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the female dipper dataset has been read in R (see above):</span>
 <span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="co"># pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)</span>
-<span class="va">gather_146</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span>,<span class="fl">1</span>,<span class="va">max</span><span class="op">)</span> <span class="co"># gather occasions 1, 4 and 6 by taking the max</span>
-<span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">gather_146</span> <span class="co"># replace occasion 1 by new occasion</span>
-<span class="va">dip.fem.hist</span> <span class="op">=</span> <span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="co"># drop occasions 4 and 6</span></code></pre></div>
+<span class="va">gather_146</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span>,<span class="fl">1</span>,<span class="va">max</span><span class="op">)</span> <span class="co"># gather occasions 1, 4 and 6 by taking the max</span>
+<span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">gather_146</span> <span class="co"># replace occasion 1 by new occasion</span>
+<span class="va">dip.fem.hist</span> <span class="op">&lt;-</span> <span class="va">dip.fem.hist</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="co"># drop occasions 4 and 6</span></code></pre></div>
 <p>Finally, suppressing the first encounter is achieved as follows:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Assuming the geese dataset has been read in R (see above):</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">geese.hist</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-<span class="va">occasion_first_encounter</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">geese.hist</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">!=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># look for occasion of first encounter</span>
-<span class="va">geese.hist</span><span class="op">[</span><span class="va">i</span>,<span class="va">occasion_first_encounter</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span> <span class="co"># replace the first non zero by a zero</span>
+<span class="va">occasion_first_encounter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">geese.hist</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">!=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># look for occasion of first encounter</span>
+<span class="va">geese.hist</span><span class="op">[</span><span class="va">i</span>,<span class="va">occasion_first_encounter</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># replace the first non zero by a zero</span>
 <span class="op">}</span>
 <span class="co"># delete empty histories from the new dataset</span>
-<span class="va">mask</span> <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="fl">1</span>,<span class="va">sum</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="co"># select non-empty histories</span>
+<span class="va">mask</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="fl">1</span>,<span class="va">sum</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="co"># select non-empty histories</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">mask</span><span class="op">)</span> <span class="co"># how many histories are to be dropped?</span>
 <span class="va">geese.hist</span><span class="op">[</span><span class="va">mask</span>,<span class="op">]</span> <span class="co"># drop these histories from dataset</span>
 <span class="va">geese.freq</span><span class="op">[</span><span class="va">mask</span><span class="op">]</span> <span class="co"># from counts</span></code></pre></div>
@@ -431,20 +429,6 @@ install_github('oliviergimenez/R2ucare')</code></pre>
 <code>group_data</code> pool together individuals with the same encounter capture-recapture history.</li>
 <li>
 <code>ungroup_data</code> split encounter capture-recapture histories in individual ones.</li>
-</ul>
-</div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<ul>
-<li>Choquet, R., Lebreton, J.-D., Gimenez, O., Reboulet, A.-M., and R. Pradel. (2009). <a href="https://oliviergimenez.github.io/pubs/Choquetetal2009UCARE.pdf">U-CARE: Utilities for performing goodness of fit tests and manipulating CApture-REcapture data</a>. Ecography. 32: 1071-1074.</li>
-<li>Cooch, E.G. and G.C. White (2017). Program MARK – a ‘gentle introduction’. <a href="http://www.phidot.org/software/mark/docs/book/" class="uri">http://www.phidot.org/software/mark/docs/book/</a>
-</li>
-<li>Gimenez O., Choquet R. and J.-D. Lebreton (2003). <a href="https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf">Parameter redundancy in multistate capture-recapture models</a>. Biometrical Journal 45: 704-722.</li>
-<li>Lebreton, J.-D. et al. (1992). Modeling survival and testing biological hypotheses using marked animals: a unified approach with case studies. Ecol. Monogr. 62: 67-118.</li>
-<li>Pradel, R., Gimenez O. and J.-D. Lebreton (2005). <a href="https://oliviergimenez.github.io/pubs/Pradeletal2005ABC.pdf">Principles and interest of GOF tests for multistate capture-recapture models</a>. Animal Biodiversity and Conservation 28: 189–204.</li>
-<li>Pradel, R. and A. Sanz-Aguilar (2012). <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666">Modeling Trap-Awareness and Related Phenomena in Capture-Recapture Studies</a>. PLoS ONE, 7(3), e32666.</li>
-<li>Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). <a href="https://oliviergimenez.github.io/pubs/Pradeletal2003Biometrics.pdf">A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model</a>. Biometrics 59: 43-53.</li>
 </ul>
 </div>
   </div>

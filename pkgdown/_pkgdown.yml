@@ -1,0 +1,12 @@
+home:
+  title: An R package to perform goodness-of-fit tests for capture-recapture models
+  description: Make sure models fit your data well
+
+template:
+  opengraph:
+    image:
+      src: R2ucare_logo/r2ucare.png
+      alt: "R2ucare awesome logo"
+    twitter:
+      creator: "@oaggimenez"
+      card: summary_large_image

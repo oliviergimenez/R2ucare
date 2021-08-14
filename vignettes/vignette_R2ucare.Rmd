@@ -1,39 +1,15 @@
 ---
-title: "vignette_R2ucare"
-subtitle: "How to use the R2ucare package to assess the fit of capture-recapture to data?"
-author: "Olivier Gimenez"
-date: "`r Sys.Date()`"
+title: "Introduction to R2ucare"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette_R2ucare}
+  %\VignetteIndexEntry{Introduction to R2ucare}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ## What it does (and does not do)
 
-The `R2ucare` package contains `R` functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data. Please email all suggestions for improvements, questions, comments and bugs to olivier.gimenez [AT] cefe.cnrs.fr.
-
-For Cormack-Jolly-Seber models (single-state), we refer to Lebreton et al. (1992) and Pradel et al. (2005) for the theory. For Arnason-Schwarz models (multistate), have a look to Pradel et al. (2003). [Chapter 5 of the Gentle Introduction to MARK (Cooch and White 2017)](http://www.phidot.org/software/mark/docs/book/pdf/chap5.pdf) also provides a good start for understanding goodness-of-fit tests. 
-
-**Warning**: to date, no goodness-of-fit test exists for models with individual covariates (unless you discretize them and use groups), individual time-varying covariates (unless you treat them as states) or temporal covariates; therefore, we suggest you remove these covariates from your dataset before using it with `R2ucare`. For groups, just treat the group separately as in the Dipper example below. 
-
-## To install the package
-
-The latest stable version of the package can be downloaded from `CRAN` with the `R` command
-``` 
-install.packages("R2ucare")
-```
-
-The repository on `GitHub` https://github.com/oliviergimenez/R2ucare hosts the development 
-version of the package, to install it:
-```
-if(!require(devtools)) install.packages("devtools")
-library("devtools")
-install_github('oliviergimenez/R2ucare')
-```
-
-Despite what its name might suggest, **you do not need** to download and install `U-CARE` to run the `R2ucare` package. This package is basically a `Matlab` to `R` translation of `U-CARE` (Choquet et al. 2009). 
+The `R2ucare` package contains `R` functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data.
 
 First things first, load the `R2ucare` package:
 ```{r, message=FALSE, warning=FALSE}
@@ -57,9 +33,9 @@ str(dipper)
 
 Get encounter histories, counts and groups:
 ```{r, message=FALSE, warning=FALSE}
-dip.hist = matrix(as.numeric(unlist(strsplit(as.character(dipper$ch),""))),nrow=length(dipper$ch),byrow=T)
-dip.freq = dipper$Freq
-dip.group = dipper$sex
+dip.hist <- matrix(as.numeric(unlist(strsplit(as.character(dipper$ch),""))),nrow=length(dipper$ch),byrow=T)
+dip.freq <- dipper$Freq
+dip.group <- dipper$sex
 head(dip.hist)
 head(dip.freq)
 head(dip.group)
@@ -89,15 +65,15 @@ head(dip.group)
 Let's use the `read_inp` function. 
 
 ```{r, message=FALSE, warning=FALSE}
-dipper = system.file("extdata", "ed.inp", package = "R2ucare")
-dipper = read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+dipper <- system.file("extdata", "ed.inp", package = "R2ucare")
+dipper <- read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
 ```
 
 Get encounter histories, counts and groups:
 ```{r, message=FALSE, warning=FALSE}
-dip.hist = dipper$encounter_histories
-dip.freq = dipper$sample_size
-dip.group = dipper$groups
+dip.hist <- dipper$encounter_histories
+dip.freq <- dipper$sample_size
+dip.group <- dipper$groups
 head(dip.hist)
 head(dip.freq)
 head(dip.group)
@@ -107,20 +83,20 @@ head(dip.group)
 
 Split the dataset in females/males:
 ```{r, message=FALSE, warning=FALSE}
-mask = (dip.group == 'Female')
-dip.fem.hist = dip.hist[mask,]
-dip.fem.freq = dip.freq[mask]
-mask = (dip.group == 'Male')
-dip.mal.hist = dip.hist[mask,]
-dip.mal.freq = dip.freq[mask]
+mask <- (dip.group == 'Female')
+dip.fem.hist <- dip.hist[mask,]
+dip.fem.freq <- dip.freq[mask]
+mask <- (dip.group == 'Male')
+dip.mal.hist <- dip.hist[mask,]
+dip.mal.freq <- dip.freq[mask]
 ```
 
 Tadaaaaan, now you're ready to perform Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl for females:
 ```{r, message=FALSE, warning=FALSE}
-test3sr_females = test3sr(dip.fem.hist, dip.fem.freq)
-test3sm_females = test3sm(dip.fem.hist, dip.fem.freq)
-test2ct_females = test2ct(dip.fem.hist, dip.fem.freq)
-test2cl_females = test2cl(dip.fem.hist, dip.fem.freq)
+test3sr_females <- test3sr(dip.fem.hist, dip.fem.freq)
+test3sm_females <- test3sm(dip.fem.hist, dip.fem.freq)
+test2ct_females <- test2ct(dip.fem.hist, dip.fem.freq)
+test2cl_females <- test2cl(dip.fem.hist, dip.fem.freq)
 # display results:
 test3sr_females
 test3sm_females
@@ -133,21 +109,21 @@ Or perform all tests at once:
 overall_CJS(dip.fem.hist, dip.fem.freq)
 ```
 
-What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in `RMark` (Cooch and White 2017; [appendix C](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf)) or `E-SURGE` (Choquet et al. 2009). If trap dependence is significant, [Cooch and White (2017)](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf) illustrate how to use a time-varying individual covariate to account for this effect in `RMark`, while Gimenez et al. (2003) suggest the use of multistate models that can be fitted with `RMark` or `E-SURGE`, and Pradel and Sanz (2012) recommend multievent models that can be fitted in `E-SURGE` only.
+What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in `RMark` (Cooch and White 2017; [appendix C](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf)) or `E-SURGE` (Choquet et al. 2009). If trap dependence is significant, [Cooch and White (2017)](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf) illustrate how to use a time-varying individual covariate to account for this effect in `RMark`, while [Gimenez et al. (2003)](https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf) suggest the use of multistate models that can be fitted with `RMark` or `E-SURGE`, and [Pradel and Sanz (2012)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666) recommend multievent models that can be fitted in `E-SURGE` only.
 
 ## Goodness-of-fit tests for the Arnason-Schwarz model
 
 Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data). 
 
 ```{r, message=FALSE, warning=FALSE}
-geese = system.file("extdata", "geese.inp", package = "R2ucare")
-geese = read_inp(geese)
+geese <- system.file("extdata", "geese.inp", package = "R2ucare")
+geese <- read_inp(geese)
 ```
 
 Get encounter histories and number of individuals with corresponding histories
 ```{r, message=FALSE, warning=FALSE}
-geese.hist = geese$encounter_histories
-geese.freq = geese$sample_size
+geese.hist <- geese$encounter_histories
+geese.freq <- geese$sample_size
 ```
 
 And now, perform Test3.GSr, Test.3.GSm, Test3G.wbwa, TestM.ITEC and TestM.LTEC:
@@ -169,12 +145,12 @@ overall_JMV(geese.hist,geese.freq)
 Several `U-CARE` functions to manipulate and process capture-recapture data can be mimicked with `R` built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:
 ```{r, message=FALSE, warning=FALSE}
 # Assuming the geese dataset has been read in R (see above):
-geese.hist[geese.hist>1] = 1
+geese.hist[geese.hist>1] <- 1
 ```
 So is recoding states:
 ```{r, message=FALSE, warning=FALSE}
 # Assuming the geese dataset has been read in R (see above):
-geese.hist[geese.hist==3]=2 # all 3s become 2s
+geese.hist[geese.hist==3] <- 2 # all 3s become 2s
 ```
 Also, reversing time is not that difficult:
 ```{r, message=FALSE, warning=FALSE,eval=FALSE}
@@ -193,19 +169,19 @@ Selecting or gathering occasions is as simple as that:
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Assuming the female dipper dataset has been read in R (see above):
 dip.fem.hist[,c(1,4,6)] # pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)
-gather_146 = apply(dip.fem.hist[,c(1,4,6)],1,max) # gather occasions 1, 4 and 6 by taking the max
-dip.fem.hist[,1] = gather_146 # replace occasion 1 by new occasion
-dip.fem.hist = dip.fem.hist[,-c(4,6)] # drop occasions 4 and 6
+gather_146 <- apply(dip.fem.hist[,c(1,4,6)],1,max) # gather occasions 1, 4 and 6 by taking the max
+dip.fem.hist[,1] <- gather_146 # replace occasion 1 by new occasion
+dip.fem.hist <- dip.fem.hist[,-c(4,6)] # drop occasions 4 and 6
 ```
 Finally, suppressing the first encounter is achieved as follows:
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Assuming the geese dataset has been read in R (see above):
 for (i in 1:nrow(geese.hist)){
-occasion_first_encounter = min(which(geese.hist[i,]!=0)) # look for occasion of first encounter
-geese.hist[i,occasion_first_encounter] = 0 # replace the first non zero by a zero
+occasion_first_encounter <- min(which(geese.hist[i,]!=0)) # look for occasion of first encounter
+geese.hist[i,occasion_first_encounter] <- 0 # replace the first non zero by a zero
 }
 # delete empty histories from the new dataset
-mask = (apply(geese.hist,1,sum)>0) # select non-empty histories
+mask <- (apply(geese.hist,1,sum)>0) # select non-empty histories
 sum(!mask) # how many histories are to be dropped?
 geese.hist[mask,] # drop these histories from dataset
 geese.freq[mask] # from counts
@@ -221,12 +197,3 @@ I have coded a few of them, see the list below and ?name-of-the-function for mor
 * `group_data` pool together individuals with the same encounter capture-recapture history.
 * `ungroup_data` split encounter capture-recapture histories in individual ones.
 
-## References 
-
-* Choquet, R., Lebreton, J.-D., Gimenez, O., Reboulet, A.-M., and R. Pradel. (2009). [U-CARE: Utilities for performing goodness of fit tests and manipulating CApture-REcapture data](https://oliviergimenez.github.io/pubs/Choquetetal2009UCARE.pdf). Ecography. 32: 1071-1074.
-* Cooch, E.G. and G.C. White (2017). Program MARK – a 'gentle introduction'. http://www.phidot.org/software/mark/docs/book/
-* Gimenez O., Choquet R. and J.-D. Lebreton (2003). [Parameter redundancy in multistate capture-recapture models](https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf). Biometrical Journal 45: 704-722.
-* Lebreton, J.-D. et al. (1992). Modeling survival and testing biological hypotheses using marked animals: a unified approach with case studies. Ecol. Monogr. 62: 67-118.
-* Pradel, R., Gimenez O. and J.-D. Lebreton (2005). [Principles and interest of GOF tests for multistate capture-recapture models](https://oliviergimenez.github.io/pubs/Pradeletal2005ABC.pdf). Animal Biodiversity and Conservation 28: 189–204.
-* Pradel, R. and A. Sanz-Aguilar (2012). [Modeling Trap-Awareness and Related Phenomena in Capture-Recapture Studies](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666). PLoS ONE, 7(3), e32666.
-* Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). [A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model](https://oliviergimenez.github.io/pubs/Pradeletal2003Biometrics.pdf). Biometrics 59: 43-53.
