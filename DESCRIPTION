@@ -1,7 +1,19 @@
 Package: R2ucare
-Authors@R: c(
-    person("Olivier", "Gimenez", , "olivier.gimenez@cefe.cnrs.fr", role = c("aut", "cre"),
-    comment = c(ORCID = "0000-0001-7001-5142")))
+Authors@R: 
+  c(person(given = "Olivier",
+           family = "Gimenez",
+           role = c("aut", "cre"),
+           email = "olivier.gimenez@cefe.cnrs.fr",
+           comment = c(ORCID = "0000-0001-7001-5142")),
+    person(given = "Jean-Dominique",
+           family = "Lebreton",
+           role = "ctb"),
+    person(given = "Remi",
+           family = "Choquet",
+           role = "ctb"),
+    person(given = "Roger",
+           family = "Pradel",
+           role = "ctb"))    
 License: GPL (>= 2)
 Title: Goodness-of-Fit Tests for Capture-Recapture Models
 Author: Olivier Gimenez, Jean-Dominique Lebreton, Remi Choquet, Roger Pradel
@@ -16,3 +28,5 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+BugReports: https://github.com/oliviergimenez/R2ucare/issues
+
