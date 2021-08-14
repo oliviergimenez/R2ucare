@@ -1,0 +1,7 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  vignette_R2ucare: vignette_R2ucare.html
+last_built: 2021-08-14T07:32Z
+
