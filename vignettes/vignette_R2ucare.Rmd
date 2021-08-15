@@ -26,14 +26,17 @@ There are 3 main data formats when manipulating capture-recapture data, correspo
 # # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf
 library(RMark)
 data_path <- "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/RMark/extdata/"
-dipper <- import.chdata(paste0(data_path,"dipper.txt"),field.names=c("ch","sex"),header=FALSE)
+dipper <- import.chdata(paste0(data_path, "dipper.txt"),
+                        field.names = c("ch", "sex"), header = FALSE)
 dipper <- as.data.frame(table(dipper))
 str(dipper)
 ```
 
 Get encounter histories, counts and groups:
 ```{r, message=FALSE, warning=FALSE}
-dip.hist <- matrix(as.numeric(unlist(strsplit(as.character(dipper$ch),""))),nrow=length(dipper$ch),byrow=T)
+dip.hist <- matrix(as.numeric(unlist(strsplit(as.character(dipper$ch),""))),
+                   nrow = length(dipper$ch),
+                   byrow = T)
 dip.freq <- dipper$Freq
 dip.group <- dipper$sex
 head(dip.hist)
@@ -66,7 +69,7 @@ Let's use the `read_inp` function.
 
 ```{r, message=FALSE, warning=FALSE}
 dipper <- system.file("extdata", "ed.inp", package = "R2ucare")
-dipper <- read_inp(dipper,group.df=data.frame(sex=c('Male','Female')))
+dipper <- read_inp(dipper, group.df = data.frame(sex = c('Male', 'Female')))
 ```
 
 Get encounter histories, counts and groups:
@@ -111,6 +114,18 @@ overall_CJS(dip.fem.hist, dip.fem.freq)
 
 What to do if these tests are significant? If you detect a transient effect, then 2 age classes should be considered on the survival probability to account for this issue, which is straightforward to do in `RMark` (Cooch and White 2017; [appendix C](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf)) or `E-SURGE` (Choquet et al. 2009). If trap dependence is significant, [Cooch and White (2017)](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf) illustrate how to use a time-varying individual covariate to account for this effect in `RMark`, while [Gimenez et al. (2003)](https://oliviergimenez.github.io/pubs/Gimenezetal2003BiomJ.pdf) suggest the use of multistate models that can be fitted with `RMark` or `E-SURGE`, and [Pradel and Sanz (2012)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0032666) recommend multievent models that can be fitted in `E-SURGE` only.
 
+Now how to assess the fit of a model including trap-dependence and/or transience? For example, let's assume we detected a significant effect of trap-dependence, we accounted for it in a model, and now we'd like to know whether our efforts paid off. Because the overall statistic is the sum of the four single components (Test.3Sr, Test3.Sm, Test2.Ct and Test.Cl), we obtain a test for the model with trap-dependence as follows:
+```{r}
+overall_test <- overall_CJS(dip.fem.hist, dip.fem.freq) # overall test
+twoct_test <- test2ct(dip.fem.hist, dip.fem.freq) # test for trap-dependence
+stat_tp <- overall_test$chi2 - twoct_test$test2ct["stat"] # overall stat - 2CT stat
+df_tp <- overall_test$degree_of_freedom - twoct_test$test2ct["df"] # overall dof - 2CT dof
+pvalue <- 1 - pchisq(stat_tp, df_tp) # compute p-value for null hypothesis: 
+                                     # model with trap-dep fits the data well
+pvalue
+```
+
+
 ## Goodness-of-fit tests for the Arnason-Schwarz model
 
 Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data). 
@@ -128,39 +143,41 @@ geese.freq <- geese$sample_size
 
 And now, perform Test3.GSr, Test.3.GSm, Test3G.wbwa, TestM.ITEC and TestM.LTEC:
 ```{r, message=FALSE, warning=FALSE}
-test3Gsr(geese.hist,geese.freq)
-test3Gsm(geese.hist,geese.freq)
-test3Gwbwa(geese.hist,geese.freq)
-testMitec(geese.hist,geese.freq)
-testMltec(geese.hist,geese.freq)
+test3Gsr(geese.hist, geese.freq)
+test3Gsm(geese.hist, geese.freq)
+test3Gwbwa(geese.hist, geese.freq)
+testMitec(geese.hist, geese.freq)
+testMltec(geese.hist, geese.freq)
 ```
 
 Or all tests at once:
 ```{r, message=FALSE, warning=FALSE}
-overall_JMV(geese.hist,geese.freq)
+overall_JMV(geese.hist, geese.freq)
 ```
+
+If trap-dependence or transience is significant, you may account for these lacks of fit as in the Cormack-Jolly-Seber model example. If there are signs of a memory effect, it gets a bit trickier but you may fit a model to account for this issue using hidden Markov models (also known as multievent models when applied to capture-recapture data).
 
 ## Various useful functions
 
 Several `U-CARE` functions to manipulate and process capture-recapture data can be mimicked with `R` built-in functions. For example, recoding multisite/state encounter histories in single-site/state ones is easy:
 ```{r, message=FALSE, warning=FALSE}
 # Assuming the geese dataset has been read in R (see above):
-geese.hist[geese.hist>1] <- 1
+geese.hist[geese.hist > 1] <- 1
 ```
 So is recoding states:
 ```{r, message=FALSE, warning=FALSE}
 # Assuming the geese dataset has been read in R (see above):
-geese.hist[geese.hist==3] <- 2 # all 3s become 2s
+geese.hist[geese.hist == 3] <- 2 # all 3s become 2s
 ```
 Also, reversing time is not that difficult:
 ```{r, message=FALSE, warning=FALSE,eval=FALSE}
 # Assuming the female dipper dataset has been read in R (see above):
-t(apply(dip.fem.hist,1,rev))
+t(apply(dip.fem.hist, 1, rev))
 ```
 What about cleaning data, i.e. deleting empty histories, and histories with no individuals?
 ```{r, message=FALSE, warning=FALSE,eval=FALSE}
 # Assuming the female dipper dataset has been read in R (see above):
-mask = (apply(dip.fem.hist,1,sum)>0 & dip.fem.freq>0) # select non-empty histories, and histories with at least one individual
+mask = (apply(dip.fem.hist, 1, sum) > 0 & dip.fem.freq > 0) # select non-empty histories, and histories with at least one individual
 sum(!mask) # how many histories are to be dropped?
 dip.fem.hist[mask,] # drop these histories from dataset
 dip.fem.freq[mask] # from counts
@@ -168,29 +185,27 @@ dip.fem.freq[mask] # from counts
 Selecting or gathering occasions is as simple as that:
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Assuming the female dipper dataset has been read in R (see above):
-dip.fem.hist[,c(1,4,6)] # pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)
-gather_146 <- apply(dip.fem.hist[,c(1,4,6)],1,max) # gather occasions 1, 4 and 6 by taking the max
+dip.fem.hist[, c(1,4,6)] # pick occasions 1, 4 and 6 (might be a good idea to clean the resulting dataset)
+gather_146 <- apply(dip.fem.hist[,c(1,4,6)], 1, max) # gather occasions 1, 4 and 6 by taking the max
 dip.fem.hist[,1] <- gather_146 # replace occasion 1 by new occasion
-dip.fem.hist <- dip.fem.hist[,-c(4,6)] # drop occasions 4 and 6
+dip.fem.hist <- dip.fem.hist[, -c(4,6)] # drop occasions 4 and 6
 ```
 Finally, suppressing the first encounter is achieved as follows:
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 # Assuming the geese dataset has been read in R (see above):
 for (i in 1:nrow(geese.hist)){
-occasion_first_encounter <- min(which(geese.hist[i,]!=0)) # look for occasion of first encounter
-geese.hist[i,occasion_first_encounter] <- 0 # replace the first non zero by a zero
+occasion_first_encounter <- min(which(geese.hist[i,] != 0)) # look for occasion of first encounter
+geese.hist[i, occasion_first_encounter] <- 0 # replace the first non zero by a zero
 }
 # delete empty histories from the new dataset
-mask <- (apply(geese.hist,1,sum)>0) # select non-empty histories
+mask <- (apply(geese.hist, 1, sum) > 0) # select non-empty histories
 sum(!mask) # how many histories are to be dropped?
 geese.hist[mask,] # drop these histories from dataset
 geese.freq[mask] # from counts
 ```
 
-The `R` packages `plyr`, `dplyr` and `tidyr` might also be very useful to work with capture-recapture datasets.
-
-Besides these simple manipulations, several useful `U-CARE` functions need a proper `R` equivalent. 
-I have coded a few of them, see the list below and ?name-of-the-function for more details. 
+Besides these simple manipulations, several useful `U-CARE` functions needed a proper `R` equivalent. 
+I coded a few of them, see the list below and ?name-of-the-function for more details. 
 
 * `marray` build the m-array for single-site/state capture-recapture data;
 * `multimarray` build the m-array for multi-site/state capture-recapture data;
