@@ -354,28 +354,28 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMitec.html">testMitec</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMitec
 ##   stat     df  p_val 
-## 68.225 27.000  0.000 
+## 68.228 27.000  0.000 
 ## 
 ## $details
 ##   occasion     stat df        p_val  test_perf
-## 1        2 14.26823  9 0.1130986859 Chi-square
-## 2        3 30.83735  9 0.0003156612 Chi-square
-## 3        4 23.11969  9 0.0059330283 Chi-square</code></pre>
+## 1        2 14.26517  9 0.1132002480 Chi-square
+## 2        3 30.84090  9 0.0003152197 Chi-square
+## 3        4 23.12239  9 0.0059272206 Chi-square</code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMltec.html">testMltec</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMltec
 ##   stat     df  p_val 
-## 20.982 19.000  0.338 
+## 20.980 19.000  0.338 
 ## 
 ## $details
 ##   occasion      stat df     p_val  test_perf
-## 1        2 14.101961 10 0.1683915 Chi-square
-## 2        3  6.880052  9 0.6496063 Chi-square</code></pre>
+## 1        2 14.101351 10 0.1684187 Chi-square
+## 2        3  6.878375  9 0.6497807 Chi-square</code></pre>
 <p>Or all tests at once:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overall_JMV.html">overall_JMV</a></span><span class="op">(</span><span class="va">geese.hist</span>,<span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
-<pre><code>##                           chi2 degree_of_freedom p_value
-## Gof test for JMV model: 982.59               197       0</code></pre>
+<pre><code>##                            chi2 degree_of_freedom p_value
+## Gof test for JMV model: 982.589               197       0</code></pre>
 </div>
 <div id="various-useful-functions" class="section level2">
 <h2 class="hasAnchor">
