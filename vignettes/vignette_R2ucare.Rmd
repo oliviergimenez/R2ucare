@@ -128,7 +128,7 @@ pvalue
 
 ## Goodness-of-fit tests for the Arnason-Schwarz model
 
-Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data). 
+Read in the geese dataset. It is provided with the package (thanks to Jay Hestbeck for sharing his data). 
 
 ```{r, message=FALSE, warning=FALSE}
 geese <- system.file("extdata", "geese.inp", package = "R2ucare")

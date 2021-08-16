@@ -295,7 +295,7 @@
 <div id="goodness-of-fit-tests-for-the-arnason-schwarz-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#goodness-of-fit-tests-for-the-arnason-schwarz-model" class="anchor"></a>Goodness-of-fit tests for the Arnason-Schwarz model</h2>
-<p>Read in the geese dataset. It is provided with the package (thanks to Jay Hesbeck for sharing his data).</p>
+<p>Read in the geese dataset. It is provided with the package (thanks to Jay Hestbeck for sharing his data).</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geese</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"geese.inp"</span>, package <span class="op">=</span> <span class="st">"R2ucare"</span><span class="op">)</span>
 <span class="va">geese</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_inp.html">read_inp</a></span><span class="op">(</span><span class="va">geese</span><span class="op">)</span></code></pre></div>
@@ -368,28 +368,28 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMitec.html">testMitec</a></span><span class="op">(</span><span class="va">geese.hist</span>, <span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMitec
 ##   stat     df  p_val 
-## 68.225 27.000  0.000 
+## 68.223 27.000  0.000 
 ## 
 ## $details
-##   occasion     stat df        p_val  test_perf
-## 1        2 14.26679  9 0.1131463485 Chi-square
-## 2        3 30.83902  9 0.0003154536 Chi-square
-## 3        4 23.11900  9 0.0059345292 Chi-square</code></pre>
+##   occasion     stat df       p_val  test_perf
+## 1        2 14.26731  9 0.113129220 Chi-square
+## 2        3 30.83651  9 0.000315766 Chi-square
+## 3        4 23.11904  9 0.005934444 Chi-square</code></pre>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/testMltec.html">testMltec</a></span><span class="op">(</span><span class="va">geese.hist</span>, <span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>## $testMltec
 ##   stat     df  p_val 
-## 20.988 19.000  0.337 
+## 20.983 19.000  0.338 
 ## 
 ## $details
 ##   occasion      stat df     p_val  test_perf
-## 1        2 14.102184 10 0.1683815 Chi-square
-## 2        3  6.885591  9 0.6490297 Chi-square</code></pre>
+## 1        2 14.102301 10 0.1683763 Chi-square
+## 2        3  6.880309  9 0.6495795 Chi-square</code></pre>
 <p>Or all tests at once:</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/overall_JMV.html">overall_JMV</a></span><span class="op">(</span><span class="va">geese.hist</span>, <span class="va">geese.freq</span><span class="op">)</span></code></pre></div>
 <pre><code>##                            chi2 degree_of_freedom p_value
-## Gof test for JMV model: 982.706               197       0</code></pre>
+## Gof test for JMV model: 982.597               197       0</code></pre>
 <p>If trap-dependence or transience is significant, you may account for these lacks of fit as in the Cormack-Jolly-Seber model example. If there are signs of a memory effect, it gets a bit trickier but you may fit a model to account for this issue using hidden Markov models (also known as multievent models when applied to capture-recapture data).</p>
 </div>
 <div id="various-useful-functions" class="section level2">

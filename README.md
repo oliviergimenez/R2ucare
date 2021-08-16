@@ -51,6 +51,23 @@ A bibtex entry is as follows:
 }
 ```
 
+## To-do list
+
+0. Fix bugs
+
+1. Add more tests (any help welcome)
+    + gof test for recovery data
+    + gof test for mixture of recapture and recoveries (based on Rachel McCrea's work)
+    + gof tests for heterogeneity in detection and in transition propensity, test for underlying state-structure (based on Anita Jeyam's work)
+    + Gof tests for closed pop models
+    + Gof tests for occupancy models (relevant?)
+
+2. Make it more user-friendly
+    + decision trees to suggest what to do when things go wrong 
+    + pass testMitec, testMltec and AS/JMV model fitting in C++ using Rcpp
+    + mosaic plot for wbwa, and other ways to visually represent contingency tables for the other tests
+    + class ucare
+
 
 ## References 
 
@@ -58,4 +75,5 @@ A bibtex entry is as follows:
 * Lebreton, J.-D. et al. (1992). Modeling survival and testing biological hypotheses using marked animals: a unified approach with case studies. Ecol. Monogr. 62: 67-118.
 * Pradel, R., Gimenez O. and J.-D. Lebreton (2005). [Principles and interest of GOF tests for multistate capture-recapture models](https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2005ABC.pdf). Animal Biodiversity and Conservation 28: 189–204.
 * Pradel R., Wintrebert C.M.A. and Gimenez O. (2003). [A proposal for a goodness-of-fit test to the Arnason-Schwarz multisite capture-recapture model](https://dl.dropboxusercontent.com/u/23160641/my-pubs/Pradeletal2003Biometrics.pdf). Biometrics 59: 43-53.
+
 
