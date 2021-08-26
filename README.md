@@ -1,5 +1,8 @@
 # R2ucare <img src="man/figures/logo.png" align="right" width="190" height="200"/>
 
+[![CRAN
+Status](https://www.r-pkg.org/badges/version/R2ucare)](https://cran.r-project.org/package=R2ucare)
+
 ## What it does (and does not do)
 
 This package contains `R` functions to perform goodness-of-fit tests for capture-recapture models. It also has various functions to manipulate capture-recapture data. Please email all suggestions for improvements, questions, comments and bugs to olivier.gimenez[at]cefe[dot]cnrs[dot]fr.
