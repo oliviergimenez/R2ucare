@@ -1,0 +1,57 @@
+# https://zhuhao.org/post/tips-on-designing-a-hex-sticker-for-rstats-packages/
+# https://github.com/GuangchuangYu/hexSticker/
+
+library(tidyverse)
+library(hexSticker)
+library(png)
+library(grid)
+
+theme_set(theme_minimal())
+df <- 4
+qq <- 6
+dat <- data.frame(x = c(0, 20))
+cinclus <- readPNG("/Users/oliviergimenez/Dropbox/OG/GITHUB/R2ucare/R2ucare_logo/binary-data.png")
+
+p <- dat %>% 
+  ggplot() + 
+  aes(x = x) +
+  geom_linerange(x = qq, 
+                 ymin = 0, 
+                 ymax = dchisq(x = qq, df = df), 
+                 col="white", 
+                 size = 0.1, 
+                 alpha = 0.4) +
+  stat_function(fun = dchisq, 
+                args = list(df = df), 
+                size = 0.3,
+                colour = "white") +
+  stat_function(fun = dchisq,
+                args = list(df = df),
+                xlim = c(qq,20),
+                geom = "area",
+                alpha = 0.2,
+                fill = "white") +
+  labs(x = "",y = "") + 
+  theme(axis.text.x = element_blank(), 
+        axis.text.y = element_blank(),
+        panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  annotation_custom(rasterGrob(cinclus, interpolate=TRUE, width = .4), xmin = 6, ymin = 0.03)
+
+sticker(p, 
+        package = "R2ucare", 
+        p_size = 8, 
+        s_x = 0.9, 
+        s_y = .65, 
+        s_width = 1.4, 
+        s_height = 1.1,
+        h_fill = "#e0320b",
+        h_color = "#771702", 
+        p_color = "white",
+        p_family = 'wqy-microhei',
+        filename = "r2ucare.png",
+        dpi = 600)
+#        url = "https://doi.org/10.1111/2041-210X.13014",
+#        u_size = 1,
+#        u_color = "white")
