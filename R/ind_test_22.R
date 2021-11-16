@@ -10,7 +10,6 @@
 #' @export
 
 ind_test_22 <- function(M,threshold=2,rounding=3){
-
 # calculate margins, total, expected table
 MC = apply(M,2,sum)
 ML = apply(M,1,sum)
@@ -33,7 +32,10 @@ if (df>0){ # perform test
    test_low = (sum(TT<threshold)>0)
    res[3] = test_low
    if (test_low) {
-   res[2] = stats::fisher.test(M)$p.value
+   res[2] = stats::fisher.test(M)$p.value    
+   if (abs(1 - res[2]) <= .Machine$double.eps){
+   res[2] <- 1 # If p-value is within machine precision of 1, then just set it to 1.
+   }
    res[1] = stats::qchisq(1-res[2],1)
    res[1] = round(res[1],rounding)
    res[2] = round(res[2],rounding)
