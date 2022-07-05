@@ -20,7 +20,7 @@ library(R2ucare)
 
 There are 3 main data formats when manipulating capture-recapture data, corresponding to the 3 main computer software available to fit corresponding models: `RMark`, `E-SURGE` and `Mark`. With `R2ucare`, it is easy to work with any of these formats. We will use the classical dipper dataset, which is provided with the package (thanks to Gilbert Marzolin for sharing his data).
 
-### Read in `RMark` files
+### Read in `RMark` file
 
 ```{r, message=FALSE, warning=FALSE}
 # # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf
