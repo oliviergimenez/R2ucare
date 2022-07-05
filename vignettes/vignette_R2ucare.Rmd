@@ -25,7 +25,7 @@ There are 3 main data formats when manipulating capture-recapture data, correspo
 ```{r, message=FALSE, warning=FALSE}
 # # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf
 dipper <- system.file("extdata", "dipper.txt", package = "RMark")
-dipper <- import.chdata(dipper, field.names = c("ch", "sex"), header = FALSE)
+dipper <- RMark::import.chdata(dipper, field.names = c("ch", "sex"), header = FALSE)
 dipper <- as.data.frame(table(dipper))
 str(dipper)
 ```
@@ -67,7 +67,7 @@ Let's use the `read_inp` function.
 
 ```{r, message=FALSE, warning=FALSE}
 dipper <- system.file("extdata", "ed.inp", package = "R2ucare")
-dipper <- read_inp(dipper, group.df = data.frame(sex = c('Male', 'Female')))
+dipper <- read_inp(dipper, group.df = data.frame(sex = c("Male", "Female")))
 ```
 
 Get encounter histories, counts and groups:
@@ -84,10 +84,10 @@ head(dip.group)
 
 Split the dataset in females/males:
 ```{r, message=FALSE, warning=FALSE}
-mask <- (dip.group == 'Female')
+mask <- (dip.group == "Female")
 dip.fem.hist <- dip.hist[mask,]
 dip.fem.freq <- dip.freq[mask]
-mask <- (dip.group == 'Male')
+mask <- (dip.group == "Male")
 dip.mal.hist <- dip.hist[mask,]
 dip.mal.freq <- dip.freq[mask]
 ```
