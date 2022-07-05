@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^MEE_paper$
+^pkgdown$
+^R2ucare_logo$
+^R2ucare_stats$
+^README.md$
