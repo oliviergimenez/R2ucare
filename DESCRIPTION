@@ -24,7 +24,6 @@ Suggests: knitr, rmarkdown,
     testthat
 Imports: stringr, RMark, stats, utils
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 BugReports: https://github.com/oliviergimenez/R2ucare/issues
-
