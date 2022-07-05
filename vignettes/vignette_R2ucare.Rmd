@@ -24,7 +24,6 @@ There are 3 main data formats when manipulating capture-recapture data, correspo
 
 ```{r, message=FALSE, warning=FALSE}
 # # read in text file as described at pages 50-51 in http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf
-library(RMark)
 dipperfile <- system.file(package = 'RMark', 'extdata/dipper.txt')
 dipper <- import.chdata(dipperfile, field.names = c("ch", "sex"), header = FALSE)
 dipper <- as.data.frame(table(dipper))
