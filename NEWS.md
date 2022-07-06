@@ -1,3 +1,9 @@
+# R2ucare 1.0.2
+
+## Other changes
+
+* reference with DOI in DESCRIPTION
+
 # R2ucare 1.0.1
 
 ## Bug Fixes
@@ -10,7 +16,6 @@
 ## Other changes
 
 * cleaned DESCRIPTION and excluded unnecessary files from source build
-
 
 # R2ucare 1.0.0
 
