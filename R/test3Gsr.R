@@ -161,20 +161,20 @@ for (i in 2:(k-1)){ # loop on date
                 table_multi_3sr[where_in_table_3sr,5] = pvalfish
                 table_multi_3sr[where_in_table_3sr,6] = 'Fisher'
             } else {
-                suppressWarnings(chi2 = stats::chisq.test(compo3GSR,correct=F))
-                pvalchi2 = chi2$p.value
-                dfchi2 = chi2$parameter
-				stachi2 = chi2$statistic
-                table_multi_3sr[where_in_table_3sr,1] = i
-                table_multi_3sr[where_in_table_3sr,2] = l
-                table_multi_3sr[where_in_table_3sr,3] = stachi2
-                table_multi_3sr[where_in_table_3sr,4] = dfchi2
-                table_multi_3sr[where_in_table_3sr,5] = pvalchi2
-                table_multi_3sr[where_in_table_3sr,6] = 'Chi-square'
+              chi2 = suppressWarnings(stats::chisq.test(compo3GSR,correct=F))
+              pvalchi2 = chi2$p.value
+              dfchi2 = chi2$parameter
+              stachi2 = chi2$statistic
+              table_multi_3sr[where_in_table_3sr,1] = i
+              table_multi_3sr[where_in_table_3sr,2] = l
+              table_multi_3sr[where_in_table_3sr,3] = stachi2
+              table_multi_3sr[where_in_table_3sr,4] = dfchi2
+              table_multi_3sr[where_in_table_3sr,5] = pvalchi2
+              table_multi_3sr[where_in_table_3sr,6] = 'Chi-square'
             }
 
-        }
     }
+}
 # compute overall test:
 stat = sum(as.numeric(table_multi_3sr[,3]))
 stat = round(stat,rounding)

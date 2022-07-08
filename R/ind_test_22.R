@@ -42,7 +42,7 @@ if (df>0){ # perform test
    res[3] = round(sign(D[1,1]) * sqrt(res[1]),rounding)
    res[4] = 'Fisher'}
    else {
-   suppressWarnings(res.tempo = stats::chisq.test(M,correct=F))
+     res.tempo = suppressWarnings(stats::chisq.test(M,correct=F))
    res[1] = res.tempo$statistic
    res[1] = round(res[1],rounding)
    res[2] = res.tempo$p.value
