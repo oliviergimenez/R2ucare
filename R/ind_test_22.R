@@ -32,7 +32,7 @@ if (df>0){ # perform test
    test_low = (sum(TT<threshold)>0)
    res[3] = test_low
    if (test_low) {
-   res[2] = stats::fisher.test(M)$p.value    
+   res[2] = stats::fisher.test(M)$p.value
    if (abs(1 - res[2]) <= .Machine$double.eps){
    res[2] <- 1 # If p-value is within machine precision of 1, then just set it to 1.
    }
@@ -42,10 +42,7 @@ if (df>0){ # perform test
    res[3] = round(sign(D[1,1]) * sqrt(res[1]),rounding)
    res[4] = 'Fisher'}
    else {
-   old.warn <- options()$warn # to suppress the warning messages
-   options(warn = -1)
-   res.tempo = stats::chisq.test(M,correct=F)
-   options(warn = old.warn)
+   suppressWarnings(res.tempo = stats::chisq.test(M,correct=F))
    res[1] = res.tempo$statistic
    res[1] = round(res[1],rounding)
    res[2] = res.tempo$p.value

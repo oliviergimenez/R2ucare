@@ -165,10 +165,7 @@ for (i in 2:(k-1)){ # loop on date
                 table_multi_3sm[where_in_table_3sm,5] = pvalfish
                 table_multi_3sm[where_in_table_3sm,6] = 'Fisher'
             } else {
-            	 old.warn <- options()$warn # to suppress the warning messages
-            	 options(warn = -1)
-            	 chi2 = stats::chisq.test(table,correct=F)
-            	 options(warn = old.warn)
+            	 suppressWarnings(chi2 = stats::chisq.test(table,correct=F))
                pvalchi2 = chi2$p.value
                dfchi2 = chi2$parameter
 				       stachi2 = chi2$statistic
@@ -218,10 +215,7 @@ for (i in 2:(k-1)){ # loop on date
              #               strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))} ];
              #           end
             } else {
-            	   	old.warn <- options()$warn # to suppress the warning messages
-            	   	options(warn = -1)
-            	   	chi2 = stats::chisq.test(table,correct=F)
-            	   	options(warn = old.warn)
+            	   	suppressWarnings(chi2 = stats::chisq.test(table,correct=F))
                   pvalchi2 = chi2$p.value
                   dfchi2 = chi2$parameter
 				        stachi2 = chi2$statistic
@@ -275,10 +269,7 @@ for (i in 2:(k-1)){ # loop on date
                 #                strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))}];
                 #            end
                        } else {
-                old.warn <- options()$warn # to suppress the warning messages
-                options(warn = -1)
-                chi2 = stats::chisq.test(table,correct=F)
-                options(warn = old.warn)
+                suppressWarnings(chi2 = stats::chisq.test(table,correct=F))
                 pvalchi2 = chi2$p.value
                 dfchi2 = chi2$parameter
                 stachi2 = chi2$statistic

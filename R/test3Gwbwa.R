@@ -217,10 +217,7 @@ for (i in 2:(k-1)){ # loop on date
                 table_wbwa[where_in_table_wbwa,5] = pvalfish
                 table_wbwa[where_in_table_wbwa,6] = 'Fisher'
             } else {
-            	   	old.warn <- options()$warn # to suppress the warning messages
-            	   	options(warn = -1)
-            	   	chi2 = stats::chisq.test(compoWBWA,correct=F)
-            	   	options(warn = old.warn)
+            	  suppressWarnings(chi2 = stats::chisq.test(compoWBWA,correct=F))
                 pvalchi2 = chi2$p.value
                 dfchi2 = chi2$parameter
 				stachi2 = chi2$statistic
