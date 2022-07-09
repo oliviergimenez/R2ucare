@@ -1,8 +1,14 @@
 # R2ucare 1.0.2
 
+## Bug Fixes
+
+* none
+
 ## Other changes
 
 * reference with DOI in DESCRIPTION
+* suppressWarnings in calls to chisq.test()
+* \donttest replaces \dontrun in overall_JMV.Rd, testMitec.Rd and testMltec.Rd
 
 # R2ucare 1.0.1
 
