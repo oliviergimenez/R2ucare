@@ -14,7 +14,7 @@
 #' @keywords package
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # read in Geese dataset
 #' library(RMark)
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")

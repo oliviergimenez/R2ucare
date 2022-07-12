@@ -40,10 +40,7 @@ if (df>0){
       res[2] = round(res[2],rounding)
       res[4] = 'Fisher'
  }  else { # no low numbers
-   	old.warn <- options()$warn # to suppress the warning messages
-   	options(warn = -1)
-   	res.tempo = stats::chisq.test(M,correct=F)
-   options(warn = old.warn)
+   res.tempo = suppressWarnings(stats::chisq.test(M,correct=F))
    res[1] = as.numeric(res.tempo$statistic)
    res[1] = round(res[1],rounding)
    res[2] = res.tempo$p.value

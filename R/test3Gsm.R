@@ -165,10 +165,7 @@ for (i in 2:(k-1)){ # loop on date
                 table_multi_3sm[where_in_table_3sm,5] = pvalfish
                 table_multi_3sm[where_in_table_3sm,6] = 'Fisher'
             } else {
-            	 old.warn <- options()$warn # to suppress the warning messages
-            	 options(warn = -1)
-            	 chi2 = stats::chisq.test(table,correct=F)
-            	 options(warn = old.warn)
+              chi2 = suppressWarnings(stats::chisq.test(table,correct=F))
                pvalchi2 = chi2$p.value
                dfchi2 = chi2$parameter
 				       stachi2 = chi2$statistic
@@ -218,19 +215,16 @@ for (i in 2:(k-1)){ # loop on date
              #               strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))} ];
              #           end
             } else {
-            	   	old.warn <- options()$warn # to suppress the warning messages
-            	   	options(warn = -1)
-            	   	chi2 = stats::chisq.test(table,correct=F)
-            	   	options(warn = old.warn)
-                  pvalchi2 = chi2$p.value
-                  dfchi2 = chi2$parameter
-				        stachi2 = chi2$statistic
-                table_multi_3sm[where_in_table_3sm,1] = i
-                table_multi_3sm[where_in_table_3sm,2] = l
-                table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]
-                table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]
-                table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]
-                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
+              chi2 = suppressWarnings(stats::chisq.test(table,correct=F))
+              pvalchi2 = chi2$p.value
+              dfchi2 = chi2$parameter
+              stachi2 = chi2$statistic
+              table_multi_3sm[where_in_table_3sm,1] = i
+              table_multi_3sm[where_in_table_3sm,2] = l
+              table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]
+              table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]
+              table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]
+              table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
              #           if verbosity>=3
              #               strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))} ];
              #           end
@@ -275,27 +269,24 @@ for (i in 2:(k-1)){ # loop on date
                 #                strtable=[ strtable {strcat('Associated test of the last table :',num2str([stafish pvalfish dffish]))}];
                 #            end
                        } else {
-                old.warn <- options()$warn # to suppress the warning messages
-                options(warn = -1)
-                chi2 = stats::chisq.test(table,correct=F)
-                options(warn = old.warn)
-                pvalchi2 = chi2$p.value
-                dfchi2 = chi2$parameter
-                stachi2 = chi2$statistic
-                table_multi_3sm[where_in_table_3sm,1] = i
-                table_multi_3sm[where_in_table_3sm,2] = l
-                table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]
-                table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]
-                table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]
-                table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
-                #            if verbosity>=3
-                #                strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))}];
-                #            end
-                #        end
-               }
+                         chi2 = suppressWarnings(stats::chisq.test(table,correct=F))
+                         pvalchi2 = chi2$p.value
+                         dfchi2 = chi2$parameter
+                         stachi2 = chi2$statistic
+                         table_multi_3sm[where_in_table_3sm,1] = i
+                         table_multi_3sm[where_in_table_3sm,2] = l
+                         table_multi_3sm[where_in_table_3sm,3] = stachi2 + table_multi_3sm[where_in_table_3sm,3]
+                         table_multi_3sm[where_in_table_3sm,4] = dfchi2 + table_multi_3sm[where_in_table_3sm,4]
+                         table_multi_3sm[where_in_table_3sm,5] = pvalchi2 + table_multi_3sm[where_in_table_3sm,5]
+                         table_multi_3sm[where_in_table_3sm,6] = 'Chi-square'
+                         #            if verbosity>=3
+                         #                strtable=[ strtable {strcat('Associated test of the last table :',num2str(chi2(table)))}];
+                         #            end
+                         #        end
+                       }
 
+                   }
                 }
-             }
                 table_multi_3sm[where_in_table_3sm,5] = 1-stats::pchisq(table_multi_3sm[where_in_table_3sm,3],table_multi_3sm[where_in_table_3sm,4])
       } # if ns>1
             #stattotal = cbind(stattotal,table_multi_3sm[where_in_table_3sm,])

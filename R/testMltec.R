@@ -10,7 +10,7 @@
 #' @keywords package
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Read in Geese dataset:
 #' geese = system.file("extdata", "geese.inp", package = "R2ucare")
 #' geese = read_inp(geese)

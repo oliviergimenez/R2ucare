@@ -217,21 +217,18 @@ for (i in 2:(k-1)){ # loop on date
                 table_wbwa[where_in_table_wbwa,5] = pvalfish
                 table_wbwa[where_in_table_wbwa,6] = 'Fisher'
             } else {
-            	   	old.warn <- options()$warn # to suppress the warning messages
-            	   	options(warn = -1)
-            	   	chi2 = stats::chisq.test(compoWBWA,correct=F)
-            	   	options(warn = old.warn)
-                pvalchi2 = chi2$p.value
-                dfchi2 = chi2$parameter
-				stachi2 = chi2$statistic
-                table_wbwa[where_in_table_wbwa,1] = i
-                table_wbwa[where_in_table_wbwa,2] = l
-                table_wbwa[where_in_table_wbwa,3] = stachi2
-                table_wbwa[where_in_table_wbwa,4] = dfchi2
-                table_wbwa[where_in_table_wbwa,5] = pvalchi2
-                table_wbwa[where_in_table_wbwa,6] = 'Chi-square'
+              chi2 = suppressWarnings(stats::chisq.test(compoWBWA,correct=F))
+              pvalchi2 = chi2$p.value
+              dfchi2 = chi2$parameter
+              stachi2 = chi2$statistic
+              table_wbwa[where_in_table_wbwa,1] = i
+              table_wbwa[where_in_table_wbwa,2] = l
+              table_wbwa[where_in_table_wbwa,3] = stachi2
+              table_wbwa[where_in_table_wbwa,4] = dfchi2
+              table_wbwa[where_in_table_wbwa,5] = pvalchi2
+              table_wbwa[where_in_table_wbwa,6] = 'Chi-square'
             }
-        }
+    }
 }
 # compute overall test:
 stat = sum(as.numeric(table_wbwa[,3]))

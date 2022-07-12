@@ -16,8 +16,10 @@ Authors@R:
            role = "ctb"))    
 License: GPL (>= 2)
 Title: Goodness-of-Fit Tests for Capture-Recapture Models
-Description: Performs goodness-of-fit tests for capture-recapture models. Also contains several functions to process capture-recapture data.
-Version: 1.0.1
+Description: Performs goodness-of-fit tests for capture-recapture models as 
+    described by Gimenez et al. (2018) <doi:10.1111/2041-210X.13014>. 
+    Also contains several functions to process capture-recapture data.
+Version: 1.0.2
 URL: https://github.com/oliviergimenez/R2ucare
 Depends: R (>= 3.3.0)
 Suggests: knitr, rmarkdown,
