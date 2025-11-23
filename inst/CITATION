@@ -1,19 +1,34 @@
 citHeader("To cite R2ucare in publications use:")
 
-citEntry(
-  entry    = "Article",
+# citEntry(
+#   entry    = "Article",
+#   title    = "R2ucare: An R package to perform goodness-of-fit tests for capture–recapture models",
+#   author   = "Gimenez, Olivier and Lebreton, Jean-Dominique and Choquet, Rémi and Pradel, Roger",
+#   journal  = "Methods in Ecology and Evolution",
+#   year     = "2018",
+#   volume   = "9",
+#   number   = "7",
+#   pages    = "1749-1754",
+#   url      = "https://oliviergimenez.github.io/R2ucare/",
+#  textVersion = paste(
+#
+#  )
+#)
+
+# revised Murray Efford 2025-11-18
+
+bibentry(
+  bibtype  = "Article",
   title    = "R2ucare: An R package to perform goodness-of-fit tests for capture–recapture models",
-  author   = "Gimenez, Olivier and Lebreton, Jean-Dominique and Choquet, Rémi and Pradel, Roger",
+  author   = c(person("Olivier", "Gimenez"), 
+               person("Jean-Dominique", "Lebreton"), 
+               person("Rémi","Choquet"),
+               person("Roger","Pradel")),
   journal  = "Methods in Ecology and Evolution",
   year     = "2018",
   volume   = "9",
-  number   = "7",
-  pages    = "1749-1754",
+  pages    = "1749--1754",
   url      = "https://oliviergimenez.github.io/R2ucare/",
-  textVersion = paste(
-
-  )
+  textVersion = paste("Gimenez, O., Lebreton, J.-D., Choquet, R. and Pradel, R.",
+  " 2018. Methods in Ecology and Evolution 9: 1749-1754.")
 )
-
-
-
